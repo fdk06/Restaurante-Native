@@ -25,15 +25,16 @@ para el contexto completo del producto.
 
 ## `design/` — Sistema de diseño y mockups
 
-Cada archivo es HTML autocontenido (se abre solo, sin depender de otros) con su PNG al lado
-para verlo sin abrir código. El orden de trabajo y la convención de nombres completa están en
-[`design/README.md`](design/README.md); resumen:
+Cada archivo es HTML autocontenido (se abre solo, sin depender de otros); las cinco pantallas
+de alta fidelidad además tienen su PNG al lado para verlas sin abrir código. El orden de
+trabajo y la convención de nombres completa están en [`design/README.md`](design/README.md);
+resumen:
 
 | Carpeta | Qué contiene | Estado |
 |---|---|---|
 | [`00_brief/`](design/00_brief) | El brief de diseño que guía todo lo demás | ✅ |
 | [`01_tokens/`](design/01_tokens) | Paleta, tipografía y espaciado, con verificación de contraste WCAG. `tokens.css` y `tokens.json` para traducir directo al código | ✅ |
-| [`02_componentes/`](design/02_componentes) | Biblioteca de componentes (botones, campos, tarjetas, barra de navegación, etc.), por lotes | 3 de ~7 lotes |
+| [`02_componentes/`](design/02_componentes) | Biblioteca de componentes (botones, campos, tarjetas, barra de navegación, etc.), por lotes | ✅ 7 de 7 lotes — 29 de 29 |
 | [`03_wireframes/`](design/03_wireframes) | Pantallas completas. Las cinco principales ya están en alta fidelidad: **Carta** (P-01), **Detalle de plato** (P-02), **Pedido opcional** (P-07), **Solicitud enviada** (P-09) y **Solicitudes del dueño** (P-22) | 5 pantallas clave |
 | [`04_prototipo/`](design/04_prototipo) | Prototipo navegable de una sola página | pendiente |
 | [`05_exportes/`](design/05_exportes) | Exportes finales para el informe y la sustentación | pendiente |
