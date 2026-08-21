@@ -1,0 +1,532 @@
+<title>Componentes Lote 3 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg: #FFFFFF; --pg-surface: #F6F5F1; --pg-border: #E2E2DA;
+    --pg-text: #16180F; --pg-text-2: #5F6355; --pg-primary: #4A5D3A;
+    --pg-accent: #A2632E; --pg-inverse: #FFFFFF;
+    --pg-warning: #A87516; --pg-error: #A82A22;
+
+    --radius-s: 8px; --radius-m: 12px; --radius-l: 20px; --radius-full: 999px;
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+      --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+      --pg-accent: #D69A5E; --pg-inverse: #12140F;
+      --pg-warning: #DFA945; --pg-error: #EF8880;
+    }
+  }
+  :root[data-theme="dark"] {
+    --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+    --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+    --pg-accent: #D69A5E; --pg-inverse: #12140F;
+    --pg-warning: #DFA945; --pg-error: #EF8880;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--pg-bg); color: var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  /* ---- Masthead ---- */
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-0.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background: var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px;
+    padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px; display:flex; gap:10px; }
+  .method-note b { color: var(--pg-text); }
+
+  /* ---- Sections ---- */
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color: var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border);
+    border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  /* ---- Frame (360dp canvas), theme-scoped ---- */
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA;
+    --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 6px 18px rgba(22,24,15,0.20);
+    --dm-shadow-up: 0 -4px 14px rgba(22,24,15,0.14);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px;
+    padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A;
+    --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 6px 20px rgba(0,0,0,0.6);
+    --dm-shadow-up: 0 -4px 16px rgba(0,0,0,0.45);
+  }
+  .frame, .frame * { color: var(--dm-text); }
+  .frame.flush { padding:0; }
+
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color: var(--dm-text); font-weight:700; }
+
+  /* Reused from Lote 1/2 */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif;
+    font-weight:600; border-radius:var(--radius-m); border:1.5px solid transparent; white-space:nowrap; }
+  .btn-m { height:48px; padding:0 16px; font-size:16px; }
+  .btn-l { height:56px; padding:0 24px; font-size:16px; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-texto { background:transparent; color:var(--dm-primary); padding:0 10px; height:48px; }
+  .btn.is-disabled.btn-primario { background:var(--dm-inactive); color:var(--dm-inverse); }
+  .icon-btn { width:48px; height:48px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border-radius:999px; }
+  .icon-btn svg { width:22px; height:22px; }
+  .chip { display:inline-flex; align-items:center; gap:5px; height:32px; padding:0 14px; border-radius:var(--radius-s);
+    font-size:13px; line-height:16px; font-weight:600; background:var(--dm-primary-soft); color:var(--dm-primary); }
+
+  /* ================= C-20 BARRA DE ACCIÓN FIJA ================= */
+  .action-bar { background:var(--dm-bg); border-top:1px solid var(--dm-border); box-shadow:var(--dm-shadow-up);
+    padding:12px 16px calc(16px); border-radius:0 0 14px 14px; }
+  .action-bar-helper { font-size:12px; color:var(--dm-text-2); margin-bottom:8px; text-align:center; }
+  .action-bar-row { display:flex; align-items:center; gap:14px; }
+  .action-bar .btn-l { flex:1; }
+  .action-total { display:flex; flex-direction:column; }
+  .action-total .lbl { font-size:11px; color:var(--dm-text-2); }
+  .action-total .amt { font-size:18px; font-weight:700; color:var(--dm-primary); }
+
+  /* ================= C-21 GALERÍA DE FOTOS ================= */
+  .gallery { position:relative; width:100%; aspect-ratio:4/3; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .gallery-top { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; padding:4px; }
+  .gallery-actions { display:flex; }
+  .gallery-chip { width:40px; height:40px; margin:4px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 78%, transparent);
+    display:flex; align-items:center; justify-content:center; }
+  .gallery-chip svg { width:19px; height:19px; }
+  .gallery-dots { position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:6px; }
+  .gallery-dots span { width:6px; height:6px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 55%, transparent); }
+  .gallery-dots span.is-current { background:var(--dm-inverse); width:16px; }
+  .gallery-error { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; height:100%; color:var(--dm-text-2); }
+  .gallery-error svg { width:32px; height:32px; }
+  .gallery-error span.msg { font-size:13px; }
+
+  /* ================= C-03 SELECTOR NUMÉRICO ================= */
+  .stepper-label { font-size:14px; font-weight:600; margin-bottom:8px; }
+  .stepper { display:inline-flex; align-items:center; gap:0; border:1.5px solid var(--dm-border); border-radius:var(--radius-m); overflow:hidden; }
+  .stepper button { width:48px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--dm-surface); flex-shrink:0; }
+  .stepper button svg { width:18px; height:18px; }
+  .stepper button.is-disabled { color:var(--dm-inactive); }
+  .stepper .count { width:44px; text-align:center; font-size:18px; font-weight:700; }
+  .stepper.compact button { width:48px; }
+  .stepper.compact button svg { width:15px; height:15px; }
+  .stepper.compact .count { width:32px; font-size:15px; }
+  .stepper.compact { border-radius:var(--radius-s); }
+
+  /* ================= C-07 INSIGNIA DE ESTADO ================= */
+  .badge-grid { display:flex; flex-direction:column; gap:10px; }
+  .status { display:inline-flex; align-items:center; gap:7px; height:26px; padding:0 12px 0 10px; border-radius:999px;
+    font-size:12.5px; font-weight:600; width:fit-content; }
+  .status .dot { width:7px; height:7px; border-radius:999px; flex-shrink:0; }
+  .status.st-atencion { background:color-mix(in srgb, var(--dm-warning) 16%, var(--dm-bg)); color:var(--dm-warning); }
+  .status.st-atencion .dot { background:var(--dm-warning); }
+  .status.st-exito { background:color-mix(in srgb, var(--dm-success) 16%, var(--dm-bg)); color:var(--dm-success); }
+  .status.st-exito .dot { background:var(--dm-success); }
+  .status.st-error { background:color-mix(in srgb, var(--dm-error) 16%, var(--dm-bg)); color:var(--dm-error); }
+  .status.st-error .dot { background:var(--dm-error); }
+  .status.st-primario { background:var(--dm-primary-soft); color:var(--dm-primary); }
+  .status.st-primario .dot { background:var(--dm-primary); }
+  .status.st-inactivo { background:var(--dm-surface); color:var(--dm-text-2); border:1px solid var(--dm-border); }
+  .status.st-inactivo .dot { background:var(--dm-inactive); }
+
+  .ref-note { font-size:12px; color:var(--dm-text-2); margin-top:4px; }
+
+  /* ---- Touch target verification table ---- */
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .verify-card .sub { font-size:13px; color:var(--pg-text-2); margin-bottom:18px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge-tt { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
+    padding:3px 8px; border-radius:6px; background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 3</h1>
+      <p class="deck">Etapa 2 de 6. C-20 Barra de acción fija, C-21 Galería de fotos, C-03 Selector numérico e C-07 Insignia de estado.</p>
+      <div class="meta">
+        <span>El Encanto Campestre</span>
+        <span class="mono">v1 · 20/08/2026</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>Por qué este lote.</b> Barra de acción fija y Galería de fotos son lo último que le
+      falta a <b>P-02 Detalle de plato</b> —la segunda pantalla en la prioridad de la Etapa 3—
+      para armarse completa. Selector numérico adelanta P-05 (comensales) y P-07 (cantidad de
+      plato). Insignia de estado es chica pero central: es la pieza que hace legible el
+      recorrido SOLICITADA → CONFIRMADA que sostiene toda la confianza del producto — vale la
+      pena resolverla temprano, no cuando ya haya varias pantallas dependiendo de una versión
+      improvisada.
+    </div>
+  </div>
+
+  <!-- ============ C-20 BARRA DE ACCIÓN FIJA ============ -->
+  <section id="c-20">
+    <div class="section-head"><span class="section-num">C-20</span><h2>Barra de acción fija</h2></div>
+    <p class="section-intro">
+      Dos variantes: <b>una acción</b> sola, y <b>acción con resumen de total</b>. Elevación/2,
+      como fija la ficha de espaciado — el mismo nivel que la barra de destinos, para que ambas
+      lean como "fijas al viewport" y no como tarjetas sueltas.
+    </p>
+    <div class="scope-note">
+      Con teclado abierto (T-7) esta barra no puede quedar pegada al fondo de la pantalla: en
+      P-05, P-07 y P-08 sube por encima del teclado o se ancla justo arriba de él. Se resuelve
+      a nivel de pantalla en la Etapa 3/4, no en el componente suelto.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame" style="padding:0;">
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Una acción · habilitada</span><span class="mono">P-08</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-row"><button class="btn btn-l btn-primario">Enviar solicitud</button></div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Una acción · deshabilitada</span><span class="mono">P-05 · explica qué falta</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-helper">Elige fecha y número de comensales para continuar</div>
+            <div class="action-bar-row"><button class="btn btn-l is-disabled btn-primario">Continuar</button></div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Con resumen de total</span><span class="mono">P-07 · con pedido</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-row">
+              <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$86.000</span></div>
+              <button class="btn btn-l btn-primario" style="flex:0 0 auto;">Continuar</button>
+            </div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Con resumen · sin platos</span><span class="mono">P-07 · el total no bloquea seguir</span></div>
+          </div>
+          <div class="action-bar" style="border-radius:0;">
+            <div class="action-bar-row">
+              <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$0</span></div>
+              <button class="btn btn-l btn-primario" style="flex:0 0 auto;">Continuar sin pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark" style="padding:0;">
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Una acción · habilitada</span><span class="mono">P-08</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-row"><button class="btn btn-l btn-primario">Enviar solicitud</button></div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Una acción · deshabilitada</span><span class="mono">P-05 · explica qué falta</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-helper">Elige fecha y número de comensales para continuar</div>
+            <div class="action-bar-row"><button class="btn btn-l is-disabled btn-primario">Continuar</button></div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Con resumen de total</span><span class="mono">P-07 · con pedido</span></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-bar-row">
+              <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$86.000</span></div>
+              <button class="btn btn-l btn-primario" style="flex:0 0 auto;">Continuar</button>
+            </div>
+          </div>
+          <div style="padding:20px 16px 0;">
+            <div class="variant-title"><span>Con resumen · sin platos</span><span class="mono">P-07 · el total no bloquea seguir</span></div>
+          </div>
+          <div class="action-bar" style="border-radius:0;">
+            <div class="action-bar-row">
+              <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$0</span></div>
+              <button class="btn btn-l btn-primario" style="flex:0 0 auto;">Continuar sin pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-21 GALERÍA DE FOTOS ============ -->
+  <section id="c-21">
+    <div class="section-head"><span class="section-num">C-21</span><h2>Galería de fotos</h2></div>
+    <p class="section-intro">
+      A sangre, hasta 10 fotos en 4:3, con retroceso, favorito y compartir flotando encima
+      (P-02). El indicador de posición son puntos, no un contador numérico — a este ancho, un
+      "3/8" compite con los botones flotantes por espacio en la misma esquina.
+    </p>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame flush">
+          <div class="gallery">
+            <div class="gallery-top">
+              <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <div class="gallery-actions">
+                <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span>
+                <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+              </div>
+            </div>
+            <div class="gallery-dots"><span class="is-current"></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">cargada · 5 de 8 fotos · botones 48×48dp</span></div>
+
+          <div class="gallery" style="margin-top:20px; background:var(--dm-surface); position:relative; overflow:hidden;">
+            <div style="position:absolute; inset:0; background-image:linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%); background-size:200% 100%; animation:sh 1.6s ease-in-out infinite;"></div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">cargando</span></div>
+
+          <div class="gallery" style="margin-top:20px; background:var(--dm-surface);">
+            <div class="gallery-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 20 2 20Z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16.3" r="0.6" fill="currentColor" stroke="none"/></svg>
+              <span class="msg">No se pudo cargar la foto</span>
+              <button class="btn btn-texto">Reintentar</button>
+            </div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">error · con reintento</span></div>
+
+          <div class="gallery" style="margin-top:20px;">
+            <div class="gallery-top">
+              <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            </div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">una sola foto · sin puntos de posición</span></div>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame flush dark">
+          <div class="gallery">
+            <div class="gallery-top">
+              <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <div class="gallery-actions">
+                <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span>
+                <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+              </div>
+            </div>
+            <div class="gallery-dots"><span class="is-current"></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">cargada · 5 de 8 fotos · botones 48×48dp</span></div>
+
+          <div class="gallery" style="margin-top:20px; background:var(--dm-surface); position:relative; overflow:hidden;">
+            <div style="position:absolute; inset:0; background-image:linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%); background-size:200% 100%; animation:sh 1.6s ease-in-out infinite;"></div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">cargando</span></div>
+
+          <div class="gallery" style="margin-top:20px; background:var(--dm-surface);">
+            <div class="gallery-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 20 2 20Z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16.3" r="0.6" fill="currentColor" stroke="none"/></svg>
+              <span class="msg">No se pudo cargar la foto</span>
+              <button class="btn btn-texto">Reintentar</button>
+            </div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">error · con reintento</span></div>
+
+          <div class="gallery" style="margin-top:20px;">
+            <div class="gallery-top">
+              <span class="gallery-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            </div>
+          </div>
+          <div style="padding:12px 16px 0;"><span class="spec">una sola foto · sin puntos de posición</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-03 SELECTOR NUMÉRICO ============ -->
+  <section id="c-03">
+    <div class="section-head"><span class="section-num">C-03</span><h2>Selector numérico</h2></div>
+    <p class="section-intro">
+      Comensales y cantidad de plato comparten mecánica; cambia la escala. Comensales llega
+      hasta 40 —el restaurante une mesas para grupos grandes— y cantidad se limita a 20 por
+      plato, un tope razonable para un pedido de mesa.
+    </p>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="variant-title"><span>Comensales</span><span class="mono">botones 48×48dp · radio/m 12dp</span></div>
+          <div style="margin-bottom:22px;">
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">mínimo · "−" deshabilitado en 1</span>
+          </div>
+          <div style="margin-bottom:22px;">
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">8</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">normal</span>
+          </div>
+          <div>
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">40</span><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">máximo · "+" deshabilitado en 40 (el tope de mesas unidas)</span>
+          </div>
+
+          <div class="variant-title" style="margin-top:26px;"><span>Cantidad de plato</span><span class="mono">compacto · 36×36dp · dentro de C-23</span></div>
+          <div class="stepper compact"><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+          <span class="spec" style="text-align:left; margin-top:6px;">mínimo · bajar de 1 quita el plato del pedido</span>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="variant-title"><span>Comensales</span><span class="mono">botones 48×48dp · radio/m 12dp</span></div>
+          <div style="margin-bottom:22px;">
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">mínimo · "−" deshabilitado en 1</span>
+          </div>
+          <div style="margin-bottom:22px;">
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">8</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">normal</span>
+          </div>
+          <div>
+            <div class="stepper-label">Comensales</div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">40</span><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            <span class="spec" style="text-align:left; margin-top:6px;">máximo · "+" deshabilitado en 40 (el tope de mesas unidas)</span>
+          </div>
+
+          <div class="variant-title" style="margin-top:26px;"><span>Cantidad de plato</span><span class="mono">compacto · 36×36dp · dentro de C-23</span></div>
+          <div class="stepper compact"><button class="is-disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+          <span class="spec" style="text-align:left; margin-top:6px;">mínimo · bajar de 1 quita el plato del pedido</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-07 INSIGNIA DE ESTADO ============ -->
+  <section id="c-07">
+    <div class="section-head"><span class="section-num">C-07</span><h2>Insignia de estado</h2></div>
+    <p class="section-intro">
+      Siete estados de reserva más "no disponible". El color agrupa por severidad —éxito,
+      atención, error, neutral— pero nunca es la única señal: el texto de la insignia siempre
+      dice el estado en palabras, así que RECHAZADA y NO ASISTIÓ comparten tono de error sin
+      volverse confundibles.
+    </p>
+    <div class="scope-note">
+      Radio completo (999dp), a diferencia del chip (C-04), que usa radio/s. Son familias
+      visuales distintas a propósito: el chip se toca, la insignia solo informa.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="badge-grid">
+            <span class="status st-atencion"><span class="dot"></span>Solicitada</span>
+            <span class="status st-exito"><span class="dot"></span>Confirmada</span>
+            <span class="status st-error"><span class="dot"></span>Rechazada</span>
+            <span class="status st-primario"><span class="dot"></span>En curso</span>
+            <span class="status st-inactivo"><span class="dot"></span>Cancelada</span>
+            <span class="status st-error"><span class="dot"></span>No asistió</span>
+            <span class="status st-inactivo"><span class="dot"></span>Expirada</span>
+            <span class="status st-inactivo"><span class="dot"></span>No disponible</span>
+          </div>
+          <p class="ref-note">alto 26dp · relleno 12/10dp · punto 7dp</p>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="badge-grid">
+            <span class="status st-atencion"><span class="dot"></span>Solicitada</span>
+            <span class="status st-exito"><span class="dot"></span>Confirmada</span>
+            <span class="status st-error"><span class="dot"></span>Rechazada</span>
+            <span class="status st-primario"><span class="dot"></span>En curso</span>
+            <span class="status st-inactivo"><span class="dot"></span>Cancelada</span>
+            <span class="status st-error"><span class="dot"></span>No asistió</span>
+            <span class="status st-inactivo"><span class="dot"></span>Expirada</span>
+            <span class="status st-inactivo"><span class="dot"></span>No disponible</span>
+          </div>
+          <p class="ref-note">alto 26dp · relleno 12/10dp · punto 7dp</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERIFICACIÓN ============ -->
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <p class="sub">Solo los controles nuevos de este lote.</p>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Botón L de la barra de acción</td><td>alto 56dp</td><td>ancho completo × 56dp</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Botones flotantes de la galería</td><td>ícono 19×19dp</td><td>40×40dp visible dentro de zona de 48dp de margen</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Botón "Reintentar" (error de foto)</td><td>etiqueta compacta</td><td>48dp alto (btn-texto estándar de C-01)</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Stepper de comensales</td><td>ícono 18×18dp</td><td>48×48dp por botón</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Stepper compacto (cantidad de plato)</td><td>ícono 15×15dp</td><td>48×48dp por botón — solo el contador se angosta, no los botones</td><td><span class="badge-tt">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 3 (C-20, C-21, C-03, C-07)</span>
+    <span>Siguiente: Lote 4, cuando apruebes este</span>
+  </footer>
+</div>
+
+<style>
+  @keyframes sh { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+  @media (prefers-reduced-motion: reduce) { [style*="animation:sh"] { animation:none !important; } }
+</style>

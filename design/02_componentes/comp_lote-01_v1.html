@@ -1,0 +1,868 @@
+<title>Componentes Lote 1 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg: #FFFFFF; --pg-surface: #F6F5F1; --pg-border: #E2E2DA;
+    --pg-text: #16180F; --pg-text-2: #5F6355; --pg-primary: #4A5D3A;
+    --pg-accent: #A2632E; --pg-inverse: #FFFFFF;
+    --pg-warning: #A87516; --pg-error: #A82A22;
+
+    --radius-s: 8px; --radius-m: 12px; --radius-l: 20px; --radius-full: 999px;
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+      --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+      --pg-accent: #D69A5E; --pg-inverse: #12140F;
+      --pg-warning: #DFA945; --pg-error: #EF8880;
+    }
+  }
+  :root[data-theme="dark"] {
+    --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+    --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+    --pg-accent: #D69A5E; --pg-inverse: #12140F;
+    --pg-warning: #DFA945; --pg-error: #EF8880;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--pg-bg); color: var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  /* ---- Masthead ---- */
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-0.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note {
+    background: var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px;
+    padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px;
+    display:flex; gap:10px;
+  }
+  .method-note b { color: var(--pg-text); }
+
+  /* ---- Sections ---- */
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .comp-id { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700; color:var(--pg-inverse);
+    background:var(--pg-primary); padding:2px 9px; border-radius:6px; }
+  .risk-tag { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--pg-error);
+    border:1px solid var(--pg-error); border-radius:999px; padding:3px 10px; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color: var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border);
+    border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+
+  .subhead { font-size:13px; font-weight:700; color:var(--pg-text); margin:36px 0 14px; display:flex; align-items:center; gap:8px; }
+  .subhead .mono { font-weight:500; color:var(--pg-text-2); font-size:12px; }
+
+  /* ---- Frame (360dp canvas), theme-scoped independent of page chrome ---- */
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA;
+    --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 6px 18px rgba(22,24,15,0.20);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px;
+    padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A;
+    --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 6px 20px rgba(0,0,0,0.6);
+  }
+  .frame, .frame * { color: var(--dm-text); }
+  .frame.flush { padding:0; }
+
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color: var(--dm-text); font-weight:700; }
+
+  /* ================= C-01 BOTÓN ================= */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'Inter',sans-serif; font-weight:600; border-radius:var(--radius-m);
+    border:1.5px solid transparent; white-space:nowrap; position:relative; }
+  .btn-m { height:48px; padding:0 16px; font-size:16px; }
+  .btn-l { height:56px; padding:0 24px; font-size:16px; width:100%; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-secundario { background:transparent; border-color:var(--dm-primary); color:var(--dm-primary); }
+  .btn-texto { background:transparent; color:var(--dm-primary); padding:0 10px; }
+  .btn-destructivo { background:transparent; border-color:var(--dm-error); color:var(--dm-error); }
+
+  .btn.is-pressed.btn-primario { opacity:.86; }
+  .btn.is-pressed.btn-secundario, .btn.is-pressed.btn-texto { background:var(--dm-primary-soft); }
+  .btn.is-pressed.btn-destructivo { background: color-mix(in srgb, var(--dm-error) 14%, transparent); }
+
+  .btn.is-disabled.btn-primario { background:var(--dm-inactive); color:var(--dm-inverse); }
+  .btn.is-disabled.btn-secundario, .btn.is-disabled.btn-texto { border-color:var(--dm-inactive); color:var(--dm-inactive); }
+  .btn.is-disabled.btn-destructivo { border-color:var(--dm-inactive); color:var(--dm-inactive); }
+
+  .btn.is-loading { color:transparent; }
+  .btn .spinner { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:20px; height:20px; border-radius:50%; border:2.5px solid currentColor; border-top-color:transparent;
+    animation:spin .8s linear infinite; }
+  .btn.is-loading.btn-primario .spinner { color:var(--dm-inverse); }
+  .btn.is-loading.btn-secundario .spinner, .btn.is-loading.btn-destructivo .spinner,
+  .btn.is-loading.btn-texto .spinner { color:currentColor; }
+  .btn.is-loading.btn-secundario { color:transparent; border-color:var(--dm-primary); }
+  .btn.is-loading.btn-secundario .spinner { color:var(--dm-primary); }
+  .btn.is-loading.btn-destructivo .spinner { color:var(--dm-error); }
+  @keyframes spin { to { transform:translate(-50%,-50%) rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation:none; opacity:.55; border-top-color:currentColor; border-right-color:transparent; } }
+
+  .btn-cell { display:flex; flex-direction:column; align-items:stretch; gap:6px; }
+  .btn-cell.fit { align-items:flex-start; }
+  .btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px; }
+  .btn-grid:last-child { margin-bottom:0; }
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  .hit-guide { position:relative; display:inline-flex; }
+  .hit-guide::after { content:''; position:absolute; inset:-4px -14px; border:1.5px dashed var(--dm-accent); border-radius:14px; pointer-events:none; }
+
+  /* ================= C-02 CAMPO DE TEXTO ================= */
+  .field { display:flex; flex-direction:column; gap:6px; width:100%; margin-bottom:20px; }
+  .field:last-child { margin-bottom:0; }
+  .field-label { font-size:14px; line-height:20px; font-weight:600; color:var(--dm-text); }
+  .field-box { display:flex; align-items:center; gap:8px; height:48px; padding:0 16px; border-radius:var(--radius-s);
+    border:1.5px solid var(--dm-border); background:var(--dm-bg); position:relative; }
+  .field-box.multiline { height:auto; min-height:88px; align-items:flex-start; padding:12px 16px; }
+  .field-box.is-focus { border-color:var(--dm-primary); border-width:2px; padding:0 15px; }
+  .field-box.multiline.is-focus { padding:11px 15px; }
+  .field-box.is-error { border-color:var(--dm-error); border-width:2px; padding:0 15px; }
+  .field-box.is-disabled { background:var(--dm-surface); border-color:var(--dm-border); }
+  .field-icon { width:20px; height:20px; color:var(--dm-text-2); flex-shrink:0; }
+  .field-box.is-disabled .field-icon { color:var(--dm-inactive); }
+  .field-value { font-size:16px; line-height:24px; color:var(--dm-text); flex:1; }
+  .field-value.placeholder { color:var(--dm-text-2); }
+  .field-box.is-disabled .field-value { color:var(--dm-text-2); }
+  .field-help { font-size:12px; line-height:16px; color:var(--dm-text-2); }
+  .field-help.is-error { color:var(--dm-error); font-weight:500; }
+  .field-toggle { width:48px; height:48px; margin:0 -16px 0 4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .field-box.is-focus .field-toggle, .field-box.is-error .field-toggle { margin-right:-15px; }
+  .field-toggle svg { width:20px; height:20px; color:var(--dm-text-2); }
+
+  /* ================= C-05 TARJETA DE PLATO ================= */
+  .dish-v { width:100%; border-radius:var(--radius-m); overflow:hidden; background:var(--dm-surface); box-shadow:var(--dm-shadow-1); margin-bottom:20px; }
+  .dish-v:last-child { margin-bottom:0; }
+  .dish-photo { position:relative; aspect-ratio:4/3; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .dish-photo.unavailable { opacity:.4; }
+  .fav-btn { position:absolute; top:0; right:0; width:48px; height:48px; display:flex; align-items:center; justify-content:center; }
+  .fav-chip { width:32px; height:32px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 80%, transparent); display:flex; align-items:center; justify-content:center; }
+  .fav-chip svg { width:18px; height:18px; color:var(--dm-text); }
+  .unavail-badge { position:absolute; left:10px; bottom:10px; background:color-mix(in srgb, var(--dm-bg) 88%, transparent);
+    color:var(--dm-inactive); font-size:11.5px; font-weight:700; padding:5px 10px; border-radius:999px; }
+  .dish-body { padding:12px 14px 14px; }
+  .dish-title { font-size:18px; line-height:24px; font-weight:600; margin-bottom:4px; }
+  .dish-desc { font-size:14px; line-height:20px; color:var(--dm-text-2); margin-bottom:10px;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .dish-foot { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .dish-price { font-size:18px; line-height:22px; font-weight:700; color:var(--dm-primary); }
+  .dish-price.inactive { color:var(--dm-inactive); }
+  .dish-tags { display:flex; gap:6px; }
+  .chip { font-size:11px; font-weight:600; padding:4px 9px; border-radius:999px; background:var(--dm-primary-soft); color:var(--dm-primary); }
+
+  .dish-h { display:flex; gap:10px; align-items:center; width:100%; height:96px; padding:8px; border-radius:var(--radius-m);
+    background:var(--dm-surface); box-shadow:var(--dm-shadow-1); margin-bottom:12px; }
+  .dish-h:last-child { margin-bottom:0; }
+  .dish-thumb { width:80px; height:80px; border-radius:var(--radius-s); flex-shrink:0; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .dish-thumb.unavailable { opacity:.4; }
+  .dish-h-body { flex:1; min-width:0; }
+  .dish-h-title { font-size:16px; line-height:20px; font-weight:600; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dish-h-meta { font-size:12px; color:var(--dm-text-2); margin-bottom:6px; }
+  .dish-h-price { font-size:16px; font-weight:700; color:var(--dm-primary); }
+  .dish-h-price.inactive { color: var(--dm-inactive); }
+
+  .skeleton-block { background:var(--dm-border); border-radius:6px;
+    background-image: linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%);
+    background-size:200% 100%; animation:shimmer 1.6s ease-in-out infinite; }
+  @keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skeleton-block { animation:none; background-image:none; } }
+  .sk-photo { aspect-ratio:4/3; border-radius:0; }
+  .sk-line { height:12px; margin-bottom:8px; border-radius:4px; }
+  .sk-line.w60 { width:60%; height:16px; }
+  .sk-line.w90 { width:90%; }
+  .sk-line.w40 { width:40%; }
+  .sk-thumb { width:80px; height:80px; border-radius:var(--radius-s); flex-shrink:0; }
+
+  /* ================= C-10 BARRA DE DESTINOS ================= */
+  .navbar-wrap { position:relative; width:100%; height:104px; }
+  .navbar { position:absolute; bottom:0; left:0; right:0; height:64px; background:var(--dm-surface); box-shadow:var(--dm-shadow-2); display:flex; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:var(--dm-text-2); position:relative; }
+  .nav-item .nav-pill { position:absolute; inset:8px 12px; border-radius:999px; z-index:0; }
+  .nav-item.is-active .nav-pill { background:var(--dm-primary-soft); }
+  .nav-item.is-active { color:var(--dm-primary); }
+  .nav-item svg, .nav-item span { position:relative; z-index:1; }
+  .nav-item svg { width:22px; height:22px; }
+  .nav-item .nav-label { font-size:10.5px; line-height:13px; font-weight:600; }
+  .nav-dot { position:absolute; top:9px; right:calc(50% - 15px); width:8px; height:8px; border-radius:50%;
+    background:var(--dm-warning); border:1.5px solid var(--dm-surface); z-index:2; }
+  .nav-center { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); width:60px; height:60px; border-radius:999px;
+    background:var(--dm-primary); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
+    box-shadow:var(--dm-shadow-2); }
+  .nav-center.is-pressed { opacity:.87; }
+  .nav-center svg { width:22px; height:22px; color:var(--dm-inverse); }
+  .nav-center .nav-label { font-size:10px; font-weight:700; color:var(--dm-inverse); }
+  .nav-center .nav-dot { top:-2px; right:-2px; border-color:var(--dm-bg); }
+
+  /* ---- Touch target verification table ---- */
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .verify-card .sub { font-size:13px; color:var(--pg-text-2); margin-bottom:18px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
+    padding:3px 8px; border-radius:6px; }
+  .badge-pass { background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 1</h1>
+      <p class="deck">Etapa 2 de 6. C-01 Botón, C-02 Campo de texto, C-05 Tarjeta de plato y C-10 Barra de cinco destinos, construidos con las fichas de la Etapa 1.</p>
+      <div class="meta">
+        <span>El Encanto Campestre</span>
+        <span class="mono">v1 · 20/08/2026</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>Cómo leer esta lámina.</b> Cada componente se muestra sobre un lienzo de 360 dp, en
+      tema claro y oscuro lado a lado (sin interruptor, para comparar de un vistazo). Donde el
+      cruce variante × estado supera lo razonable para revisar, muestro la matriz completa
+      sobre la variante más representativa y las demás variantes en su estado más informativo
+      — lo señalo en cada sección. Todo control interactivo cumple 48×48 dp de área táctil
+      aunque su elemento visible sea más chico; los casos donde eso no es obvio a simple vista
+      llevan una guía punteada mostrando el área real.
+    </div>
+  </div>
+
+  <!-- ============ C-01 BOTÓN ============ -->
+  <section id="c-01">
+    <div class="section-head">
+      <span class="section-num">C-01</span>
+      <h2>Botón</h2>
+    </div>
+    <p class="section-intro">
+      Cuatro variantes — <b>primario</b>, <b>secundario</b>, <b>texto</b>, <b>destructivo</b> — en
+      dos tamaños. <b>destructivo</b> se resuelve como contorno, no relleno: acciones como
+      "Rechazar" (P-22) no deben competir visualmente con la acción primaria de la misma
+      pantalla; el peso alto queda reservado a la confirmación explícita (C-22).
+    </p>
+    <div class="scope-note">
+      Matriz completa (4 variantes × 4 estados) en tamaño M. El tamaño L solo se usa en la
+      barra de acción fija (C-20), así que se muestra en su contexto real — primario +
+      secundario uno junto al otro — en vez de repetir los cuatro estados.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="variant-title"><span>Primario</span><span class="mono">marca/primario · texto/inverso</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-primario">Reservar</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-pressed">Reservar</button><span class="spec">presionado · opacidad 86%</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-disabled">Reservar</button><span class="spec">deshabilitado · estado/inactivo</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-loading">Reservar<span class="spinner"></span></button><span class="spec">cargando · ancho fijo</span></div>
+          </div>
+
+          <div class="variant-title"><span>Secundario</span><span class="mono">contorno marca/primario</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-secundario">Ver carta</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-pressed">Ver carta</button><span class="spec">presionado · fondo marca/primario-suave</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-disabled">Ver carta</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-loading">Ver carta<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+          <div class="variant-title"><span>Texto</span><span class="mono">sin relleno, sin borde</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell fit"><span class="hit-guide"><button class="btn btn-m btn-texto">Editar</button></span><span class="spec">normal · guía = 48×48 dp mín.</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-pressed">Editar</button><span class="spec">presionado</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-disabled">Editar</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-loading">Editar<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+          <div class="variant-title"><span>Destructivo</span><span class="mono">contorno estado/error</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo">Rechazar</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-pressed">Rechazar</button><span class="spec">presionado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-disabled">Rechazar</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-loading">Rechazar<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="variant-title"><span>Primario</span><span class="mono">marca/primario · texto/inverso</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-primario">Reservar</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-pressed">Reservar</button><span class="spec">presionado · opacidad 86%</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-disabled">Reservar</button><span class="spec">deshabilitado · estado/inactivo</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-primario is-loading">Reservar<span class="spinner"></span></button><span class="spec">cargando · ancho fijo</span></div>
+          </div>
+
+          <div class="variant-title"><span>Secundario</span><span class="mono">contorno marca/primario</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-secundario">Ver carta</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-pressed">Ver carta</button><span class="spec">presionado · fondo marca/primario-suave</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-disabled">Ver carta</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-secundario is-loading">Ver carta<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+          <div class="variant-title"><span>Texto</span><span class="mono">sin relleno, sin borde</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell fit"><span class="hit-guide"><button class="btn btn-m btn-texto">Editar</button></span><span class="spec">normal · guía = 48×48 dp mín.</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-pressed">Editar</button><span class="spec">presionado</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-disabled">Editar</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell fit"><button class="btn btn-m btn-texto is-loading">Editar<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+          <div class="variant-title"><span>Destructivo</span><span class="mono">contorno estado/error</span></div>
+          <div class="btn-grid">
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo">Rechazar</button><span class="spec">normal</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-pressed">Rechazar</button><span class="spec">presionado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-disabled">Rechazar</button><span class="spec">deshabilitado</span></div>
+            <div class="btn-cell"><button class="btn btn-m btn-destructivo is-loading">Rechazar<span class="spinner"></span></button><span class="spec">cargando</span></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="subhead">Tamaño L — en contexto real (barra de acción fija, C-20) <span class="mono">altura 56dp · relleno 24dp horiz. · radio/m 12dp</span></div>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame" style="width:328px;">
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-l btn-secundario">Compartir</button>
+            <button class="btn btn-l btn-primario">Reservar</button>
+          </div>
+          <span class="spec" style="margin-top:12px;">P-02 · barra de acción fija de dos botones</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark" style="width:328px;">
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-l btn-secundario">Compartir</button>
+            <button class="btn btn-l btn-primario">Reservar</button>
+          </div>
+          <span class="spec" style="margin-top:12px;">P-02 · barra de acción fija de dos botones</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-02 CAMPO DE TEXTO ============ -->
+  <section id="c-02">
+    <div class="section-head">
+      <span class="section-num">C-02</span>
+      <h2>Campo de texto</h2>
+    </div>
+    <p class="section-intro">
+      Cinco variantes por tipo de dato — <b>texto</b>, <b>correo</b>, <b>contraseña</b>,
+      <b>teléfono</b>, <b>área de texto</b> — construidas sobre la misma caja. Altura de línea
+      simple 48 dp (el campo entero es el objetivo táctil, sin necesidad de guía adicional).
+    </p>
+    <div class="scope-note">
+      La matriz completa de cinco estados —vacío, con contenido, enfocado, error,
+      deshabilitado— se muestra sobre <b>texto</b>, porque el comportamiento de cada estado
+      es idéntico entre variantes (cambia el borde y la etiqueta, no la mecánica). Las demás
+      variantes muestran su estado más informativo: correo en error de validación, contraseña
+      con el interruptor de visibilidad, teléfono con contenido, área de texto en error.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="variant-title"><span>Texto — los cinco estados</span><span class="mono">radio/s 8dp · relleno 16dp</span></div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box"><span class="field-value placeholder">Ej. María Fernanda Ortiz</span></div>
+            <span class="field-help">vacío</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">con contenido</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-focus"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">enfocado · borde marca/primario 2dp</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-error"><span class="field-value">Mar</span></div>
+            <span class="field-help is-error">Escribe tu nombre completo</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-disabled"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">deshabilitado</span>
+          </div>
+
+          <div class="variant-title"><span>Correo</span><span class="mono">con error de validación</span></div>
+          <div class="field">
+            <label class="field-label">Correo electrónico</label>
+            <div class="field-box is-error">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+              <span class="field-value">maria.ortizgmail.com</span>
+            </div>
+            <span class="field-help is-error">Ingresa un correo válido</span>
+          </div>
+
+          <div class="variant-title"><span>Contraseña</span><span class="mono">interruptor de visibilidad</span></div>
+          <div class="field">
+            <label class="field-label">Contraseña</label>
+            <div class="field-box is-focus">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              <span class="field-value">••••••••••</span>
+              <span class="hit-guide field-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+            </div>
+            <span class="field-help">enfocado · botón de mostrar/ocultar = 48×48 dp</span>
+          </div>
+
+          <div class="variant-title"><span>Teléfono</span><span class="mono">con contenido</span></div>
+          <div class="field">
+            <label class="field-label">Teléfono de contacto</label>
+            <div class="field-box">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c-1 0-2 1-2 2 0 7 6 13 13 13 1 0 2-1 2-2v-2.5l-4-1.5-1.5 1.5a9 9 0 0 1-4-4L12 9 10.5 5 8 4H7z"/></svg>
+              <span class="field-value">315 402 8871</span>
+            </div>
+            <span class="field-help">con contenido</span>
+          </div>
+
+          <div class="variant-title"><span>Área de texto</span><span class="mono">en error</span></div>
+          <div class="field">
+            <label class="field-label">Nota para la cocina (opcional)</label>
+            <div class="field-box multiline is-error"><span class="field-value">Alergia a los </span></div>
+            <span class="field-help is-error">Cuéntanos a qué es la alergia</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="variant-title"><span>Texto — los cinco estados</span><span class="mono">radio/s 8dp · relleno 16dp</span></div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box"><span class="field-value placeholder">Ej. María Fernanda Ortiz</span></div>
+            <span class="field-help">vacío</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">con contenido</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-focus"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">enfocado · borde marca/primario 2dp</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-error"><span class="field-value">Mar</span></div>
+            <span class="field-help is-error">Escribe tu nombre completo</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Nombre completo</label>
+            <div class="field-box is-disabled"><span class="field-value">María Fernanda Ortiz</span></div>
+            <span class="field-help">deshabilitado</span>
+          </div>
+
+          <div class="variant-title"><span>Correo</span><span class="mono">con error de validación</span></div>
+          <div class="field">
+            <label class="field-label">Correo electrónico</label>
+            <div class="field-box is-error">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+              <span class="field-value">maria.ortizgmail.com</span>
+            </div>
+            <span class="field-help is-error">Ingresa un correo válido</span>
+          </div>
+
+          <div class="variant-title"><span>Contraseña</span><span class="mono">interruptor de visibilidad</span></div>
+          <div class="field">
+            <label class="field-label">Contraseña</label>
+            <div class="field-box is-focus">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              <span class="field-value">••••••••••</span>
+              <span class="hit-guide field-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+            </div>
+            <span class="field-help">enfocado · botón de mostrar/ocultar = 48×48 dp</span>
+          </div>
+
+          <div class="variant-title"><span>Teléfono</span><span class="mono">con contenido</span></div>
+          <div class="field">
+            <label class="field-label">Teléfono de contacto</label>
+            <div class="field-box">
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c-1 0-2 1-2 2 0 7 6 13 13 13 1 0 2-1 2-2v-2.5l-4-1.5-1.5 1.5a9 9 0 0 1-4-4L12 9 10.5 5 8 4H7z"/></svg>
+              <span class="field-value">315 402 8871</span>
+            </div>
+            <span class="field-help">con contenido</span>
+          </div>
+
+          <div class="variant-title"><span>Área de texto</span><span class="mono">en error</span></div>
+          <div class="field">
+            <label class="field-label">Nota para la cocina (opcional)</label>
+            <div class="field-box multiline is-error"><span class="field-value">Alergia a los </span></div>
+            <span class="field-help is-error">Cuéntanos a qué es la alergia</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-05 TARJETA DE PLATO ============ -->
+  <section id="c-05">
+    <div class="section-head">
+      <span class="section-num">C-05</span>
+      <h2>Tarjeta de plato</h2>
+    </div>
+    <p class="section-intro">
+      Vertical para la carta, horizontal para favoritos y pedido. La fotografía manda
+      (principio 1): en la vertical ocupa todo el ancho en 4:3; en la horizontal se reduce a
+      una miniatura para no romper la altura estable que exigen las listas virtualizadas (T-5).
+    </p>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="variant-title"><span>Vertical</span><span class="mono">328×~360dp · radio/m 12dp · elevación/1</span></div>
+          <div class="dish-v">
+            <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+            <div class="dish-body">
+              <div class="dish-title">Bandeja campesina El Encanto</div>
+              <p class="dish-desc">Carne asada, chicharrón, arroz, frijol, huevo, plátano y arepa. Para compartir el hambre después del paseo.</p>
+              <div class="dish-foot"><span class="dish-price">$45.000</span><div class="dish-tags"><span class="chip">Para compartir</span></div></div>
+            </div>
+          </div>
+          <span class="spec">disponible</span>
+
+          <div class="dish-v" style="margin-top:20px;">
+            <div class="dish-photo unavailable">
+              <span class="unavail-badge">No disponible este día</span>
+              <span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span>
+            </div>
+            <div class="dish-body">
+              <div class="dish-title">Trucha arcoíris al ajillo</div>
+              <p class="dish-desc">Trucha fresca, ajo tostado, mantequilla y limón mandarino. Con patacones.</p>
+              <div class="dish-foot"><span class="dish-price inactive">$42.000</span><div class="dish-tags"><span class="chip">Sin gluten</span></div></div>
+            </div>
+          </div>
+          <span class="spec">no disponible en la fecha · foto 40% opacidad · precio estado/inactivo</span>
+
+          <div class="dish-v" style="margin-top:20px;">
+            <div class="dish-photo sk-photo skeleton-block"></div>
+            <div class="dish-body">
+              <div class="skeleton-block sk-line w60"></div>
+              <div class="skeleton-block sk-line w90"></div>
+              <div class="skeleton-block sk-line w40" style="margin-bottom:0;"></div>
+            </div>
+          </div>
+          <span class="spec">esqueleto</span>
+
+          <div class="variant-title" style="margin-top:26px;"><span>Horizontal</span><span class="mono">328×96dp fijo · radio/m 12dp</span></div>
+          <div class="dish-h">
+            <div class="dish-thumb"></div>
+            <div class="dish-h-body">
+              <div class="dish-h-title">Empanadas de pipián</div>
+              <div class="dish-h-meta">Entrada · 6 unidades</div>
+              <div class="dish-h-price">$18.000</div>
+            </div>
+          </div>
+          <span class="spec">disponible</span>
+
+          <div class="dish-h">
+            <div class="dish-thumb unavailable"></div>
+            <div class="dish-h-body">
+              <div class="dish-h-title">Mazamorra con panela</div>
+              <div class="dish-h-meta">Postre</div>
+              <div class="dish-h-price inactive">$12.000</div>
+            </div>
+          </div>
+          <span class="spec">no disponible en la fecha</span>
+
+          <div class="dish-h">
+            <div class="skeleton-block sk-thumb"></div>
+            <div class="dish-h-body" style="width:100%;">
+              <div class="skeleton-block sk-line w90" style="height:14px;"></div>
+              <div class="skeleton-block sk-line w40" style="margin-bottom:0;"></div>
+            </div>
+          </div>
+          <span class="spec">esqueleto</span>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="variant-title"><span>Vertical</span><span class="mono">328×~360dp · radio/m 12dp · elevación/1</span></div>
+          <div class="dish-v">
+            <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+            <div class="dish-body">
+              <div class="dish-title">Bandeja campesina El Encanto</div>
+              <p class="dish-desc">Carne asada, chicharrón, arroz, frijol, huevo, plátano y arepa. Para compartir el hambre después del paseo.</p>
+              <div class="dish-foot"><span class="dish-price">$45.000</span><div class="dish-tags"><span class="chip">Para compartir</span></div></div>
+            </div>
+          </div>
+          <span class="spec">disponible</span>
+
+          <div class="dish-v" style="margin-top:20px;">
+            <div class="dish-photo unavailable">
+              <span class="unavail-badge">No disponible este día</span>
+              <span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span>
+            </div>
+            <div class="dish-body">
+              <div class="dish-title">Trucha arcoíris al ajillo</div>
+              <p class="dish-desc">Trucha fresca, ajo tostado, mantequilla y limón mandarino. Con patacones.</p>
+              <div class="dish-foot"><span class="dish-price inactive">$42.000</span><div class="dish-tags"><span class="chip">Sin gluten</span></div></div>
+            </div>
+          </div>
+          <span class="spec">no disponible en la fecha · foto 40% opacidad · precio estado/inactivo</span>
+
+          <div class="dish-v" style="margin-top:20px;">
+            <div class="dish-photo sk-photo skeleton-block"></div>
+            <div class="dish-body">
+              <div class="skeleton-block sk-line w60"></div>
+              <div class="skeleton-block sk-line w90"></div>
+              <div class="skeleton-block sk-line w40" style="margin-bottom:0;"></div>
+            </div>
+          </div>
+          <span class="spec">esqueleto</span>
+
+          <div class="variant-title" style="margin-top:26px;"><span>Horizontal</span><span class="mono">328×96dp fijo · radio/m 12dp</span></div>
+          <div class="dish-h">
+            <div class="dish-thumb"></div>
+            <div class="dish-h-body">
+              <div class="dish-h-title">Empanadas de pipián</div>
+              <div class="dish-h-meta">Entrada · 6 unidades</div>
+              <div class="dish-h-price">$18.000</div>
+            </div>
+          </div>
+          <span class="spec">disponible</span>
+
+          <div class="dish-h">
+            <div class="dish-thumb unavailable"></div>
+            <div class="dish-h-body">
+              <div class="dish-h-title">Mazamorra con panela</div>
+              <div class="dish-h-meta">Postre</div>
+              <div class="dish-h-price inactive">$12.000</div>
+            </div>
+          </div>
+          <span class="spec">no disponible en la fecha</span>
+
+          <div class="dish-h">
+            <div class="skeleton-block sk-thumb"></div>
+            <div class="dish-h-body" style="width:100%;">
+              <div class="skeleton-block sk-line w90" style="height:14px;"></div>
+              <div class="skeleton-block sk-line w40" style="margin-bottom:0;"></div>
+            </div>
+          </div>
+          <span class="spec">esqueleto</span>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-10 BARRA DE CINCO DESTINOS ============ -->
+  <section id="c-10">
+    <div class="section-head">
+      <span class="section-num">C-10</span>
+      <h2>Barra de cinco destinos</h2>
+      <span class="risk-tag">Riesgo alto</span>
+    </div>
+    <p class="section-intro">
+      Cinco destinos con Noticias como botón central elevado (T-3). El botón central no es una
+      pestaña más: es circular, sobresale de la barra 32 dp y siempre lleva ícono + etiqueta,
+      porque un botón sin texto es más difícil de identificar de un vistazo, y Noticias es el
+      destino que más le importa a este cliente.
+    </p>
+    <div class="scope-note">
+      Cada franja está a ancho completo (360dp) para mostrar la barra real, sin el margen
+      lateral de 16dp que sí llevan las demás secciones.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro · Carta activa</span>
+        <div class="frame flush" style="width:360px;">
+          <div class="navbar-wrap">
+            <div class="navbar">
+              <div class="nav-item is-active"><span class="nav-pill"></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                <span class="nav-label">Carta</span>
+              </div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg>
+                <span class="nav-label">Reservas</span>
+              </div>
+              <div class="nav-item"></div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4h11l-3 4 3 4H6z"/></svg>
+                <span class="nav-label">Próximamente</span>
+              </div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2.1"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2.1"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2.1"/></svg>
+                <span class="nav-label">Ajustes</span>
+              </div>
+            </div>
+            <div class="nav-center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+              <span class="nav-label">Noticias</span>
+            </div>
+          </div>
+        </div>
+        <span class="spec">pestaña activa (Carta) · inactivas · botón central normal · <b>72×64dp</b> por pestaña, <b>60dp</b> el central — ambos superan 48×48dp</span>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Claro · con novedad + presionado</span>
+        <div class="frame flush" style="width:360px;">
+          <div class="navbar-wrap">
+            <div class="navbar">
+              <div class="nav-item"><span class="nav-pill"></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                <span class="nav-label">Carta</span>
+              </div>
+              <div class="nav-item is-active"><span class="nav-pill"></span>
+                <span class="nav-dot"></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg>
+                <span class="nav-label">Reservas</span>
+              </div>
+              <div class="nav-item"></div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4h11l-3 4 3 4H6z"/></svg>
+                <span class="nav-label">Próximamente</span>
+              </div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2.1"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2.1"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2.1"/></svg>
+                <span class="nav-label">Ajustes</span>
+              </div>
+            </div>
+            <div class="nav-center is-pressed">
+              <span class="nav-dot"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+              <span class="nav-label">Noticias</span>
+            </div>
+          </div>
+        </div>
+        <span class="spec">Reservas con indicador de novedad (solicitud resuelta) · central presionado · opacidad 87%</span>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro · Ajustes activa</span>
+        <div class="frame flush dark" style="width:360px;">
+          <div class="navbar-wrap">
+            <div class="navbar">
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                <span class="nav-label">Carta</span>
+              </div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg>
+                <span class="nav-label">Reservas</span>
+              </div>
+              <div class="nav-item"></div>
+              <div class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4h11l-3 4 3 4H6z"/></svg>
+                <span class="nav-label">Próximamente</span>
+              </div>
+              <div class="nav-item is-active"><span class="nav-pill"></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2.1"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2.1"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2.1"/></svg>
+                <span class="nav-label">Ajustes</span>
+              </div>
+            </div>
+            <div class="nav-center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+              <span class="nav-label">Noticias</span>
+            </div>
+          </div>
+        </div>
+        <span class="spec">pestaña activa (Ajustes) — este ítem vive en Ajustes; Administración no aparece en la barra</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERIFICACIÓN ============ -->
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <p class="sub">Requisito no negociable del brief. El elemento visible puede ser más chico; lo que cuenta es el área que responde al toque.</p>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Botón M (las 4 variantes)</td><td>alto 48dp</td><td>ancho variable × 48dp</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Botón L (las 2 variantes)</td><td>alto 56dp</td><td>ancho variable × 56dp</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Botón texto</td><td>~36×24dp de etiqueta</td><td>relleno interno hasta 48×48dp (ver guía punteada)</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Campo de texto (una línea)</td><td>alto 48dp, ancho completo</td><td>el campo entero es el objetivo</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Interruptor mostrar/ocultar contraseña</td><td>ícono 20×20dp</td><td>48×48dp con margen negativo hasta el borde del campo</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Favorito sobre tarjeta de plato</td><td>círculo visible 32×32dp</td><td>48×48dp en la esquina de la foto</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Pestaña de la barra de destinos</td><td>ícono 22×22dp + etiqueta</td><td>72×64dp (ancho de columna × alto de barra)</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Botón central (Noticias)</td><td>círculo 60×60dp</td><td>60×60dp — ya es el objetivo</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 1 de N (C-01, C-02, C-05, C-10)</span>
+    <span>Siguiente: Lote 2, cuando apruebes este</span>
+  </footer>
+</div>

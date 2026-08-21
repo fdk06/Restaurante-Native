@@ -1,0 +1,869 @@
+<title>Fichas de Diseño El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg: #FFFFFF;
+    --pg-surface: #F6F5F1;
+    --pg-border: #E2E2DA;
+    --pg-text: #16180F;
+    --pg-text-2: #5F6355;
+    --pg-primary: #4A5D3A;
+    --pg-primary-soft: #EEF2E8;
+    --pg-accent: #A2632E;
+    --pg-inverse: #FFFFFF;
+    --pg-success: #2F6B45;
+    --pg-warning: #A87516;
+    --pg-error: #A82A22;
+    --pg-shadow-1: 0 1px 3px rgba(22,24,15,0.10);
+    --pg-shadow-2: 0 8px 24px rgba(22,24,15,0.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --pg-bg: #12140F;
+      --pg-surface: #1C1F19;
+      --pg-border: #2C302A;
+      --pg-text: #F0F1EA;
+      --pg-text-2: #A5A99B;
+      --pg-primary: #9CB584;
+      --pg-primary-soft: #232C1C;
+      --pg-accent: #D69A5E;
+      --pg-inverse: #12140F;
+      --pg-success: #6FB98C;
+      --pg-warning: #DFA945;
+      --pg-error: #EF8880;
+      --pg-shadow-1: 0 1px 3px rgba(0,0,0,0.4);
+      --pg-shadow-2: 0 8px 28px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --pg-bg: #12140F;
+    --pg-surface: #1C1F19;
+    --pg-border: #2C302A;
+    --pg-text: #F0F1EA;
+    --pg-text-2: #A5A99B;
+    --pg-primary: #9CB584;
+    --pg-primary-soft: #232C1C;
+    --pg-accent: #D69A5E;
+    --pg-inverse: #12140F;
+    --pg-success: #6FB98C;
+    --pg-warning: #DFA945;
+    --pg-error: #EF8880;
+    --pg-shadow-1: 0 1px 3px rgba(0,0,0,0.4);
+    --pg-shadow-2: 0 8px 28px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    background: var(--pg-bg);
+    color: var(--pg-text);
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 24px 96px;
+  }
+  code, .mono { font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace; }
+
+  a { color: inherit; }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+
+  /* ---------- Header ---------- */
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--pg-border);
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pg-accent);
+    margin: 0 0 10px;
+  }
+  .masthead h1 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .masthead .deck {
+    color: var(--pg-text-2);
+    font-size: 15px;
+    margin-top: 8px;
+    max-width: 46ch;
+  }
+  .masthead .meta {
+    font-size: 12px;
+    color: var(--pg-text-2);
+    margin-top: 14px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .masthead .meta .mono { color: var(--pg-primary); }
+
+  /* ---------- Sections ---------- */
+  section { margin-top: 64px; }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--pg-text-2);
+  }
+  section > .section-head > h2 { font-size: 22px; font-weight: 700; }
+  .section-intro {
+    color: var(--pg-text-2);
+    font-size: 15px;
+    max-width: 64ch;
+    margin: 14px 0 28px;
+  }
+
+  /* ---------- Preview toggle ---------- */
+  .theme-toggle {
+    display: inline-flex;
+    background: var(--pg-surface);
+    border: 1px solid var(--pg-border);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .theme-toggle button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--pg-text-2);
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    min-height: 32px;
+  }
+  .theme-toggle button.active {
+    background: var(--pg-primary);
+    color: var(--pg-inverse);
+  }
+  .toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .toggle-row .hint { font-size: 13px; color: var(--pg-text-2); }
+
+  /* ---------- Verification callout ---------- */
+  .verify-card {
+    background: var(--pg-surface);
+    border: 1px solid var(--pg-border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  .verify-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .verify-card .sub { font-size: 13px; color: var(--pg-text-2); margin-bottom: 18px; }
+  .verify-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 10px;
+  }
+  .verify-item {
+    background: var(--pg-bg);
+    border: 1px solid var(--pg-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .verify-item .label { color: var(--pg-text-2); line-height: 1.35; }
+  .verify-item .label b { color: var(--pg-text); font-weight: 600; }
+  .verify-summary {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--pg-border);
+    font-size: 13.5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .badge-pass { background: color-mix(in srgb, var(--pg-success) 16%, transparent); color: var(--pg-success); }
+  .badge-fail { background: color-mix(in srgb, var(--pg-error) 18%, transparent); color: var(--pg-error); }
+  .badge-neutral { background: var(--pg-border); color: var(--pg-text-2); }
+
+  /* ---------- Palette table ---------- */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--pg-border); border-radius: 16px; }
+  table.palette { border-collapse: collapse; width: 100%; min-width: 880px; font-size: 13.5px; }
+  table.palette th, table.palette td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--pg-border);
+    vertical-align: top;
+  }
+  table.palette thead th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pg-text-2);
+    background: var(--pg-surface);
+    position: sticky;
+    top: 0;
+  }
+  table.palette tbody tr:last-child td { border-bottom: none; }
+  table.palette tbody tr:hover { background: color-mix(in srgb, var(--pg-surface) 60%, transparent); }
+  .ficha-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; }
+  .uso-text { color: var(--pg-text-2); font-size: 12.5px; max-width: 22ch; }
+  .swatch-cell { display: flex; align-items: center; gap: 8px; }
+  .swatch {
+    width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+  .swatch-hex { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--pg-text-2); }
+  .contrast-cell { font-size: 12px; }
+  .contrast-line { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .contrast-line:last-child { margin-bottom: 0; }
+  .contrast-ratio { font-family: 'JetBrains Mono', monospace; }
+  .contrast-note { color: var(--pg-text-2); font-size: 11.5px; }
+  .dash { color: var(--pg-text-2); }
+
+  .admin-note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--pg-primary-soft);
+    border: 1px solid var(--pg-border);
+    font-size: 13px;
+    color: var(--pg-text);
+    display: flex;
+    gap: 10px;
+  }
+  .admin-note b { color: var(--pg-accent); }
+
+  /* ---------- Demo scope (manual toggle, independent of page theme) ---------- */
+  .demo-scope {
+    --dm-bg: #FFFFFF; --dm-surface: #F6F5F1; --dm-border: #E2E2DA;
+    --dm-text: #16180F; --dm-text-2: #5F6355;
+    --dm-primary: #4A5D3A; --dm-primary-soft: #EEF2E8; --dm-accent: #A2632E;
+    --dm-inverse: #FFFFFF;
+    --dm-success: #2F6B45; --dm-warning: #A87516; --dm-error: #A82A22; --dm-inactive: #B4B4AA;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 6px 16px rgba(22,24,15,0.18);
+    background: var(--dm-bg);
+    border: 1px solid var(--dm-border);
+    border-radius: 20px;
+    padding: 28px;
+    transition: background 220ms ease;
+  }
+  .demo-scope.is-dark {
+    --dm-bg: #12140F; --dm-surface: #1C1F19; --dm-border: #2C302A;
+    --dm-text: #F0F1EA; --dm-text-2: #A5A99B;
+    --dm-primary: #9CB584; --dm-primary-soft: #232C1C; --dm-accent: #D69A5E;
+    --dm-inverse: #12140F;
+    --dm-success: #6FB98C; --dm-warning: #DFA945; --dm-error: #EF8880; --dm-inactive: #55584F;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.4);
+    --dm-shadow-2: 0 6px 20px rgba(0,0,0,0.5);
+  }
+  .demo-scope, .demo-scope * { color: var(--dm-text); }
+
+  /* Type scale specimens */
+  .specimen-list { display: flex; flex-direction: column; }
+  .specimen {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--dm-border);
+    align-items: baseline;
+  }
+  .specimen:first-child { padding-top: 0; }
+  .specimen:last-child { border-bottom: none; padding-bottom: 0; }
+  .specimen .meta { font-size: 12px; }
+  .specimen .meta .ficha-name { display: block; margin-bottom: 4px; }
+  .specimen .meta .dims { color: var(--dm-text-2); }
+  .sp-display { font-size: 28px; line-height: 34px; font-weight: 700; }
+  .sp-titulo-l { font-size: 22px; line-height: 28px; font-weight: 700; }
+  .sp-titulo-m { font-size: 18px; line-height: 24px; font-weight: 600; }
+  .sp-cuerpo-l { font-size: 16px; line-height: 24px; font-weight: 400; color: var(--dm-text); }
+  .sp-cuerpo-m { font-size: 14px; line-height: 20px; font-weight: 400; color: var(--dm-text-2); }
+  .sp-etiqueta { font-size: 13px; line-height: 16px; font-weight: 600; }
+  .sp-pie { font-size: 12px; line-height: 16px; font-weight: 400; color: var(--dm-text-2); }
+  .sp-precio { font-size: 18px; line-height: 22px; font-weight: 700; color: var(--dm-primary); }
+  .sp-codigo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px; line-height: 26px; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--dm-primary-soft);
+    color: var(--dm-primary);
+    min-height: 32px;
+  }
+
+  /* Composed dish card, real-world application of the type scale */
+  .compose-wrap { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; margin-top: 32px; }
+  .compose-label { font-size: 12px; color: var(--dm-text-2); margin-bottom: 10px; }
+  .dish-card {
+    width: 300px;
+    background: var(--dm-surface);
+    border: 1px solid var(--dm-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--dm-shadow-1);
+  }
+  .dish-photo {
+    aspect-ratio: 4 / 3;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 35%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 35%, var(--dm-surface)));
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  .fav-dot {
+    width: 32px; height: 32px; border-radius: 999px;
+    background: color-mix(in srgb, var(--dm-bg) 82%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .dish-body { padding: 14px 16px 16px; }
+  .dish-title { font-size: 18px; line-height: 24px; font-weight: 600; margin-bottom: 4px; }
+  .dish-desc { font-size: 14px; line-height: 20px; color: var(--dm-text-2); margin-bottom: 12px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .dish-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .dish-price { font-size: 18px; line-height: 22px; font-weight: 700; color: var(--dm-primary); }
+  .dish-tags { display: flex; gap: 6px; }
+  .dish-tags .chip { font-size: 11px; padding: 4px 9px; min-height: auto; }
+
+  .code-card {
+    width: 260px;
+    background: var(--dm-surface);
+    border: 1px solid var(--dm-border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .code-card .sp-pie { margin-bottom: 8px; }
+  .code-box {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px; font-weight: 700; letter-spacing: 0.05em;
+    background: var(--dm-bg);
+    border: 1px dashed var(--dm-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 6px 0 12px;
+  }
+  .status-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .status-pill {
+    font-size: 12px; font-weight: 600;
+    padding: 5px 10px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .status-pill.warn { background: color-mix(in srgb, var(--dm-warning) 20%, var(--dm-surface)); color: var(--dm-warning); }
+  .status-pill.ok { background: color-mix(in srgb, var(--dm-success) 20%, var(--dm-surface)); color: var(--dm-success); }
+  .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+
+  /* ---------- Spacing / radius / elevation ---------- */
+  .scale-block { display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
+  .scale-row { display: flex; align-items: center; gap: 16px; }
+  .scale-row .val { width: 46px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--dm-text-2); text-align: right; flex-shrink: 0; }
+  .scale-bar { height: 18px; background: var(--dm-primary); border-radius: 4px; }
+
+  .radius-row { display: flex; gap: 28px; flex-wrap: wrap; }
+  .radius-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .radius-swatch { width: 76px; height: 76px; background: var(--dm-primary-soft); border: 1.5px solid var(--dm-primary); }
+  .radius-label { font-size: 12px; text-align: center; }
+  .radius-label .ficha-name { display: block; }
+  .radius-label .dims { color: var(--dm-text-2); }
+
+  .elev-row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .elev-card {
+    width: 150px; height: 92px;
+    background: var(--dm-surface);
+    border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    font-size: 12px;
+  }
+  .elev-card .dims { color: var(--dm-text-2); font-size: 11px; }
+  .elev-card.e0 { box-shadow: var(--dm-shadow-none, none); border: 1px solid var(--dm-border); }
+  .elev-card.e1 { box-shadow: var(--dm-shadow-1); }
+  .elev-card.e2 { box-shadow: var(--dm-shadow-2); }
+
+  /* ---------- Code section ---------- */
+  .code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 780px) { .code-grid { grid-template-columns: 1fr; } }
+  .code-panel { background: var(--pg-surface); border: 1px solid var(--pg-border); border-radius: 14px; overflow: hidden; }
+  .code-panel-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 16px; border-bottom: 1px solid var(--pg-border);
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 700;
+  }
+  .code-panel-head span.path { color: var(--pg-text-2); font-weight: 500; }
+  .code-panel pre {
+    margin: 0; padding: 16px; overflow: auto; max-height: 420px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6;
+  }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--pg-border);
+    font-size: 12.5px;
+    color: var(--pg-text-2);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>El Encanto Campestre</h1>
+      <p class="deck">Fichas de diseño — Etapa 1 de 6. Color, tipografía y espaciado, verificados en tema claro y oscuro antes de construir componentes.</p>
+      <div class="meta">
+        <span>Restaurante campestre · Timbío, Cauca</span>
+        <span class="mono">v1 · 20/08/2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 1. COLOR ============ -->
+  <section id="color">
+    <div class="section-head"><span class="section-num">01</span><h2>Color</h2></div>
+    <p class="section-intro">
+      Catorce fichas semánticas derivadas del verde militar de la marca y del acento tierra
+      tomado del plumaje de la aguililla caminera. Ningún componente referencia un valor
+      hexadecimal directamente: siempre pasa por el nombre de la ficha, para que el cambio
+      de tema sea automático.
+    </p>
+
+    <div class="verify-card">
+      <h3>Verificación de contraste — obligatoria</h3>
+      <p class="sub">texto/primario y texto/secundario sobre superficie/fondo y superficie/elevada · texto/inverso sobre marca/primario · en ambos temas. Mínimo exigido: 4.5:1.</p>
+      <div class="verify-grid" id="verify-grid"></div>
+      <div class="verify-summary" id="verify-summary"></div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="palette">
+        <thead>
+          <tr>
+            <th>Ficha</th>
+            <th>Uso</th>
+            <th>Claro</th>
+            <th>Oscuro</th>
+            <th>Contraste relevante</th>
+          </tr>
+        </thead>
+        <tbody id="palette-body"><!-- filled by JS --></tbody>
+      </table>
+    </div>
+
+    <div class="admin-note">
+      <span>⚠</span>
+      <div>
+        <b>Hallazgo al verificar admin/encabezado.</b>
+        texto/inverso solo garantiza contraste sobre marca/primario, no sobre este fondo.
+        En tema claro admin/encabezado es oscuro y texto/inverso (blanco) funciona bien.
+        Pero en tema oscuro admin/encabezado ya es casi negro, así que texto/inverso
+        (también casi negro) queda prácticamente ilegible sobre él — ver la fila
+        correspondiente en la tabla. Corrección: sobre admin/encabezado usar
+        <b>texto/inverso en tema claro</b> y <b>texto/primario en tema oscuro</b>, no una
+        sola ficha fija para los dos temas.
+      </div>
+    </div>
+
+    <div class="admin-note" style="margin-top:12px;">
+      <span>⚠</span>
+      <div>
+        <b>Hallazgo al verificar estado/atencion.</b>
+        Usado como texto suelto sobre superficie/elevada en tema claro, cae a 3.69:1 —
+        por debajo de 4.5:1 (sí cumple el umbral de 3:1 de texto grande o de ícono).
+        No es un valor a ajustar: esta ficha está pensada para ir como texto sobre su
+        propio fondo tintado dentro de una insignia (C-07), tal como se ve en la píldora
+        "Pendiente de aprobación" de la sección de Tipografía, no suelta encima de una
+        tarjeta. Regla de uso: si algún componente necesita estado/atencion como texto
+        pequeño fuera de una insignia, debe ir sobre su fondo tintado, nunca directo
+        sobre superficie/elevada.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. TIPOGRAFÍA ============ -->
+  <section id="tipografia">
+    <div class="toggle-row">
+      <div class="section-head" style="margin-bottom:0"><span class="section-num">02</span><h2>Tipografía</h2></div>
+      <div class="theme-toggle" data-toggle-group="demo">
+        <button type="button" data-theme-btn="light" class="active">Claro</button>
+        <button type="button" data-theme-btn="dark">Oscuro</button>
+      </div>
+    </div>
+    <p class="section-intro">
+      Una sola familia — Inter — con jerarquía por tamaño y peso, ninguna ficha nueva por
+      pantalla. El bloque de abajo cambia de tema con el interruptor; la tabla de color de
+      arriba, no, para que los dos temas queden siempre visibles a la vez.
+    </p>
+
+    <div class="demo-scope" data-demo-theme>
+      <div class="specimen-list">
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/display</span><span class="dims">28 / 34 · 700</span></div>
+          <div class="sp-display">Bienvenido a El Encanto Campestre</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/titulo-l</span><span class="dims">22 / 28 · 700</span></div>
+          <div class="sp-titulo-l">Carta del domingo 6 de septiembre</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/titulo-m</span><span class="dims">18 / 24 · 600</span></div>
+          <div class="sp-titulo-m">Sancocho de gallina campesino</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/cuerpo-l</span><span class="dims">16 / 24 · 400</span></div>
+          <div class="sp-cuerpo-l">Servido con arroz blanco, aguacate, tajadas de plátano maduro y ají de la casa. Preparado con gallina criolla de finca propia, tres horas al fuego de leña.</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/cuerpo-m</span><span class="dims">14 / 20 · 400</span></div>
+          <div class="sp-cuerpo-m">Gallina criolla, mazorca, plátano y yuca en caldo campesino.</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/etiqueta</span><span class="dims">13 / 16 · 600</span></div>
+          <div><span class="sp-etiqueta chip">Plato fuerte</span></div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/pie</span><span class="dims">12 / 16 · 400</span></div>
+          <div class="sp-pie">Actualizado hace 2 horas · 14 platos disponibles hoy</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/precio</span><span class="dims">18 / 22 · 700</span></div>
+          <div class="sp-precio">$38.000</div>
+        </div>
+        <div class="specimen">
+          <div class="meta"><span class="ficha-name">tipo/codigo</span><span class="dims">20 / 26 · 700 mono</span></div>
+          <div class="sp-codigo">ECC-4921</div>
+        </div>
+      </div>
+
+      <div class="compose-wrap">
+        <div>
+          <p class="compose-label">Composición real — tarjeta de plato (C-05)</p>
+          <div class="dish-card">
+            <div class="dish-photo"><span class="fav-dot">♡</span></div>
+            <div class="dish-body">
+              <div class="dish-title">Trucha arcoíris al ajillo</div>
+              <p class="dish-desc">Trucha fresca de la piscícola vecina, salteada con ajo tostado, mantequilla y limón mandarino. Acompañada de patacones.</p>
+              <div class="dish-foot">
+                <span class="dish-price">$42.000</span>
+                <div class="dish-tags"><span class="chip">Sin gluten</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="compose-label">Composición real — solicitud enviada (P-09)</p>
+          <div class="code-card">
+            <p class="sp-pie">Código de tu reserva</p>
+            <div class="code-box">ECC-4921</div>
+            <div class="status-row">
+              <span class="status-pill warn">Pendiente de aprobación</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ESPACIADO ============ -->
+  <section id="espaciado">
+    <div class="section-head"><span class="section-num">03</span><h2>Espaciado, radios y elevación</h2></div>
+    <p class="section-intro">
+      Escala de 4 a 48 dp, cuatro radios con un uso fijo cada uno, y tres niveles de
+      elevación para distinguir tarjetas de hojas modales sin depender del color.
+    </p>
+
+    <div class="demo-scope" data-demo-theme>
+      <h3 style="font-size:13px;font-weight:600;color:var(--dm-text-2);margin-bottom:14px;">Escala de espaciado (dp)</h3>
+      <div class="scale-block" id="spacing-scale"></div>
+
+      <h3 style="font-size:13px;font-weight:600;color:var(--dm-text-2);margin:8px 0 14px;">Radios</h3>
+      <div class="radius-row">
+        <div class="radius-item">
+          <div class="radius-swatch" style="border-radius:8px;"></div>
+          <div class="radius-label"><span class="ficha-name">radio/s</span><span class="dims">8 dp</span></div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-swatch" style="border-radius:12px;"></div>
+          <div class="radius-label"><span class="ficha-name">radio/m</span><span class="dims">12 dp</span></div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-swatch" style="border-radius:20px;"></div>
+          <div class="radius-label"><span class="ficha-name">radio/l</span><span class="dims">20 dp</span></div>
+        </div>
+        <div class="radius-item">
+          <div class="radius-swatch" style="border-radius:999px;"></div>
+          <div class="radius-label"><span class="ficha-name">radio/completo</span><span class="dims">999 dp</span></div>
+        </div>
+      </div>
+
+      <h3 style="font-size:13px;font-weight:600;color:var(--dm-text-2);margin:28px 0 14px;">Elevación</h3>
+      <div class="elev-row">
+        <div class="elev-card e0"><span class="ficha-name">elevación/0</span><span class="dims">sin sombra</span></div>
+        <div class="elev-card e1"><span class="ficha-name">elevación/1</span><span class="dims">tarjetas</span></div>
+        <div class="elev-card e2"><span class="ficha-name">elevación/2</span><span class="dims">modales, barra fija</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. ARCHIVOS ============ -->
+  <section id="archivos">
+    <div class="section-head"><span class="section-num">04</span><h2>Archivos de fichas</h2></div>
+    <p class="section-intro">
+      <span class="mono">tokens.css</span> y <span class="mono">tokens.json</span> se guardan junto a esta
+      lámina en <span class="mono">design/01_tokens/</span>. Mismos nombres de ficha aquí y en el código,
+      para que un cambio de paleta no obligue a tocar componentes en el Sprint 1.
+    </p>
+    <div class="code-grid">
+      <div class="code-panel">
+        <div class="code-panel-head"><span>tokens.css</span><span class="path">01_tokens/</span></div>
+        <pre id="css-src"></pre>
+      </div>
+      <div class="code-panel">
+        <div class="code-panel-head"><span>tokens.json</span><span class="path">01_tokens/</span></div>
+        <pre id="json-src"></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 1 de 6 · Fichas de diseño</span>
+    <span>Siguiente: Etapa 2 · Componentes (Prompt 2, §7) — pendiente de tu aprobación</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // ---------- WCAG contrast engine ----------
+  function hexToRgb(hex) {
+    var h = hex.replace('#', '');
+    return [
+      parseInt(h.substring(0, 2), 16),
+      parseInt(h.substring(2, 4), 16),
+      parseInt(h.substring(4, 6), 16)
+    ];
+  }
+  function channelLin(c) {
+    var s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  }
+  function relLuminance(hex) {
+    var rgb = hexToRgb(hex);
+    return 0.2126 * channelLin(rgb[0]) + 0.7152 * channelLin(rgb[1]) + 0.0722 * channelLin(rgb[2]);
+  }
+  function contrastRatio(hexA, hexB) {
+    var l1 = relLuminance(hexA), l2 = relLuminance(hexB);
+    var lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+  function fmt(r) { return r.toFixed(2) + ':1'; }
+
+  // ---------- Data: full palette ----------
+  var TOKENS = {
+    'marca/primario':        { uso: 'Acción principal, marca',        claro: '#4A5D3A', oscuro: '#9CB584' },
+    'marca/primario-suave':  { uso: 'Fondo de chips seleccionados',   claro: '#EEF2E8', oscuro: '#232C1C' },
+    'marca/acento':          { uso: 'Acento tierra (plumaje aguililla)', claro: '#A2632E', oscuro: '#D69A5E' },
+    'superficie/fondo':      { uso: 'Fondo de pantalla',              claro: '#FFFFFF', oscuro: '#12140F' },
+    'superficie/elevada':    { uso: 'Tarjetas, hojas modales',        claro: '#F6F5F1', oscuro: '#1C1F19' },
+    'superficie/borde':      { uso: 'Separadores',                    claro: '#E2E2DA', oscuro: '#2C302A' },
+    'texto/primario':        { uso: 'Títulos y contenido',            claro: '#16180F', oscuro: '#F0F1EA' },
+    'texto/secundario':      { uso: 'Descripciones, metadatos',       claro: '#5F6355', oscuro: '#A5A99B' },
+    'texto/inverso':         { uso: 'Texto sobre marca/primario',     claro: '#FFFFFF', oscuro: '#12140F' },
+    'estado/exito':          { uso: 'Reserva confirmada',             claro: '#2F6B45', oscuro: '#6FB98C' },
+    'estado/atencion':       { uso: 'Solicitud pendiente',            claro: '#A87516', oscuro: '#DFA945' },
+    'estado/error':          { uso: 'Rechazo, error, cancelación',    claro: '#A82A22', oscuro: '#EF8880' },
+    'estado/inactivo':       { uso: 'Plato no disponible, sin aforo', claro: '#B4B4AA', oscuro: '#55584F' },
+    'admin/encabezado':      { uso: 'Distintivo de administración',   claro: '#2E3A2A', oscuro: '#1A2118' }
+  };
+
+  var FONDO_C = TOKENS['superficie/fondo'].claro, FONDO_O = TOKENS['superficie/fondo'].oscuro;
+  var ELEV_C  = TOKENS['superficie/elevada'].claro, ELEV_O = TOKENS['superficie/elevada'].oscuro;
+  var PRIM_C  = TOKENS['marca/primario'].claro, PRIM_O = TOKENS['marca/primario'].oscuro;
+  var INV_C   = TOKENS['texto/inverso'].claro, INV_O = TOKENS['texto/inverso'].oscuro;
+  var TXP_C   = TOKENS['texto/primario'].claro, TXP_O = TOKENS['texto/primario'].oscuro;
+  var TXS_C   = TOKENS['texto/secundario'].claro, TXS_O = TOKENS['texto/secundario'].oscuro;
+
+  // ---------- Required verification (§4.1) ----------
+  var required = [
+    { label: 'texto/primario · fondo · claro',   fg: TXP_C, bg: FONDO_C },
+    { label: 'texto/primario · fondo · oscuro',  fg: TXP_O, bg: FONDO_O },
+    { label: 'texto/primario · elevada · claro', fg: TXP_C, bg: ELEV_C },
+    { label: 'texto/primario · elevada · oscuro',fg: TXP_O, bg: ELEV_O },
+    { label: 'texto/secundario · fondo · claro',   fg: TXS_C, bg: FONDO_C },
+    { label: 'texto/secundario · fondo · oscuro',  fg: TXS_O, bg: FONDO_O },
+    { label: 'texto/secundario · elevada · claro', fg: TXS_C, bg: ELEV_C },
+    { label: 'texto/secundario · elevada · oscuro',fg: TXS_O, bg: ELEV_O },
+    { label: 'texto/inverso · marca/primario · claro',  fg: INV_C, bg: PRIM_C },
+    { label: 'texto/inverso · marca/primario · oscuro', fg: INV_O, bg: PRIM_O }
+  ];
+
+  var grid = document.getElementById('verify-grid');
+  var minRatio = Infinity, minLabel = '', allPass = true;
+  required.forEach(function (item) {
+    var r = contrastRatio(item.fg, item.bg);
+    var pass = r >= 4.5;
+    if (!pass) allPass = false;
+    if (r < minRatio) { minRatio = r; minLabel = item.label; }
+    var el = document.createElement('div');
+    el.className = 'verify-item';
+    el.innerHTML =
+      '<span class="label"><b>' + item.label.split(' · ')[0] + '</b><br>' + item.label.split(' · ').slice(1).join(' · ') + '</span>' +
+      '<span class="badge ' + (pass ? 'badge-pass' : 'badge-fail') + '">' + fmt(r) + (pass ? (r >= 7 ? ' AAA' : ' AA') : ' ✕') + '</span>';
+    grid.appendChild(el);
+  });
+  document.getElementById('verify-summary').innerHTML =
+    (allPass
+      ? '<span style="font-size:16px;">✅</span><span><b>Los diez pares obligatorios superan 4.5:1.</b> No fue necesario ajustar ningún valor de partida. El más ajustado es <span class="mono">' + minLabel + '</span>, con ' + fmt(minRatio) + '.</span>'
+      : '<span style="font-size:16px;">⚠️</span><span><b>Hay pares por debajo de 4.5:1.</b> El más crítico es <span class="mono">' + minLabel + '</span>, con ' + fmt(minRatio) + '. Revisar antes de aprobar la etapa.</span>');
+
+  // ---------- Full palette table ----------
+  function pairRow(fgLabel, fgC, fgO, bgLabel, bgC, bgO, threshold, mode) {
+    var rC = contrastRatio(fgC, bgC), rO = contrastRatio(fgO, bgO);
+    function line(r, exempt) {
+      if (exempt) {
+        return '<div class="contrast-line"><span class="badge badge-neutral">' + fmt(r) + '</span><span class="contrast-note">' + mode + '</span></div>';
+      }
+      var pass = r >= threshold;
+      var badgeText = pass ? (threshold >= 4.5 ? (r >= 7 ? 'AAA' : 'AA') : 'Cumple') : 'No cumple';
+      return '<div class="contrast-line"><span class="badge ' + (pass ? 'badge-pass' : 'badge-fail') + '">' + fmt(r) + ' ' + badgeText + '</span></div>';
+    }
+    return { rC: rC, rO: rO, html:
+      '<div class="contrast-note" style="margin-bottom:4px;">' + fgLabel + ' sobre ' + bgLabel + '</div>' +
+      line(rC, mode === 'informativo') + line(rO, mode === 'informativo')
+    };
+  }
+
+  var rows = [
+    { key: 'marca/primario', contrast: pairRow('texto/inverso', INV_C, INV_O, 'este color', PRIM_C, PRIM_O, 4.5) },
+    { key: 'marca/primario-suave', contrast: pairRow('texto/primario', TXP_C, TXP_O, 'este color', TOKENS['marca/primario-suave'].claro, TOKENS['marca/primario-suave'].oscuro, 4.5) },
+    { key: 'marca/acento', contrast: pairRow('este color', TOKENS['marca/acento'].claro, TOKENS['marca/acento'].oscuro, 'superficie/fondo', FONDO_C, FONDO_O, 4.5) },
+    { key: 'superficie/fondo', contrast: null },
+    { key: 'superficie/elevada', contrast: pairRow('este color', ELEV_C, ELEV_O, 'superficie/fondo', FONDO_C, FONDO_O, 0, 'informativo') },
+    { key: 'superficie/borde', contrast: pairRow('este color', TOKENS['superficie/borde'].claro, TOKENS['superficie/borde'].oscuro, 'superficie/elevada', ELEV_C, ELEV_O, 3, 'no-texto, ref. 3:1') },
+    { key: 'texto/primario', contrast: pairRow('este color', TXP_C, TXP_O, 'fondo · elevada', FONDO_C, FONDO_O, 4.5), extra: pairRow('este color', TXP_C, TXP_O, 'superficie/elevada', ELEV_C, ELEV_O, 4.5) },
+    { key: 'texto/secundario', contrast: pairRow('este color', TXS_C, TXS_O, 'fondo · elevada', FONDO_C, FONDO_O, 4.5), extra: pairRow('este color', TXS_C, TXS_O, 'superficie/elevada', ELEV_C, ELEV_O, 4.5) },
+    { key: 'texto/inverso', contrast: pairRow('este color', INV_C, INV_O, 'marca/primario', PRIM_C, PRIM_O, 4.5) },
+    { key: 'estado/exito', contrast: pairRow('este color', TOKENS['estado/exito'].claro, TOKENS['estado/exito'].oscuro, 'superficie/elevada', ELEV_C, ELEV_O, 4.5) },
+    { key: 'estado/atencion', contrast: pairRow('este color', TOKENS['estado/atencion'].claro, TOKENS['estado/atencion'].oscuro, 'superficie/elevada', ELEV_C, ELEV_O, 4.5) },
+    { key: 'estado/error', contrast: pairRow('este color', TOKENS['estado/error'].claro, TOKENS['estado/error'].oscuro, 'superficie/elevada', ELEV_C, ELEV_O, 4.5) },
+    { key: 'estado/inactivo', contrast: pairRow('este color', TOKENS['estado/inactivo'].claro, TOKENS['estado/inactivo'].oscuro, 'superficie/fondo', FONDO_C, FONDO_O, 0, 'informativo') },
+    { key: 'admin/encabezado', contrast: pairRow('texto/inverso · texto/primario', [INV_C, TXP_O][0], [INV_C, TXP_O][1], 'este color', TOKENS['admin/encabezado'].claro, TOKENS['admin/encabezado'].oscuro, 4.5) }
+  ];
+  // admin/encabezado needs a mixed pairing (texto/inverso in light, texto/primario in dark) — computed directly:
+  (function fixAdminRow() {
+    var row = rows[rows.length - 1];
+    var rC = contrastRatio(INV_C, TOKENS['admin/encabezado'].claro);
+    var rO = contrastRatio(TXP_O, TOKENS['admin/encabezado'].oscuro);
+    function badge(r) {
+      var pass = r >= 4.5;
+      return '<span class="badge ' + (pass ? 'badge-pass' : 'badge-fail') + '">' + fmt(r) + (pass ? (r >= 7 ? ' AAA' : ' AA') : ' ✕') + '</span>';
+    }
+    row.contrast.html =
+      '<div class="contrast-note" style="margin-bottom:4px;">texto/inverso sobre este (claro)</div>' +
+      '<div class="contrast-line">' + badge(rC) + '</div>' +
+      '<div class="contrast-note" style="margin:6px 0 4px;">texto/primario sobre este (oscuro)</div>' +
+      '<div class="contrast-line">' + badge(rO) + '</div>';
+  })();
+
+  var tbody = document.getElementById('palette-body');
+  Object.keys(TOKENS).forEach(function (key) {
+    var t = TOKENS[key];
+    var row = rows.filter(function (r) { return r.key === key; })[0];
+    var contrastHtml = '<span class="dash">— base, sin texto directo</span>';
+    if (row && row.contrast) {
+      contrastHtml = row.contrast.html;
+      if (row.extra) {
+        contrastHtml += '<div class="contrast-note" style="margin:6px 0 4px;">este color sobre superficie/elevada</div>' + row.extra.html.split('</div>').slice(1).join('</div>');
+      }
+    }
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><span class="ficha-name">' + key + '</span></td>' +
+      '<td><span class="uso-text">' + t.uso + '</span></td>' +
+      '<td><div class="swatch-cell"><span class="swatch" style="background:' + t.claro + '"></span><span class="swatch-hex">' + t.claro + '</span></div></td>' +
+      '<td><div class="swatch-cell"><span class="swatch" style="background:' + t.oscuro + '"></span><span class="swatch-hex">' + t.oscuro + '</span></div></td>' +
+      '<td class="contrast-cell">' + contrastHtml + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  // ---------- Demo theme toggle ----------
+  var demoScopes = document.querySelectorAll('[data-demo-theme]');
+  document.querySelectorAll('[data-toggle-group="demo"] button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var theme = btn.getAttribute('data-theme-btn');
+      document.querySelectorAll('[data-toggle-group="demo"] button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      demoScopes.forEach(function (scope) {
+        scope.classList.toggle('is-dark', theme === 'dark');
+      });
+    });
+  });
+
+  // ---------- Spacing scale ----------
+  var spacing = [4, 8, 12, 16, 24, 32, 48];
+  var maxSpace = 48;
+  var spacingHost = document.getElementById('spacing-scale');
+  spacing.forEach(function (v) {
+    var row = document.createElement('div');
+    row.className = 'scale-row';
+    row.innerHTML = '<span class="val">' + v + ' dp</span><span class="scale-bar" style="width:' + (v / maxSpace * 260 + 20) + 'px"></span>';
+    spacingHost.appendChild(row);
+  });
+
+  // ---------- Embed source files (kept in sync with the standalone .css/.json) ----------
+  document.getElementById('css-src').textContent =
+"/* El Encanto Campestre — tokens.css — Etapa 1 — v1 — 20/08/2026 */\n\n:root {\n  --color-marca-primario: #4A5D3A;\n  --color-marca-primario-suave: #EEF2E8;\n  --color-marca-acento: #A2632E;\n  --color-superficie-fondo: #FFFFFF;\n  --color-superficie-elevada: #F6F5F1;\n  --color-superficie-borde: #E2E2DA;\n  --color-texto-primario: #16180F;\n  --color-texto-secundario: #5F6355;\n  --color-texto-inverso: #FFFFFF;\n  --color-estado-exito: #2F6B45;\n  --color-estado-atencion: #A87516;\n  --color-estado-error: #A82A22;\n  --color-estado-inactivo: #B4B4AA;\n  --color-admin-encabezado: #2E3A2A;\n\n  --font-family-base: 'Inter', system-ui, sans-serif;\n  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;\n\n  --tipo-display-size: 28px;  --tipo-display-line-height: 34px;  --tipo-display-weight: 700;\n  --tipo-titulo-l-size: 22px; --tipo-titulo-l-line-height: 28px; --tipo-titulo-l-weight: 700;\n  --tipo-titulo-m-size: 18px; --tipo-titulo-m-line-height: 24px; --tipo-titulo-m-weight: 600;\n  --tipo-cuerpo-l-size: 16px; --tipo-cuerpo-l-line-height: 24px; --tipo-cuerpo-l-weight: 400;\n  --tipo-cuerpo-m-size: 14px; --tipo-cuerpo-m-line-height: 20px; --tipo-cuerpo-m-weight: 400;\n  --tipo-etiqueta-size: 13px; --tipo-etiqueta-line-height: 16px; --tipo-etiqueta-weight: 600;\n  --tipo-pie-size: 12px;      --tipo-pie-line-height: 16px;      --tipo-pie-weight: 400;\n  --tipo-precio-size: 18px;   --tipo-precio-line-height: 22px;   --tipo-precio-weight: 700;\n  --tipo-codigo-size: 20px;   --tipo-codigo-line-height: 26px;   --tipo-codigo-weight: 700;\n\n  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;\n  --space-5: 24px; --space-6: 32px; --space-7: 48px;\n  --margin-lateral: 16px; --gap-tarjetas: 12px;\n\n  --radius-s: 8px; --radius-m: 12px; --radius-l: 20px; --radius-full: 999px;\n\n  --elevation-0: none;\n  --elevation-1: 0 1px 3px rgba(22,24,15,0.12);\n  --elevation-2: 0 6px 16px rgba(22,24,15,0.18);\n}\n\n[data-theme='dark'] {\n  --color-marca-primario: #9CB584;\n  --color-marca-primario-suave: #232C1C;\n  --color-marca-acento: #D69A5E;\n  --color-superficie-fondo: #12140F;\n  --color-superficie-elevada: #1C1F19;\n  --color-superficie-borde: #2C302A;\n  --color-texto-primario: #F0F1EA;\n  --color-texto-secundario: #A5A99B;\n  --color-texto-inverso: #12140F;\n  --color-estado-exito: #6FB98C;\n  --color-estado-atencion: #DFA945;\n  --color-estado-error: #EF8880;\n  --color-estado-inactivo: #55584F;\n  --color-admin-encabezado: #1A2118;\n\n  --elevation-1: 0 1px 3px rgba(0,0,0,0.4);\n  --elevation-2: 0 6px 20px rgba(0,0,0,0.55);\n}\n\n/* Nota: sobre admin/encabezado, usar texto/inverso en tema claro\n   y texto/primario en tema oscuro. Ver verificación en esta lámina. */";
+
+  document.getElementById('json-src').textContent =
+"{\n  \"meta\": {\n    \"proyecto\": \"El Encanto Campestre\",\n    \"etapa\": \"1 · Fichas de diseño\",\n    \"version\": \"v1\",\n    \"fecha\": \"20/08/2026\"\n  },\n  \"color\": {\n    \"marca\": {\n      \"primario\": { \"claro\": \"#4A5D3A\", \"oscuro\": \"#9CB584\" },\n      \"primario-suave\": { \"claro\": \"#EEF2E8\", \"oscuro\": \"#232C1C\" },\n      \"acento\": { \"claro\": \"#A2632E\", \"oscuro\": \"#D69A5E\" }\n    },\n    \"superficie\": {\n      \"fondo\": { \"claro\": \"#FFFFFF\", \"oscuro\": \"#12140F\" },\n      \"elevada\": { \"claro\": \"#F6F5F1\", \"oscuro\": \"#1C1F19\" },\n      \"borde\": { \"claro\": \"#E2E2DA\", \"oscuro\": \"#2C302A\" }\n    },\n    \"texto\": {\n      \"primario\": { \"claro\": \"#16180F\", \"oscuro\": \"#F0F1EA\" },\n      \"secundario\": { \"claro\": \"#5F6355\", \"oscuro\": \"#A5A99B\" },\n      \"inverso\": { \"claro\": \"#FFFFFF\", \"oscuro\": \"#12140F\" }\n    },\n    \"estado\": {\n      \"exito\": { \"claro\": \"#2F6B45\", \"oscuro\": \"#6FB98C\" },\n      \"atencion\": { \"claro\": \"#A87516\", \"oscuro\": \"#DFA945\" },\n      \"error\": { \"claro\": \"#A82A22\", \"oscuro\": \"#EF8880\" },\n      \"inactivo\": { \"claro\": \"#B4B4AA\", \"oscuro\": \"#55584F\" }\n    },\n    \"admin\": { \"encabezado\": { \"claro\": \"#2E3A2A\", \"oscuro\": \"#1A2118\" } }\n  },\n  \"tipografia\": {\n    \"familia\": \"Inter\",\n    \"fichas\": {\n      \"display\": { \"tamano\": 28, \"interlineado\": 34, \"peso\": 700 },\n      \"titulo-l\": { \"tamano\": 22, \"interlineado\": 28, \"peso\": 700 },\n      \"titulo-m\": { \"tamano\": 18, \"interlineado\": 24, \"peso\": 600 },\n      \"cuerpo-l\": { \"tamano\": 16, \"interlineado\": 24, \"peso\": 400 },\n      \"cuerpo-m\": { \"tamano\": 14, \"interlineado\": 20, \"peso\": 400 },\n      \"etiqueta\": { \"tamano\": 13, \"interlineado\": 16, \"peso\": 600 },\n      \"pie\": { \"tamano\": 12, \"interlineado\": 16, \"peso\": 400 },\n      \"precio\": { \"tamano\": 18, \"interlineado\": 22, \"peso\": 700 },\n      \"codigo\": { \"tamano\": 20, \"interlineado\": 26, \"peso\": 700, \"familia\": \"monoespaciada\" }\n    }\n  },\n  \"espaciado\": { \"escala\": [4,8,12,16,24,32,48], \"margenLateral\": 16, \"separacionTarjetas\": 12 },\n  \"radio\": { \"s\": 8, \"m\": 12, \"l\": 20, \"completo\": 999 },\n  \"elevacion\": { \"0\": \"sin sombra\", \"1\": \"sutil en tarjetas\", \"2\": \"media en modales y barra fija\" }\n}";
+})();
+</script>
