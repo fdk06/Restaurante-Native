@@ -1,0 +1,434 @@
+<title>P-01 Carta El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1200px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2 { margin:0; text-wrap:balance; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:24px; margin-bottom:16px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:32px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:56ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px;
+    font-size:13.5px; color:var(--pg-text-2); margin-bottom:48px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:56px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:20px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14px; max-width:78ch; margin-bottom:18px; }
+
+  .phone-row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .phone-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+
+  /* ---- Phone frame: 360x800dp scrollable viewport ---- */
+  .phone {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 6px 18px rgba(22,24,15,0.20);
+    width:360px; height:800px; background:var(--dm-bg); color:var(--dm-text);
+    border-radius:28px; border:1px solid var(--dm-border); box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .phone.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 6px 20px rgba(0,0,0,0.6);
+  }
+  .phone * { color:var(--dm-text); }
+  .safe-top { height:24px; flex-shrink:0; }
+
+  .app-header { flex-shrink:0; padding:0 16px 12px; display:flex; align-items:center; gap:10px; }
+  .brand-mark { width:32px; height:32px; border-radius:999px; background:var(--dm-primary); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; }
+  .brand-mark svg { width:18px; height:18px; color:var(--dm-inverse); }
+  .brand-name { font-size:16px; font-weight:700; line-height:20px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .header-icon-btn { width:40px; height:40px; margin-right:-8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .header-icon-btn svg { width:22px; height:22px; }
+
+  .context-strip { flex-shrink:0; margin:0 16px 14px; padding:10px 12px; border-radius:var(--radius-m);
+    background:var(--dm-primary-soft); display:flex; align-items:center; gap:10px; }
+  .context-strip svg { width:20px; height:20px; color:var(--dm-primary); flex-shrink:0; }
+  .context-strip .txt { flex:1; }
+  .context-strip .l1 { font-size:13px; font-weight:700; color:var(--dm-primary); line-height:17px; }
+  .context-strip .l2 { font-size:11.5px; color:var(--dm-text-2); line-height:15px; }
+  .context-strip .chg { font-size:12px; font-weight:700; color:var(--dm-primary); flex-shrink:0; }
+
+  .upcoming-card { flex-shrink:0; margin:0 16px 16px; padding:12px; border-radius:var(--radius-m); border:1px solid var(--dm-border);
+    display:flex; align-items:center; gap:12px; background:var(--dm-bg); box-shadow:var(--dm-shadow-1); }
+  .upcoming-card .date-block { text-align:center; flex-shrink:0; width:40px; }
+  .upcoming-card .date-block .d { font-size:18px; font-weight:700; line-height:20px; }
+  .upcoming-card .date-block .m { font-size:10px; color:var(--dm-text-2); text-transform:uppercase; }
+  .upcoming-card .info { flex:1; min-width:0; }
+  .upcoming-card .info .t1 { font-size:13px; font-weight:600; }
+  .upcoming-card .info .t2 { font-size:11.5px; color:var(--dm-text-2); font-family:'JetBrains Mono',monospace; }
+  .status-mini { display:inline-flex; align-items:center; gap:5px; height:22px; padding:0 9px; border-radius:999px; font-size:11px; font-weight:600; flex-shrink:0; }
+  .status-mini .dot { width:6px; height:6px; border-radius:999px; }
+  .status-mini.exito { background:color-mix(in srgb, var(--dm-success) 16%, var(--dm-bg)); color:var(--dm-success); }
+  .status-mini.exito .dot { background:var(--dm-success); }
+
+  .chip-strip { flex-shrink:0; display:flex; gap:8px; padding:0 16px 12px; overflow-x:auto; }
+  .chip { display:inline-flex; align-items:center; height:32px; padding:0 14px; border-radius:var(--radius-s);
+    font-size:13px; font-weight:600; background:var(--dm-surface); border:1.5px solid var(--dm-border); color:var(--dm-text-2); white-space:nowrap; flex-shrink:0; }
+  .chip.is-selected { background:var(--dm-primary); border-color:transparent; color:var(--dm-inverse); font-weight:700; }
+
+  .scroll-area { flex:1; overflow-y:auto; padding:0 16px 16px; }
+  .cat-heading { font-size:15px; font-weight:700; padding:14px 0 10px; position:sticky; top:0; background:var(--dm-bg); z-index:1; }
+  .cat-heading:first-child { padding-top:0; }
+
+  .dish-v { border-radius:var(--radius-m); overflow:hidden; background:var(--dm-surface); box-shadow:var(--dm-shadow-1); margin-bottom:14px; }
+  .dish-photo { position:relative; aspect-ratio:4/3; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .dish-photo.unavailable { opacity:.4; }
+  .fav-btn { position:absolute; top:0; right:0; width:44px; height:44px; display:flex; align-items:center; justify-content:center; }
+  .fav-chip { width:30px; height:30px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 80%, transparent); display:flex; align-items:center; justify-content:center; }
+  .fav-chip svg { width:16px; height:16px; }
+  .unavail-badge { position:absolute; left:10px; bottom:10px; background:color-mix(in srgb, var(--dm-bg) 88%, transparent);
+    color:var(--dm-inactive); font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px; }
+  .dish-body { padding:11px 13px 13px; }
+  .dish-title { font-size:17px; line-height:22px; font-weight:600; margin-bottom:3px; }
+  .dish-desc { font-size:13.5px; line-height:18px; color:var(--dm-text-2); margin-bottom:9px;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .dish-foot { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .dish-price { font-size:17px; font-weight:700; color:var(--dm-primary); }
+  .dish-price.inactive { color:var(--dm-inactive); }
+  .dish-tags { display:flex; gap:5px; }
+  .tag { font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:999px; background:var(--dm-primary-soft); color:var(--dm-primary); }
+
+  /* ---- Bottom nav (C-10) ---- */
+  .navbar-wrap { position:relative; flex-shrink:0; height:88px; }
+  .navbar { position:absolute; bottom:0; left:0; right:0; height:60px; background:var(--dm-surface); box-shadow:var(--dm-shadow-2); display:flex; }
+  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; color:var(--dm-text-2); }
+  .nav-item.is-active { color:var(--dm-primary); }
+  .nav-item svg { width:20px; height:20px; }
+  .nav-item .lbl { font-size:10px; font-weight:600; }
+  .nav-center { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); width:54px; height:54px; border-radius:999px;
+    background:var(--dm-primary); display:flex; align-items:center; justify-content:center; box-shadow:var(--dm-shadow-2); }
+  .nav-center svg { width:22px; height:22px; color:var(--dm-inverse); }
+
+  /* ---- Empty / loading / error content ---- */
+  .empty-state { display:flex; flex-direction:column; align-items:center; text-align:center; padding:48px 24px; gap:12px; }
+  .empty-icon { width:52px; height:52px; border-radius:999px; background:var(--dm-primary-soft); display:flex; align-items:center; justify-content:center; }
+  .empty-icon svg { width:24px; height:24px; color:var(--dm-primary); }
+  .empty-title { font-size:17px; font-weight:600; }
+  .empty-desc { font-size:13.5px; color:var(--dm-text-2); max-width:24ch; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 18px; border-radius:var(--radius-m);
+    background:var(--dm-primary); color:var(--dm-inverse); font-weight:600; font-size:14.5px; border:none; margin-top:4px; }
+
+  .skeleton { background-color:var(--dm-border); border-radius:6px; background-image:
+    linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%);
+    background-size:200% 100%; animation:sh 1.6s ease-in-out infinite; }
+  @keyframes sh { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; background-image:none; } }
+  .sk-photo { aspect-ratio:4/3; }
+  .sk-line { height:12px; margin-bottom:8px; }
+  .sk-w60 { width:60%; height:16px; }
+  .sk-w90 { width:90%; }
+  .sk-w40 { width:40%; margin-bottom:0; }
+
+  .offline-banner { flex-shrink:0; margin:0 16px 12px; padding:10px 12px; border-radius:var(--radius-m);
+    background:color-mix(in srgb, var(--dm-warning) 14%, var(--dm-bg)); display:flex; align-items:center; gap:9px; }
+  .offline-banner svg { width:18px; height:18px; color:var(--dm-warning); flex-shrink:0; }
+  .offline-banner span { font-size:12.5px; color:var(--dm-text); line-height:16px; }
+
+  .caption { font-size:12px; color:var(--pg-text-2); text-align:center; max-width:360px; }
+
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>P-01 · Carta</h1>
+      <p class="deck">Etapa 4 — alta fidelidad. Adelantada a pedido del cliente: es la pantalla que define el carácter visual de todo el producto (§9.2).</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">hf v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>⚡</span>
+    <div>
+      <b>Fuimos directo a la pantalla.</b> Saltamos los lotes de componentes 4-7 por ahora —
+      esta pantalla solo necesitaba piezas que ya estaban resueltas (Botón, Chip, Tarjeta de
+      plato, Encabezado, Barra de destinos, Insignia de estado), así que no había razón para
+      esperar. Sigo con P-02, P-07, P-09 y P-22 en el mismo formato, una detrás de otra. Si
+      falta algún componente para una de esas, lo resuelvo dentro de la propia pantalla en vez
+      de detenerme a construir la lámina aparte — lo marco cuando pase.
+    </div>
+  </div>
+
+  <!-- ============ ESTADO PRINCIPAL ============ -->
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Estado principal</h2></div>
+    <p class="section-intro">Domingo 6 de septiembre, con reserva próxima confirmada y la trucha agotada para esa fecha — para mostrar el estado "no disponible" en contexto real, no aislado.</p>
+
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="safe-top"></div>
+          <div class="app-header">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-11 4 7 3-4 3 8"/></svg></span>
+            <span class="brand-name">El Encanto Campestre</span>
+            <span class="header-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+          </div>
+
+          <div class="context-strip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+            <div class="txt"><div class="l1">Abrimos el domingo 6 de septiembre</div><div class="l2">11:00 a. m. – 6:00 p. m.</div></div>
+            <span class="chg">Cambiar</span>
+          </div>
+
+          <div class="upcoming-card">
+            <div class="date-block"><div class="d">06</div><div class="m">Sep</div></div>
+            <div class="info"><div class="t1">Tu reserva · 4 personas</div><div class="t2">ECC-4921</div></div>
+            <span class="status-mini exito"><span class="dot"></span>Confirmada</span>
+          </div>
+
+          <div class="chip-strip">
+            <span class="chip">Entradas</span>
+            <span class="chip is-selected">Fuertes</span>
+            <span class="chip">Postres</span>
+            <span class="chip">Bebidas</span>
+          </div>
+
+          <div class="scroll-area">
+            <div class="cat-heading">Fuertes</div>
+            <div class="dish-v">
+              <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+              <div class="dish-body">
+                <div class="dish-title">Bandeja campesina El Encanto</div>
+                <p class="dish-desc">Carne asada, chicharrón, arroz, frijol, huevo, plátano y arepa.</p>
+                <div class="dish-foot"><span class="dish-price">$45.000</span><div class="dish-tags"><span class="tag">Para compartir</span></div></div>
+              </div>
+            </div>
+            <div class="dish-v">
+              <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+              <div class="dish-body">
+                <div class="dish-title">Sancocho de gallina campesino</div>
+                <p class="dish-desc">Gallina criolla, mazorca, plátano y yuca, tres horas al fuego de leña.</p>
+                <div class="dish-foot"><span class="dish-price">$38.000</span><div class="dish-tags"><span class="tag">Sin gluten</span></div></div>
+              </div>
+            </div>
+            <div class="dish-v">
+              <div class="dish-photo unavailable"><span class="unavail-badge">No disponible este día</span></div>
+              <div class="dish-body">
+                <div class="dish-title">Trucha arcoíris al ajillo</div>
+                <p class="dish-desc">Trucha fresca, ajo tostado, mantequilla y limón mandarino.</p>
+                <div class="dish-foot"><span class="dish-price inactive">$42.000</span><div class="dish-tags"><span class="tag">Sin gluten</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-wrap">
+            <div class="navbar">
+              <div class="nav-item is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg><span class="lbl">Carta</span></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/></svg><span class="lbl">Reservas</span></div>
+              <div class="nav-item"></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4h11l-3 4 3 4H6z"/></svg><span class="lbl">Próx.</span></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2"/></svg><span class="lbl">Ajustes</span></div>
+            </div>
+            <div class="nav-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro</span>
+        <div class="phone dark">
+          <div class="safe-top"></div>
+          <div class="app-header">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-11 4 7 3-4 3 8"/></svg></span>
+            <span class="brand-name">El Encanto Campestre</span>
+            <span class="header-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+          </div>
+
+          <div class="context-strip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+            <div class="txt"><div class="l1">Abrimos el domingo 6 de septiembre</div><div class="l2">11:00 a. m. – 6:00 p. m.</div></div>
+            <span class="chg">Cambiar</span>
+          </div>
+
+          <div class="upcoming-card">
+            <div class="date-block"><div class="d">06</div><div class="m">Sep</div></div>
+            <div class="info"><div class="t1">Tu reserva · 4 personas</div><div class="t2">ECC-4921</div></div>
+            <span class="status-mini exito"><span class="dot"></span>Confirmada</span>
+          </div>
+
+          <div class="chip-strip">
+            <span class="chip">Entradas</span>
+            <span class="chip is-selected">Fuertes</span>
+            <span class="chip">Postres</span>
+            <span class="chip">Bebidas</span>
+          </div>
+
+          <div class="scroll-area">
+            <div class="cat-heading">Fuertes</div>
+            <div class="dish-v">
+              <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+              <div class="dish-body">
+                <div class="dish-title">Bandeja campesina El Encanto</div>
+                <p class="dish-desc">Carne asada, chicharrón, arroz, frijol, huevo, plátano y arepa.</p>
+                <div class="dish-foot"><span class="dish-price">$45.000</span><div class="dish-tags"><span class="tag">Para compartir</span></div></div>
+              </div>
+            </div>
+            <div class="dish-v">
+              <div class="dish-photo"><span class="fav-btn"><span class="fav-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span></span></div>
+              <div class="dish-body">
+                <div class="dish-title">Sancocho de gallina campesino</div>
+                <p class="dish-desc">Gallina criolla, mazorca, plátano y yuca, tres horas al fuego de leña.</p>
+                <div class="dish-foot"><span class="dish-price">$38.000</span><div class="dish-tags"><span class="tag">Sin gluten</span></div></div>
+              </div>
+            </div>
+            <div class="dish-v">
+              <div class="dish-photo unavailable"><span class="unavail-badge">No disponible este día</span></div>
+              <div class="dish-body">
+                <div class="dish-title">Trucha arcoíris al ajillo</div>
+                <p class="dish-desc">Trucha fresca, ajo tostado, mantequilla y limón mandarino.</p>
+                <div class="dish-foot"><span class="dish-price inactive">$42.000</span><div class="dish-tags"><span class="tag">Sin gluten</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-wrap">
+            <div class="navbar">
+              <div class="nav-item is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg><span class="lbl">Carta</span></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/></svg><span class="lbl">Reservas</span></div>
+              <div class="nav-item"></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="21"/><path d="M6 4h11l-3 4 3 4H6z"/></svg><span class="lbl">Próx.</span></div>
+              <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2"/></svg><span class="lbl">Ajustes</span></div>
+            </div>
+            <div class="nav-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OTROS ESTADOS ============ -->
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>Vacío, carga y error</h2></div>
+    <p class="section-intro">Un tema por estado para avanzar rápido — el patrón de tokens es el mismo que ya vimos arriba en los dos temas; si necesitas el tercer estado también en el tema que falta, lo agrego.</p>
+
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Vacío · claro</span>
+        <div class="phone" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="app-header">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-11 4 7 3-4 3 8"/></svg></span>
+            <span class="brand-name">El Encanto Campestre</span>
+            <span class="header-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+          </div>
+          <div class="context-strip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>
+            <div class="txt"><div class="l1">Miércoles 3 de septiembre</div><div class="l2">Solo con reserva de 15+ personas</div></div>
+            <span class="chg">Cambiar</span>
+          </div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg></span>
+            <span class="empty-title">El menú de ese día aún no se publica</span>
+            <span class="empty-desc">El dueño habilita los platos más cerca de la fecha.</span>
+            <button class="btn">Ver otra fecha</button>
+          </div>
+        </div>
+        <span class="caption">P-01 · sin platos para la fecha consultada</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Carga · oscuro</span>
+        <div class="phone dark" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="app-header">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-11 4 7 3-4 3 8"/></svg></span>
+            <span class="brand-name">El Encanto Campestre</span>
+            <span class="header-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+          </div>
+          <div class="scroll-area" style="padding-top:14px;">
+            <div class="skeleton sk-line sk-w60"></div>
+            <div class="dish-v"><div class="skeleton sk-photo"></div>
+              <div class="dish-body">
+                <div class="skeleton sk-line sk-w90"></div>
+                <div class="skeleton sk-line sk-w60"></div>
+                <div class="skeleton sk-line sk-w40"></div>
+              </div>
+            </div>
+            <div class="dish-v"><div class="skeleton sk-photo"></div>
+              <div class="dish-body">
+                <div class="skeleton sk-line sk-w90"></div>
+                <div class="skeleton sk-line sk-w60"></div>
+                <div class="skeleton sk-line sk-w40"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="caption">P-01 · carga inicial con esqueletos</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Sin conexión · claro</span>
+        <div class="phone" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="app-header">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-11 4 7 3-4 3 8"/></svg></span>
+            <span class="brand-name">El Encanto Campestre</span>
+            <span class="header-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+          </div>
+          <div class="offline-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 20 2 20Z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16.3" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <span>Sin conexión. Mostrando la carta guardada del 30/08/2026.</span>
+          </div>
+          <div class="chip-strip">
+            <span class="chip">Entradas</span>
+            <span class="chip is-selected">Fuertes</span>
+            <span class="chip">Postres</span>
+          </div>
+          <div class="scroll-area">
+            <div class="dish-v">
+              <div class="dish-photo"></div>
+              <div class="dish-body">
+                <div class="dish-title">Bandeja campesina El Encanto</div>
+                <p class="dish-desc">Carne asada, chicharrón, arroz, frijol, huevo, plátano y arepa.</p>
+                <div class="dish-foot"><span class="dish-price">$45.000</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="caption">P-01 · señal débil (T-12): sigue usable con datos guardados</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 4 de 6 · Alta fidelidad — P-01 Carta</span>
+    <span>Siguiente: P-02 Detalle de plato</span>
+  </footer>
+</div>

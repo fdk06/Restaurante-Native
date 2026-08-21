@@ -1,0 +1,312 @@
+<title>P-07 Pedido Opcional El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1200px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2 { margin:0; text-wrap:balance; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:24px; margin-bottom:16px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:32px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:56ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px;
+    font-size:13.5px; color:var(--pg-text-2); margin-bottom:48px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:56px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:20px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14px; max-width:78ch; margin-bottom:18px; }
+
+  .phone-row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .phone-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+
+  .phone {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF; --dm-inactive:#B4B4AA;
+    --dm-shadow-2: 0 -4px 14px rgba(22,24,15,0.14);
+    width:360px; height:800px; background:var(--dm-bg); color:var(--dm-text);
+    border-radius:28px; border:1px solid var(--dm-border); box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .phone.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F; --dm-inactive:#55584F;
+    --dm-shadow-2: 0 -4px 16px rgba(0,0,0,0.4);
+  }
+  .phone * { color:var(--dm-text); }
+  .safe-top { height:24px; flex-shrink:0; }
+
+  .header-row { flex-shrink:0; display:flex; align-items:center; gap:8px; padding:0 8px 10px; }
+  .icon-btn { width:40px; height:40px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .icon-btn svg { width:21px; height:21px; }
+  .header-title { font-size:17px; font-weight:700; flex:1; padding-left:4px; }
+  .steps { display:flex; align-items:center; gap:4px; padding-right:4px; }
+  .steps .seg { width:16px; height:4px; border-radius:2px; background:var(--dm-border); }
+  .steps .seg.done, .steps .seg.current { background:var(--dm-primary); }
+  .steps .seg.current { width:22px; }
+
+  .intro-block { flex-shrink:0; padding:2px 16px 14px; }
+  .intro-title { font-size:16px; font-weight:600; margin-bottom:4px; }
+  .intro-desc { font-size:13px; color:var(--dm-text-2); line-height:18px; margin-bottom:10px; }
+  .skip-link { font-size:13px; font-weight:700; color:var(--dm-primary); display:inline-block; padding:6px 0; }
+
+  .scroll-area { flex:1; overflow-y:auto; padding:0 16px 16px; }
+  .cat-heading { font-size:13px; font-weight:700; color:var(--dm-text-2); text-transform:uppercase; letter-spacing:.03em; padding:10px 0 8px; }
+
+  .order-line { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--dm-border); }
+  .order-line:last-child { border-bottom:none; }
+  .ol-thumb { width:52px; height:52px; border-radius:var(--radius-s); flex-shrink:0; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .ol-body { flex:1; min-width:0; }
+  .ol-name { font-size:14.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ol-price { font-size:13px; color:var(--dm-text-2); }
+  .ol-note { font-size:11.5px; color:var(--dm-primary); margin-top:2px; }
+  .stepper { display:inline-flex; align-items:center; border:1.5px solid var(--dm-border); border-radius:var(--radius-s); flex-shrink:0; }
+  .stepper button { width:32px; height:32px; display:flex; align-items:center; justify-content:center; }
+  .stepper button svg { width:14px; height:14px; }
+  .stepper .count { width:26px; text-align:center; font-size:14px; font-weight:700; }
+  .add-btn { flex-shrink:0; height:32px; padding:0 14px; border-radius:var(--radius-s); border:1.5px solid var(--dm-primary);
+    color:var(--dm-primary); font-size:13px; font-weight:700; }
+
+  .action-bar { flex-shrink:0; background:var(--dm-bg); border-top:1px solid var(--dm-border); box-shadow:var(--dm-shadow-2);
+    padding:12px 16px 20px; display:flex; align-items:center; gap:12px; }
+  .action-total { display:flex; flex-direction:column; }
+  .action-total .lbl { font-size:11px; color:var(--dm-text-2); }
+  .action-total .amt { font-size:18px; font-weight:700; color:var(--dm-primary); }
+  .btn-primario { flex-shrink:0; height:52px; padding:0 22px; border-radius:var(--radius-m); background:var(--dm-primary); color:var(--dm-inverse);
+    font-weight:600; font-size:15px; border:none; margin-left:auto; }
+
+  .empty-state { display:flex; flex-direction:column; align-items:center; text-align:center; padding:56px 24px; gap:12px; }
+  .empty-icon { width:52px; height:52px; border-radius:999px; background:var(--dm-primary-soft); display:flex; align-items:center; justify-content:center; }
+  .empty-icon svg { width:24px; height:24px; color:var(--dm-primary); }
+  .empty-title { font-size:16px; font-weight:600; }
+  .empty-desc { font-size:13px; color:var(--dm-text-2); max-width:26ch; }
+
+  .skeleton { background-color:var(--dm-border); border-radius:6px; background-image:
+    linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%);
+    background-size:200% 100%; animation:sh 1.6s ease-in-out infinite; }
+  @keyframes sh { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; background-image:none; } }
+  .sk-thumb { width:52px; height:52px; border-radius:var(--radius-s); flex-shrink:0; }
+  .sk-line { height:11px; margin-bottom:6px; }
+  .sk-w70 { width:70%; }
+  .sk-w40 { width:40%; margin-bottom:0; }
+
+  .caption { font-size:12px; color:var(--pg-text-2); text-align:center; max-width:360px; }
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>P-07 · Pedido opcional</h1>
+      <p class="deck">Etapa 4 — alta fidelidad. La pantalla con más riesgo de leerse como un carrito de compras (principio 7): sin ícono de carrito, sin insignia de conteo, "Continuar sin pedido" visible desde el primer momento.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">hf v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>Indicador de pasos (C-18) resuelto aquí mismo</b>, sin lámina de componente aparte —
+      son cuatro segmentos en el encabezado, no un patrón que necesite su propio catálogo de
+      estados.
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Estado principal — con platos elegidos</h2></div>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="safe-top"></div>
+          <div class="header-row">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            <span class="header-title">Tu pedido</span>
+            <div class="steps"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          </div>
+          <div class="intro-block">
+            <div class="intro-title">¿Quieres dejar listo tu pedido?</div>
+            <div class="intro-desc">Es opcional, pero ayuda a la cocina a prepararse antes de que llegues.</div>
+            <span class="skip-link">Continuar sin pedido →</span>
+          </div>
+          <div class="scroll-area">
+            <div class="cat-heading">Entradas</div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Empanadas de pipián</div><div class="ol-price">$18.000</div></div>
+              <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">2</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            </div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Patacones con hogao</div><div class="ol-price">$15.000</div></div>
+              <button class="add-btn">Agregar</button>
+            </div>
+            <div class="cat-heading">Fuertes</div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Sancocho de gallina campesino</div><div class="ol-price">$38.000</div><div class="ol-note">Nota: sin cilantro</div></div>
+              <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            </div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Bandeja campesina El Encanto</div><div class="ol-price">$45.000</div></div>
+              <button class="add-btn">Agregar</button>
+            </div>
+          </div>
+          <div class="action-bar">
+            <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$74.000</span></div>
+            <button class="btn-primario">Continuar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro</span>
+        <div class="phone dark">
+          <div class="safe-top"></div>
+          <div class="header-row">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            <span class="header-title">Tu pedido</span>
+            <div class="steps"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          </div>
+          <div class="intro-block">
+            <div class="intro-title">¿Quieres dejar listo tu pedido?</div>
+            <div class="intro-desc">Es opcional, pero ayuda a la cocina a prepararse antes de que llegues.</div>
+            <span class="skip-link">Continuar sin pedido →</span>
+          </div>
+          <div class="scroll-area">
+            <div class="cat-heading">Entradas</div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Empanadas de pipián</div><div class="ol-price">$18.000</div></div>
+              <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">2</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            </div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Patacones con hogao</div><div class="ol-price">$15.000</div></div>
+              <button class="add-btn">Agregar</button>
+            </div>
+            <div class="cat-heading">Fuertes</div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Sancocho de gallina campesino</div><div class="ol-price">$38.000</div><div class="ol-note">Nota: sin cilantro</div></div>
+              <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+            </div>
+            <div class="order-line">
+              <div class="ol-thumb"></div>
+              <div class="ol-body"><div class="ol-name">Bandeja campesina El Encanto</div><div class="ol-price">$45.000</div></div>
+              <button class="add-btn">Agregar</button>
+            </div>
+          </div>
+          <div class="action-bar">
+            <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$74.000</span></div>
+            <button class="btn-primario">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>Sin pedido, sin platos habilitados y carga</h2></div>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">$0 · claro</span>
+        <div class="phone" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="header-row">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            <span class="header-title">Tu pedido</span>
+            <div class="steps"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          </div>
+          <div class="intro-block">
+            <div class="intro-title">¿Quieres dejar listo tu pedido?</div>
+            <div class="intro-desc">Es opcional, pero ayuda a la cocina a prepararse antes de que llegues.</div>
+            <span class="skip-link">Continuar sin pedido →</span>
+          </div>
+          <div class="scroll-area">
+            <div class="cat-heading">Entradas</div>
+            <div class="order-line"><div class="ol-thumb"></div><div class="ol-body"><div class="ol-name">Empanadas de pipián</div><div class="ol-price">$18.000</div></div><button class="add-btn">Agregar</button></div>
+          </div>
+          <div class="action-bar">
+            <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$0</span></div>
+            <button class="btn-primario">Continuar sin pedido</button>
+          </div>
+        </div>
+        <span class="caption">nada seleccionado — el botón mismo lo dice</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Sin platos habilitados · oscuro</span>
+        <div class="phone dark" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="header-row">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            <span class="header-title">Tu pedido</span>
+            <div class="steps"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          </div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg></span>
+            <span class="empty-title">El menú de ese día aún no se publica</span>
+            <span class="empty-desc">Puedes continuar igual: el pedido siempre es opcional.</span>
+          </div>
+          <div class="action-bar">
+            <div class="action-total"><span class="lbl">Total del pedido</span><span class="amt">$0</span></div>
+            <button class="btn-primario">Continuar sin pedido</button>
+          </div>
+        </div>
+        <span class="caption">seguir sin pedido nunca se bloquea</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Carga · claro</span>
+        <div class="phone" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="header-row">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            <span class="header-title">Tu pedido</span>
+            <div class="steps"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          </div>
+          <div class="scroll-area" style="padding-top:16px;">
+            <div class="order-line"><div class="skeleton sk-thumb"></div><div class="ol-body"><div class="skeleton sk-line sk-w70"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+            <div class="order-line"><div class="skeleton sk-thumb"></div><div class="ol-body"><div class="skeleton sk-line sk-w70"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+            <div class="order-line"><div class="skeleton sk-thumb"></div><div class="ol-body"><div class="skeleton sk-line sk-w70"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+          </div>
+        </div>
+        <span class="caption">carga inicial</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 4 de 6 · Alta fidelidad — P-07 Pedido opcional</span>
+    <span>Siguiente: P-09 Solicitud enviada</span>
+  </footer>
+</div>

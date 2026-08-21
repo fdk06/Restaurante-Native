@@ -1,0 +1,90 @@
+/*
+  El Encanto Campestre — Fichas de diseño (design tokens)
+  Etapa 1 · v1 · 20/08/2026
+  Fuente: Brief_Diseno_Wireframes.md §4
+  Cada color es una ficha semántica: nunca se usa un valor literal en los componentes.
+*/
+
+:root {
+  /* — Color · tema claro — */
+  --color-marca-primario: #4A5D3A;
+  --color-marca-primario-suave: #EEF2E8;
+  --color-marca-acento: #A2632E;
+  --color-superficie-fondo: #FFFFFF;
+  --color-superficie-elevada: #F6F5F1;
+  --color-superficie-borde: #E2E2DA;
+  --color-texto-primario: #16180F;
+  --color-texto-secundario: #5F6355;
+  --color-texto-inverso: #FFFFFF;
+  --color-estado-exito: #2F6B45;
+  --color-estado-atencion: #A87516;
+  --color-estado-error: #A82A22;
+  --color-estado-inactivo: #B4B4AA;
+  --color-admin-encabezado: #2E3A2A;
+
+  /* — Tipografía — */
+  --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --tipo-display-size: 28px;   --tipo-display-line-height: 34px;   --tipo-display-weight: 700;
+  --tipo-titulo-l-size: 22px;  --tipo-titulo-l-line-height: 28px;  --tipo-titulo-l-weight: 700;
+  --tipo-titulo-m-size: 18px;  --tipo-titulo-m-line-height: 24px;  --tipo-titulo-m-weight: 600;
+  --tipo-cuerpo-l-size: 16px;  --tipo-cuerpo-l-line-height: 24px;  --tipo-cuerpo-l-weight: 400;
+  --tipo-cuerpo-m-size: 14px;  --tipo-cuerpo-m-line-height: 20px;  --tipo-cuerpo-m-weight: 400;
+  --tipo-etiqueta-size: 13px;  --tipo-etiqueta-line-height: 16px;  --tipo-etiqueta-weight: 600;
+  --tipo-pie-size: 12px;       --tipo-pie-line-height: 16px;       --tipo-pie-weight: 400;
+  --tipo-precio-size: 18px;    --tipo-precio-line-height: 22px;    --tipo-precio-weight: 700;
+  --tipo-codigo-size: 20px;    --tipo-codigo-line-height: 26px;    --tipo-codigo-weight: 700;
+
+  /* — Espaciado — */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --margin-lateral: 16px;
+  --gap-tarjetas: 12px;
+
+  /* — Radios — */
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+  --radius-full: 999px;
+
+  /* — Elevación — */
+  --elevation-0: none;
+  --elevation-1: 0 1px 3px rgba(22, 24, 15, 0.12);
+  --elevation-2: 0 6px 16px rgba(22, 24, 15, 0.18);
+}
+
+[data-theme='dark'] {
+  /* — Color · tema oscuro — */
+  --color-marca-primario: #9CB584;
+  --color-marca-primario-suave: #232C1C;
+  --color-marca-acento: #D69A5E;
+  --color-superficie-fondo: #12140F;
+  --color-superficie-elevada: #1C1F19;
+  --color-superficie-borde: #2C302A;
+  --color-texto-primario: #F0F1EA;
+  --color-texto-secundario: #A5A99B;
+  --color-texto-inverso: #12140F;
+  --color-estado-exito: #6FB98C;
+  --color-estado-atencion: #DFA945;
+  --color-estado-error: #EF8880;
+  --color-estado-inactivo: #55584F;
+  --color-admin-encabezado: #1A2118;
+
+  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --elevation-2: 0 6px 20px rgba(0, 0, 0, 0.55);
+}
+
+/*
+  Nota de uso — admin/encabezado:
+  El texto sobre este fondo NO usa siempre texto/inverso. En tema claro,
+  admin/encabezado es oscuro y requiere texto/inverso (blanco). En tema
+  oscuro, admin/encabezado ya es casi negro, así que texto/inverso (también
+  casi negro) es ilegible sobre él: usar texto/primario en su lugar.
+  Ver la verificación completa en tokens_fichas_v1.html, sección Color.
+*/

@@ -1,0 +1,355 @@
+<title>P-22 Solicitudes El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1200px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2 { margin:0; text-wrap:balance; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:24px; margin-bottom:16px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:32px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:56ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px;
+    font-size:13.5px; color:var(--pg-text-2); margin-bottom:48px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:56px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:20px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14px; max-width:78ch; margin-bottom:18px; }
+
+  .phone-row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .phone-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+
+  .phone {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA; --dm-admin:#2E3A2A;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 -4px 14px rgba(22,24,15,0.2);
+    width:360px; height:800px; background:var(--dm-bg); color:var(--dm-text);
+    border-radius:28px; border:1px solid var(--dm-border); box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .phone.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F; --dm-admin:#1A2118;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 -4px 16px rgba(0,0,0,0.4);
+  }
+  .phone * { color:var(--dm-text); }
+  .safe-top { height:24px; flex-shrink:0; background:var(--dm-admin); }
+
+  .admin-header { flex-shrink:0; background:var(--dm-admin); padding:6px 16px 14px; }
+  .admin-eyebrow { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--dm-inverse); opacity:.75; }
+  .dark .admin-eyebrow { color:var(--dm-text); }
+  .admin-title-row { display:flex; align-items:center; justify-content:space-between; margin-top:2px; }
+  .admin-title { font-size:19px; font-weight:700; color:var(--dm-inverse); }
+  .dark .admin-title { color:var(--dm-text); }
+  .pending-count { display:flex; align-items:center; gap:6px; background:color-mix(in srgb, var(--dm-warning) 30%, transparent);
+    border-radius:999px; padding:5px 11px; font-size:12.5px; font-weight:700; color:var(--dm-warning); }
+  .pending-count .n { background:var(--dm-warning); color:var(--dm-admin); width:18px; height:18px; border-radius:999px;
+    display:flex; align-items:center; justify-content:center; font-size:11px; }
+
+  .filter-row { flex-shrink:0; display:flex; gap:8px; padding:12px 16px; }
+  .fchip { height:30px; padding:0 13px; border-radius:var(--radius-s); font-size:12.5px; font-weight:600; display:flex; align-items:center;
+    background:var(--dm-surface); border:1.5px solid var(--dm-border); color:var(--dm-text-2); }
+  .fchip.is-selected { background:var(--dm-primary); border-color:transparent; color:var(--dm-inverse); font-weight:700; }
+
+  .scroll-area { flex:1; overflow-y:auto; padding:0 16px 16px; }
+
+  .req-item { border:1px solid var(--dm-border); border-radius:var(--radius-m); padding:12px; margin-bottom:10px; background:var(--dm-bg); }
+  .req-item.is-urgent { border-color:var(--dm-warning); background:color-mix(in srgb, var(--dm-warning) 8%, var(--dm-bg)); }
+  .req-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+  .req-date { font-size:14px; font-weight:700; }
+  .req-time { font-size:12px; color:var(--dm-text-2); }
+  .req-elapsed { font-size:11px; color:var(--dm-text-2); flex-shrink:0; white-space:nowrap; }
+  .req-elapsed.urgent { color:var(--dm-warning); font-weight:700; }
+  .req-mid { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .req-name { font-size:14px; font-weight:600; }
+  .req-people { font-size:12px; color:var(--dm-text-2); }
+  .req-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .req-order { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--dm-primary); font-weight:600; }
+  .req-order svg { width:14px; height:14px; }
+  .req-total { font-size:14px; font-weight:700; }
+  .req-alert { display:flex; align-items:center; gap:6px; margin-top:8px; padding-top:8px; border-top:1px dashed var(--dm-border);
+    font-size:11.5px; color:var(--dm-error); font-weight:600; }
+  .req-alert svg { width:14px; height:14px; flex-shrink:0; }
+
+  /* ---- Modal sheet (detail) ---- */
+  .sheet-overlay { position:absolute; inset:0; background:rgba(0,0,0,.4); display:flex; align-items:flex-end; }
+  .sheet { width:100%; max-height:88%; background:var(--dm-bg); border-radius:20px 20px 0 0; box-shadow:var(--dm-shadow-2);
+    display:flex; flex-direction:column; }
+  .sheet-handle { width:36px; height:4px; border-radius:999px; background:var(--dm-border); margin:10px auto 4px; flex-shrink:0; }
+  .sheet-scroll { overflow-y:auto; padding:8px 18px 18px; }
+  .sheet-title { font-size:17px; font-weight:700; margin-bottom:2px; }
+  .sheet-sub { font-size:12.5px; color:var(--dm-text-2); margin-bottom:14px; }
+  .sheet-block { margin-bottom:14px; }
+  .sheet-label { font-size:11px; font-weight:700; color:var(--dm-text-2); text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; }
+  .order-row { display:flex; justify-content:space-between; font-size:13px; padding:4px 0; }
+  .order-row .name { color:var(--dm-text); }
+  .order-row .price { color:var(--dm-text-2); }
+  .order-total-row { display:flex; justify-content:space-between; font-size:14px; font-weight:700; padding-top:8px; margin-top:4px; border-top:1px solid var(--dm-border); }
+  .note-box { background:var(--dm-surface); border-radius:var(--radius-s); padding:10px 12px; font-size:12.5px; color:var(--dm-text); font-style:italic; }
+  .sheet-actions { display:flex; gap:8px; padding:12px 18px 18px; border-top:1px solid var(--dm-border); flex-shrink:0; }
+  .sbtn { flex:1; height:46px; border-radius:var(--radius-m); font-weight:600; font-size:13.5px; border:1.5px solid transparent; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .sbtn svg { width:15px; height:15px; }
+  .sbtn.approve { background:var(--dm-primary); color:var(--dm-inverse); }
+  .sbtn.reject { background:transparent; border-color:var(--dm-error); color:var(--dm-error); }
+  .sbtn.copy { background:var(--dm-surface); color:var(--dm-text); flex:0 0 46px; }
+  .toast { position:absolute; bottom:90px; left:50%; transform:translateX(-50%); background:var(--dm-text); color:var(--dm-bg);
+    font-size:12.5px; font-weight:600; padding:8px 16px; border-radius:999px; white-space:nowrap; box-shadow:0 6px 16px rgba(0,0,0,.25); }
+
+  .empty-state { display:flex; flex-direction:column; align-items:center; text-align:center; padding:64px 24px; gap:12px; }
+  .empty-icon { width:52px; height:52px; border-radius:999px; background:var(--dm-primary-soft); display:flex; align-items:center; justify-content:center; }
+  .empty-icon svg { width:24px; height:24px; color:var(--dm-primary); }
+  .empty-title { font-size:16px; font-weight:600; }
+  .empty-desc { font-size:13px; color:var(--dm-text-2); max-width:24ch; }
+
+  .caption { font-size:12px; color:var(--pg-text-2); text-align:center; max-width:360px; }
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>P-22 · Solicitudes</h1>
+      <p class="deck">Etapa 4 — alta fidelidad. La pantalla más importante para el cliente: el dueño la revisa entre servicio y servicio, desde el teléfono.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">hf v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>La solicitud de María Fernanda</b> es la misma reserva que salió de P-07 → P-09 —
+      llega aquí con su pedido completo, para que se vea el recorrido de punta a punta, no
+      pantallas sueltas con datos que no conectan entre sí.
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Bandeja — estado principal</h2></div>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="safe-top"></div>
+          <div class="admin-header">
+            <span class="admin-eyebrow">Administración</span>
+            <div class="admin-title-row">
+              <span class="admin-title">Solicitudes</span>
+              <span class="pending-count"><span class="n">3</span>pendientes</span>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="fchip is-selected">Pendientes</span>
+            <span class="fchip">Aprobadas</span>
+            <span class="fchip">Rechazadas</span>
+          </div>
+          <div class="scroll-area">
+            <div class="req-item">
+              <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">12:30 p. m.</span></div><span class="req-elapsed">hace 12 min</span></div>
+              <div class="req-mid"><span class="req-name">María Fernanda Ortiz</span><span class="req-people">4 personas</span></div>
+              <div class="req-bottom">
+                <span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span>
+                <span class="req-total">$74.000</span>
+              </div>
+            </div>
+            <div class="req-item">
+              <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 38 min</span></div>
+              <div class="req-mid"><span class="req-name">Carlos Andrés Muñoz</span><span class="req-people">6 personas</span></div>
+              <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+              <div class="req-alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>2 cancelaciones previas</div>
+            </div>
+            <div class="req-item is-urgent">
+              <div class="req-top"><div><span class="req-date">07/09/2026</span> <span class="req-time">11:00 a. m.</span></div><span class="req-elapsed urgent">hace 3 h</span></div>
+              <div class="req-mid"><span class="req-name">Laura Gómez</span><span class="req-people">2 personas</span></div>
+              <div class="req-bottom">
+                <span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span>
+                <span class="req-total">$32.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro</span>
+        <div class="phone dark">
+          <div class="safe-top"></div>
+          <div class="admin-header">
+            <span class="admin-eyebrow">Administración</span>
+            <div class="admin-title-row">
+              <span class="admin-title">Solicitudes</span>
+              <span class="pending-count"><span class="n">3</span>pendientes</span>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="fchip is-selected">Pendientes</span>
+            <span class="fchip">Aprobadas</span>
+            <span class="fchip">Rechazadas</span>
+          </div>
+          <div class="scroll-area">
+            <div class="req-item">
+              <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">12:30 p. m.</span></div><span class="req-elapsed">hace 12 min</span></div>
+              <div class="req-mid"><span class="req-name">María Fernanda Ortiz</span><span class="req-people">4 personas</span></div>
+              <div class="req-bottom">
+                <span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span>
+                <span class="req-total">$74.000</span>
+              </div>
+            </div>
+            <div class="req-item">
+              <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 38 min</span></div>
+              <div class="req-mid"><span class="req-name">Carlos Andrés Muñoz</span><span class="req-people">6 personas</span></div>
+              <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+              <div class="req-alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>2 cancelaciones previas</div>
+            </div>
+            <div class="req-item is-urgent">
+              <div class="req-top"><div><span class="req-date">07/09/2026</span> <span class="req-time">11:00 a. m.</span></div><span class="req-elapsed urgent">hace 3 h</span></div>
+              <div class="req-mid"><span class="req-name">Laura Gómez</span><span class="req-people">2 personas</span></div>
+              <div class="req-bottom">
+                <span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span>
+                <span class="req-total">$32.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>Detalle de una solicitud — hoja modal (C-12)</h2></div>
+    <p class="section-intro">Al tocar la solicitud de María Fernanda: pedido completo, nota, y las tres acciones del dueño. "Copiar ticket" confirma de forma visible — el siguiente paso ocurre en el grupo de WhatsApp de cocina, fuera de la app.</p>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="safe-top"></div>
+          <div class="admin-header">
+            <span class="admin-eyebrow">Administración</span>
+            <div class="admin-title-row"><span class="admin-title">Solicitudes</span><span class="pending-count"><span class="n">3</span>pendientes</span></div>
+          </div>
+          <div class="sheet-overlay">
+            <div class="sheet" style="max-height:82%;">
+              <div class="sheet-handle"></div>
+              <div class="sheet-scroll">
+                <div class="sheet-title">María Fernanda Ortiz</div>
+                <div class="sheet-sub">06/09/2026 · 12:30 p. m. · 4 personas · ECC-4921</div>
+                <div class="sheet-block">
+                  <div class="sheet-label">Pedido</div>
+                  <div class="order-row"><span class="name">Empanadas de pipián ×2</span><span class="price">$36.000</span></div>
+                  <div class="order-row"><span class="name">Sancocho de gallina campesino ×1</span><span class="price">$38.000</span></div>
+                  <div class="order-total-row"><span>Total</span><span>$74.000</span></div>
+                </div>
+                <div class="sheet-block">
+                  <div class="sheet-label">Nota del comensal</div>
+                  <div class="note-box">"El sancocho sin cilantro, por favor."</div>
+                </div>
+              </div>
+              <div class="sheet-actions">
+                <button class="sbtn copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+                <button class="sbtn reject">Rechazar</button>
+                <button class="sbtn approve">Aprobar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro · ticket copiado</span>
+        <div class="phone dark">
+          <div class="safe-top"></div>
+          <div class="admin-header">
+            <span class="admin-eyebrow">Administración</span>
+            <div class="admin-title-row"><span class="admin-title">Solicitudes</span><span class="pending-count"><span class="n">3</span>pendientes</span></div>
+          </div>
+          <div class="sheet-overlay">
+            <div class="sheet" style="max-height:82%;">
+              <div class="sheet-handle"></div>
+              <div class="sheet-scroll">
+                <div class="sheet-title">María Fernanda Ortiz</div>
+                <div class="sheet-sub">06/09/2026 · 12:30 p. m. · 4 personas · ECC-4921</div>
+                <div class="sheet-block">
+                  <div class="sheet-label">Pedido</div>
+                  <div class="order-row"><span class="name">Empanadas de pipián ×2</span><span class="price">$36.000</span></div>
+                  <div class="order-row"><span class="name">Sancocho de gallina campesino ×1</span><span class="price">$38.000</span></div>
+                  <div class="order-total-row"><span>Total</span><span>$74.000</span></div>
+                </div>
+                <div class="sheet-block">
+                  <div class="sheet-label">Nota del comensal</div>
+                  <div class="note-box">"El sancocho sin cilantro, por favor."</div>
+                </div>
+              </div>
+              <div class="sheet-actions">
+                <button class="sbtn copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+                <button class="sbtn reject">Rechazar</button>
+                <button class="sbtn approve">Aprobar</button>
+              </div>
+            </div>
+          </div>
+          <span class="toast">Ticket copiado al portapapeles</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2>Bandeja vacía</h2></div>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone" style="height:640px;">
+          <div class="safe-top"></div>
+          <div class="admin-header">
+            <span class="admin-eyebrow">Administración</span>
+            <div class="admin-title-row"><span class="admin-title">Solicitudes</span></div>
+          </div>
+          <div class="filter-row">
+            <span class="fchip is-selected">Pendientes</span>
+            <span class="fchip">Aprobadas</span>
+            <span class="fchip">Rechazadas</span>
+          </div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg></span>
+            <span class="empty-title">No hay solicitudes pendientes</span>
+            <span class="empty-desc">Todo al día. Las nuevas solicitudes aparecerán aquí.</span>
+          </div>
+        </div>
+        <span class="caption">sin contador cuando la bandeja está en cero</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 4 de 6 · Alta fidelidad — P-22 Solicitudes</span>
+    <span>Las cinco pantallas de §9.2 quedaron cubiertas</span>
+  </footer>
+</div>

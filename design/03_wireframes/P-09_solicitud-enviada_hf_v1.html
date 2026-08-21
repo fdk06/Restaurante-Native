@@ -1,0 +1,214 @@
+<title>P-09 Solicitud Enviada El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1200px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2 { margin:0; text-wrap:balance; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:24px; margin-bottom:16px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:32px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:56ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px;
+    font-size:13.5px; color:var(--pg-text-2); margin-bottom:48px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:56px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:20px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14px; max-width:78ch; margin-bottom:18px; }
+
+  .phone-row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .phone-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+
+  .phone {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF; --dm-warning:#A87516;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    width:360px; height:800px; background:var(--dm-bg); color:var(--dm-text);
+    border-radius:28px; border:1px solid var(--dm-border); box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .phone.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F; --dm-warning:#DFA945;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+  }
+  .phone * { color:var(--dm-text); }
+  .safe-top { height:24px; flex-shrink:0; }
+  .scroll-area { flex:1; overflow-y:auto; padding:8px 20px 20px; }
+
+  .send-icon { width:64px; height:64px; border-radius:999px; background:var(--dm-primary-soft); margin:8px auto 14px;
+    display:flex; align-items:center; justify-content:center; }
+  .send-icon svg { width:28px; height:28px; color:var(--dm-primary); }
+  .title-center { font-size:22px; font-weight:700; text-align:center; margin-bottom:6px; }
+  .subtitle-center { font-size:13.5px; color:var(--dm-text-2); text-align:center; margin-bottom:18px; }
+
+  .code-card { position:relative; border:1.5px dashed var(--dm-primary); border-radius:var(--radius-m); background:var(--dm-primary-soft);
+    padding:14px; text-align:center; margin-bottom:16px; }
+  .code-card .lbl { font-size:11px; font-weight:700; color:var(--dm-primary); text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px; }
+  .code-card .code { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; letter-spacing:.06em; color:var(--dm-text); }
+  .code-card .hint { font-size:11px; color:var(--dm-text-2); margin-top:4px; display:flex; align-items:center; justify-content:center; gap:4px; }
+  .code-card .hint svg { width:12px; height:12px; }
+  .copied-toast { position:absolute; top:-14px; right:8px; background:var(--dm-primary); color:var(--dm-inverse); font-size:11px; font-weight:700;
+    padding:4px 10px; border-radius:999px; box-shadow:0 4px 10px rgba(0,0,0,.2); }
+
+  .summary-card { border:1px solid var(--dm-border); border-radius:var(--radius-m); padding:14px; margin-bottom:16px; }
+  .summary-row { display:flex; justify-content:space-between; padding:5px 0; font-size:13.5px; }
+  .summary-row .k { color:var(--dm-text-2); }
+  .summary-row .v { font-weight:600; }
+  .summary-row.total { border-top:1px solid var(--dm-border); margin-top:5px; padding-top:9px; }
+  .summary-row.total .v { color:var(--dm-primary); font-size:15px; }
+
+  .pay-block { border-radius:var(--radius-m); background:var(--dm-surface); padding:14px; margin-bottom:16px; }
+  .pay-block .hd { font-size:13px; font-weight:700; margin-bottom:10px; }
+  .pay-step { display:flex; gap:10px; margin-bottom:10px; }
+  .pay-step:last-child { margin-bottom:0; }
+  .pay-step .n { width:20px; height:20px; border-radius:999px; background:var(--dm-primary); color:var(--dm-inverse); font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+  .pay-step .t { font-size:12.5px; line-height:17px; color:var(--dm-text); }
+  .pay-methods { display:flex; gap:6px; margin-top:6px; }
+  .pay-methods span { font-size:10.5px; font-weight:700; padding:3px 8px; border-radius:6px; background:var(--dm-bg); border:1px solid var(--dm-border); }
+
+  .whatsapp-btn { width:100%; height:52px; border-radius:var(--radius-m); background:var(--dm-primary); color:var(--dm-inverse);
+    font-weight:600; font-size:15px; border:none; display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:12px; }
+  .whatsapp-btn svg { width:19px; height:19px; }
+
+  .notice-block { display:flex; gap:8px; padding:11px 12px; border-radius:var(--radius-m); background:color-mix(in srgb, var(--dm-warning) 14%, var(--dm-bg)); margin-bottom:14px; }
+  .notice-block svg { width:17px; height:17px; color:var(--dm-warning); flex-shrink:0; margin-top:1px; }
+  .notice-block span { font-size:12px; line-height:17px; color:var(--dm-text); }
+
+  .link-btn { display:block; text-align:center; font-size:13.5px; font-weight:700; color:var(--dm-primary); padding:10px 0; }
+
+  .caption { font-size:12px; color:var(--pg-text-2); text-align:center; max-width:360px; }
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>P-09 · Solicitud enviada</h1>
+      <p class="deck">Etapa 4 — alta fidelidad. La pantalla con más carga de comunicación: si se lee como una confirmación, la app promete algo que todavía no cumplió. Ícono de envío, no de éxito.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">hf v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Estado principal</h2></div>
+    <p class="section-intro">Continúa el pedido de $74.000 armado en P-07 — el total llega hasta las instrucciones de pago sin recalcularse ni perderse en el camino.</p>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="safe-top"></div>
+          <div class="scroll-area">
+            <span class="send-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            <div class="title-center">Solicitud enviada</div>
+            <div class="subtitle-center">El restaurante todavía tiene que confirmarla</div>
+
+            <div class="code-card">
+              <div class="lbl">Código de tu reserva</div>
+              <div class="code">ECC-4921</div>
+              <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Toca para copiar</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="summary-row"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="summary-row"><span class="k">Franja</span><span class="v">12:30 p. m.</span></div>
+              <div class="summary-row"><span class="k">Comensales</span><span class="v">4 personas</span></div>
+              <div class="summary-row total"><span class="k">Total del pedido</span><span class="v">$74.000</span></div>
+            </div>
+
+            <div class="pay-block">
+              <div class="hd">Cómo pagar</div>
+              <div class="pay-step"><span class="n">1</span><span class="t">Paga $74.000 por el medio que prefieras.<div class="pay-methods"><span>Efectivo</span><span>PSE</span><span>Nequi</span></div></span></div>
+              <div class="pay-step"><span class="n">2</span><span class="t">Nequi y PSE: 315 402 8871, a nombre de El Encanto Campestre.</span></div>
+              <div class="pay-step"><span class="n">3</span><span class="t">Envía el comprobante con el botón de abajo — incluye tu código automáticamente.</span></div>
+            </div>
+
+            <button class="whatsapp-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.55L3 20l1.05-5.4A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.5 10.5c.5 2.5 2.5 4.5 5 5"/></svg>Enviar comprobante por WhatsApp</button>
+
+            <div class="notice-block">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Tu reserva queda confirmada cuando el restaurante verifique el pago. Te avisamos por notificación.</span>
+            </div>
+
+            <span class="link-btn">Ver mis reservas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro</span>
+        <div class="phone dark">
+          <div class="safe-top"></div>
+          <div class="scroll-area">
+            <span class="send-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+            <div class="title-center">Solicitud enviada</div>
+            <div class="subtitle-center">El restaurante todavía tiene que confirmarla</div>
+
+            <div class="code-card">
+              <span class="copied-toast">Copiado</span>
+              <div class="lbl">Código de tu reserva</div>
+              <div class="code">ECC-4921</div>
+              <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Toca para copiar</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="summary-row"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="summary-row"><span class="k">Franja</span><span class="v">12:30 p. m.</span></div>
+              <div class="summary-row"><span class="k">Comensales</span><span class="v">4 personas</span></div>
+              <div class="summary-row total"><span class="k">Total del pedido</span><span class="v">$74.000</span></div>
+            </div>
+
+            <div class="pay-block">
+              <div class="hd">Cómo pagar</div>
+              <div class="pay-step"><span class="n">1</span><span class="t">Paga $74.000 por el medio que prefieras.<div class="pay-methods"><span>Efectivo</span><span>PSE</span><span>Nequi</span></div></span></div>
+              <div class="pay-step"><span class="n">2</span><span class="t">Nequi y PSE: 315 402 8871, a nombre de El Encanto Campestre.</span></div>
+              <div class="pay-step"><span class="n">3</span><span class="t">Envía el comprobante con el botón de abajo — incluye tu código automáticamente.</span></div>
+            </div>
+
+            <button class="whatsapp-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.55L3 20l1.05-5.4A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.5 10.5c.5 2.5 2.5 4.5 5 5"/></svg>Enviar comprobante por WhatsApp</button>
+
+            <div class="notice-block">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Tu reserva queda confirmada cuando el restaurante verifique el pago. Te avisamos por notificación.</span>
+            </div>
+
+            <span class="link-btn">Ver mis reservas</span>
+          </div>
+        </div>
+        <span class="caption">código recién copiado — confirmación visible arriba de la tarjeta</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 4 de 6 · Alta fidelidad — P-09 Solicitud enviada</span>
+    <span>Siguiente: P-22 Solicitudes (admin)</span>
+  </footer>
+</div>

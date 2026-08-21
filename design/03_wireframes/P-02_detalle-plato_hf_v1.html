@@ -1,0 +1,279 @@
+<title>P-02 Detalle de Plato El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1200px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2 { margin:0; text-wrap:balance; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:24px; margin-bottom:16px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:32px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:56ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:12px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  section { margin-top:56px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:20px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14px; max-width:78ch; margin-bottom:18px; }
+
+  .phone-row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+  .phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .phone-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+
+  .phone {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-warning:#A87516; --dm-inactive:#B4B4AA;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 -4px 14px rgba(22,24,15,0.14);
+    width:360px; height:800px; background:var(--dm-bg); color:var(--dm-text);
+    border-radius:28px; border:1px solid var(--dm-border); box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .phone.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-warning:#DFA945; --dm-inactive:#55584F;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 -4px 16px rgba(0,0,0,0.4);
+  }
+  .phone * { color:var(--dm-text); }
+
+  .gallery { position:relative; flex-shrink:0; width:100%; aspect-ratio:4/3; background:
+    linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .gallery-top { position:absolute; top:24px; left:0; right:0; display:flex; justify-content:space-between; padding:4px; }
+  .gallery-actions { display:flex; }
+  .gchip { width:40px; height:40px; margin:4px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 78%, transparent);
+    display:flex; align-items:center; justify-content:center; }
+  .gchip svg { width:19px; height:19px; }
+  .gallery-dots { position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:6px; }
+  .gallery-dots span { width:6px; height:6px; border-radius:999px; background:color-mix(in srgb, var(--dm-bg) 55%, transparent); }
+  .gallery-dots span.is-current { background:var(--dm-inverse); width:16px; }
+
+  .scroll-area { flex:1; overflow-y:auto; padding:16px; }
+  .title-row { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
+  .dish-name { font-size:22px; line-height:27px; font-weight:700; flex:1; }
+  .dish-price { font-size:20px; font-weight:700; color:var(--dm-primary); flex-shrink:0; white-space:nowrap; }
+  .dish-price.inactive { color:var(--dm-inactive); }
+  .tag-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .tag { font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--dm-primary-soft); color:var(--dm-primary); }
+  .dish-desc-full { font-size:14.5px; line-height:21px; color:var(--dm-text); margin-bottom:18px; }
+
+  .info-block { display:flex; gap:10px; padding:12px; border-radius:var(--radius-m); background:var(--dm-surface); margin-bottom:12px; }
+  .info-block svg { width:18px; height:18px; color:var(--dm-text-2); flex-shrink:0; margin-top:1px; }
+  .info-block .lbl { font-size:12px; font-weight:700; margin-bottom:2px; }
+  .info-block .val { font-size:13px; color:var(--dm-text-2); line-height:18px; }
+
+  .avail-block { display:flex; align-items:center; gap:9px; padding:11px 12px; border-radius:var(--radius-m); margin-bottom:12px; }
+  .avail-block.ok { background:color-mix(in srgb, #2F6B45 12%, var(--dm-bg)); }
+  .avail-block.no { background:color-mix(in srgb, var(--dm-warning) 14%, var(--dm-bg)); }
+  .avail-block svg { width:18px; height:18px; flex-shrink:0; }
+  .avail-block.ok svg, .avail-block.ok span { color:#2F6B45; }
+  .dark .avail-block.ok svg, .dark .avail-block.ok span { color:#6FB98C; }
+  .avail-block.no svg, .avail-block.no span { color:var(--dm-warning); }
+  .avail-block span { font-size:13px; font-weight:600; }
+
+  .action-bar { flex-shrink:0; background:var(--dm-bg); border-top:1px solid var(--dm-border); box-shadow:var(--dm-shadow-2);
+    padding:12px 16px 20px; display:flex; gap:10px; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 20px; border-radius:var(--radius-m);
+    font-weight:600; font-size:15px; border:1.5px solid transparent; }
+  .btn-primario { flex:1.4; background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-secundario { flex:1; background:transparent; border-color:var(--dm-primary); color:var(--dm-primary); }
+  .avail-inline { flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .avail-inline .t1 { font-size:12.5px; font-weight:600; color:var(--dm-warning); }
+  .avail-inline .t2 { font-size:11px; color:var(--dm-text-2); }
+
+  .skeleton { background-color:var(--dm-border); border-radius:6px; background-image:
+    linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%);
+    background-size:200% 100%; animation:sh 1.6s ease-in-out infinite; }
+  @keyframes sh { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; background-image:none; } }
+  .sk-line { height:12px; margin-bottom:8px; }
+  .sk-w70 { width:70%; height:22px; }
+  .sk-w40 { width:40%; margin-bottom:16px; }
+  .sk-w95 { width:95%; }
+  .sk-w80 { width:80%; margin-bottom:0; }
+
+  .gallery-error { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; height:100%; color:var(--dm-text-2); background:var(--dm-surface); }
+  .gallery-error svg { width:30px; height:30px; }
+  .gallery-error span { font-size:12.5px; }
+
+  .caption { font-size:12px; color:var(--pg-text-2); text-align:center; max-width:360px; }
+
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>P-02 · Detalle de plato</h1>
+      <p class="deck">Etapa 4 — alta fidelidad. Es el destino de los enlaces compartidos por WhatsApp: tiene que verse bien abierta en frío.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">hf v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Estado principal — disponible</h2></div>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">Claro</span>
+        <div class="phone">
+          <div class="gallery">
+            <div class="gallery-top">
+              <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <div class="gallery-actions">
+                <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span>
+                <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+              </div>
+            </div>
+            <div class="gallery-dots"><span class="is-current"></span><span></span><span></span></div>
+          </div>
+          <div class="scroll-area">
+            <div class="title-row"><span class="dish-name">Bandeja campesina El Encanto</span><span class="dish-price">$45.000</span></div>
+            <div class="tag-row"><span class="tag">Fuertes</span><span class="tag">Para compartir</span></div>
+            <p class="dish-desc-full">Carne asada, chicharrón, arroz, frijol antioqueño, huevo frito, plátano maduro, arepa y aguacate. La porción está pensada para compartir entre dos.</p>
+            <div class="info-block">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div><div class="lbl">Contiene</div><div class="val">Gluten (arepa), lácteos (mantequilla del arroz)</div></div>
+            </div>
+            <div class="avail-block ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>
+              <span>Disponible el domingo 06/09/2026</span>
+            </div>
+          </div>
+          <div class="action-bar">
+            <button class="btn btn-secundario">Compartir</button>
+            <button class="btn btn-primario">Reservar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Oscuro</span>
+        <div class="phone dark">
+          <div class="gallery">
+            <div class="gallery-top">
+              <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <div class="gallery-actions">
+                <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.9 8.1 2.4 5 5.6 5c1.9 0 3.3 1 4.4 2.6C11.1 6 12.5 5 14.4 5c3.2 0 4.7 3.1 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span>
+                <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+              </div>
+            </div>
+            <div class="gallery-dots"><span class="is-current"></span><span></span><span></span></div>
+          </div>
+          <div class="scroll-area">
+            <div class="title-row"><span class="dish-name">Bandeja campesina El Encanto</span><span class="dish-price">$45.000</span></div>
+            <div class="tag-row"><span class="tag">Fuertes</span><span class="tag">Para compartir</span></div>
+            <p class="dish-desc-full">Carne asada, chicharrón, arroz, frijol antioqueño, huevo frito, plátano maduro, arepa y aguacate. La porción está pensada para compartir entre dos.</p>
+            <div class="info-block">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div><div class="lbl">Contiene</div><div class="val">Gluten (arepa), lácteos (mantequilla del arroz)</div></div>
+            </div>
+            <div class="avail-block ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>
+              <span>Disponible el domingo 06/09/2026</span>
+            </div>
+          </div>
+          <div class="action-bar">
+            <button class="btn btn-secundario">Compartir</button>
+            <button class="btn btn-primario">Reservar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>No disponible, carga y error</h2></div>
+    <p class="section-intro">La trucha que en P-01 aparecía agotada para el 06/09 — misma fecha, misma historia. La barra de acción sustituye "Reservar" por un aviso, no lo deshabilita en silencio.</p>
+    <div class="phone-row">
+      <div class="phone-col">
+        <span class="phone-label">No disponible · claro</span>
+        <div class="phone" style="height:760px;">
+          <div class="gallery">
+            <div class="gallery-top">
+              <span class="gchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+            </div>
+          </div>
+          <div class="scroll-area">
+            <div class="title-row"><span class="dish-name">Trucha arcoíris al ajillo</span><span class="dish-price inactive">$42.000</span></div>
+            <div class="tag-row"><span class="tag">Sin gluten</span></div>
+            <p class="dish-desc-full">Trucha fresca de la piscícola vecina, salteada con ajo tostado, mantequilla y limón mandarino. Con patacones.</p>
+            <div class="avail-block no">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>No disponible el domingo 06/09/2026</span>
+            </div>
+          </div>
+          <div class="action-bar">
+            <div class="avail-inline"><span class="t1">No disponible esta fecha</span><span class="t2">Prueba con otro día</span></div>
+            <button class="btn btn-secundario" style="flex:0 0 auto;">Ver otra fecha</button>
+          </div>
+        </div>
+        <span class="caption">"Reservar" desaparece; el aviso explica por qué</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Carga · oscuro</span>
+        <div class="phone dark" style="height:760px;">
+          <div class="gallery" style="background:var(--dm-surface);">
+            <div style="position:absolute; inset:0;" class="skeleton"></div>
+          </div>
+          <div class="scroll-area">
+            <div class="skeleton sk-line sk-w70"></div>
+            <div class="skeleton sk-line sk-w40"></div>
+            <div class="skeleton sk-line sk-w95"></div>
+            <div class="skeleton sk-line sk-w95"></div>
+            <div class="skeleton sk-line sk-w80"></div>
+          </div>
+        </div>
+        <span class="caption">carga inicial</span>
+      </div>
+
+      <div class="phone-col">
+        <span class="phone-label">Error de imagen · claro</span>
+        <div class="phone" style="height:760px;">
+          <div class="gallery-error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 20 2 20Z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16.3" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <span>No se pudo cargar la foto</span>
+          </div>
+          <div class="scroll-area">
+            <div class="title-row"><span class="dish-name">Bandeja campesina El Encanto</span><span class="dish-price">$45.000</span></div>
+            <div class="tag-row"><span class="tag">Fuertes</span></div>
+            <p class="dish-desc-full">El resto del contenido carga con normalidad — solo la foto falló.</p>
+          </div>
+          <div class="action-bar">
+            <button class="btn btn-secundario">Compartir</button>
+            <button class="btn btn-primario">Reservar</button>
+          </div>
+        </div>
+        <span class="caption">el resto de la pantalla no depende de la foto</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 4 de 6 · Alta fidelidad — P-02 Detalle de plato</span>
+    <span>Siguiente: P-07 Pedido opcional</span>
+  </footer>
+</div>
