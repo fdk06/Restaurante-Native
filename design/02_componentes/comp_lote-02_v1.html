@@ -1,0 +1,602 @@
+<title>Componentes Lote 2 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg: #FFFFFF; --pg-surface: #F6F5F1; --pg-border: #E2E2DA;
+    --pg-text: #16180F; --pg-text-2: #5F6355; --pg-primary: #4A5D3A;
+    --pg-accent: #A2632E; --pg-inverse: #FFFFFF;
+    --pg-warning: #A87516; --pg-error: #A82A22;
+
+    --radius-s: 8px; --radius-m: 12px; --radius-l: 20px; --radius-full: 999px;
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+      --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+      --pg-accent: #D69A5E; --pg-inverse: #12140F;
+      --pg-warning: #DFA945; --pg-error: #EF8880;
+    }
+  }
+  :root[data-theme="dark"] {
+    --pg-bg: #12140F; --pg-surface: #1C1F19; --pg-border: #2C302A;
+    --pg-text: #F0F1EA; --pg-text-2: #A5A99B; --pg-primary: #9CB584;
+    --pg-accent: #D69A5E; --pg-inverse: #12140F;
+    --pg-warning: #DFA945; --pg-error: #EF8880;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--pg-bg); color: var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  /* ---- Masthead ---- */
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px;
+    padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-0.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+
+  .method-note { background: var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px;
+    padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px; display:flex; gap:10px; }
+  .method-note b { color: var(--pg-text); }
+
+  /* ---- Sections ---- */
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color: var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border);
+    border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  /* ---- Frame (360dp canvas), theme-scoped ---- */
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA;
+    --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-admin:#2E3A2A;
+    --dm-shadow-1: 0 1px 3px rgba(22,24,15,0.12);
+    --dm-shadow-2: 0 6px 18px rgba(22,24,15,0.20);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px;
+    padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A;
+    --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-admin:#1A2118;
+    --dm-shadow-1: 0 1px 3px rgba(0,0,0,0.45);
+    --dm-shadow-2: 0 6px 20px rgba(0,0,0,0.6);
+  }
+  .frame, .frame * { color: var(--dm-text); }
+  .frame.flush { padding:0; }
+
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color: var(--dm-text); font-weight:700; }
+
+  .hit-guide { position:relative; display:inline-flex; }
+  .hit-guide::after { content:''; position:absolute; inset:-8px -8px; border:1.5px dashed var(--dm-accent); border-radius:10px; pointer-events:none; }
+
+  /* Reused from C-01 (Lote 1) so header/empty-state actions stay consistent */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif;
+    font-weight:600; border-radius:var(--radius-m); border:1.5px solid transparent; white-space:nowrap; }
+  .btn-m { height:48px; padding:0 16px; font-size:16px; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-texto { background:transparent; color:var(--dm-primary); padding:0 10px; }
+  .icon-btn { width:48px; height:48px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border-radius:999px; }
+  .icon-btn svg { width:22px; height:22px; }
+
+  /* ================= C-11 ENCABEZADO DE PANTALLA ================= */
+  .screen-top { margin-bottom:22px; }
+  .screen-top:last-child { margin-bottom:0; }
+  .safe-top { height:24px; background:repeating-linear-gradient(135deg, var(--dm-border) 0 6px, transparent 6px 12px);
+    opacity:.5; border-top-left-radius:10px; border-top-right-radius:10px; }
+  .header-row { display:flex; align-items:center; gap:4px; height:56px; padding:0 8px; background:var(--dm-bg); }
+  .header-row.admin { height:64px; background:var(--dm-admin); flex-direction:column; align-items:flex-start; justify-content:center; padding:8px 16px; gap:2px; }
+  .header-admin-top { display:flex; align-items:center; justify-content:space-between; width:100%; }
+  .header-title { font-size:22px; line-height:28px; font-weight:700; flex:1; padding:0 8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .header-row.admin .header-title { font-size:18px; line-height:24px; padding:0; color:var(--dm-inverse); }
+  .header-eyebrow { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--dm-inverse); opacity:.75; }
+  .dark .header-row.admin .header-title, .dark .header-eyebrow { color: var(--dm-text); }
+
+  /* ================= C-04 CHIP ================= */
+  .chip-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
+  .chip { display:inline-flex; align-items:center; gap:5px; height:32px; padding:0 14px; border-radius:var(--radius-s);
+    font-size:13px; line-height:16px; font-weight:600; border:1.5px solid transparent; }
+  .chip svg { width:14px; height:14px; }
+  /* categoría — selección única, estilo tab */
+  .chip-categoria { background:var(--dm-surface); border-color:var(--dm-border); color:var(--dm-text-2); }
+  .chip-categoria.is-selected { background:var(--dm-primary); color:var(--dm-inverse); font-weight:700; border-color:transparent; }
+  .chip-categoria.is-disabled { color:var(--dm-inactive); border-color:var(--dm-border); background:transparent; }
+  /* filtro — selección múltiple, tinte + check */
+  .chip-filtro { background:var(--dm-bg); border-color:var(--dm-border); color:var(--dm-text); }
+  .chip-filtro.is-selected { background:var(--dm-primary-soft); border-color:var(--dm-primary); color:var(--dm-primary); }
+  .chip-filtro.is-disabled { color:var(--dm-inactive); border-color:var(--dm-border); background:transparent; }
+  /* etiqueta dietaria — informativa, mismo tinte que en C-05 */
+  .chip-dieta { background:var(--dm-primary-soft); color:var(--dm-primary); }
+  .chip-dieta.is-disabled { background:transparent; border-color:var(--dm-border); color:var(--dm-inactive); }
+
+  /* ================= C-09 SELECTOR DE FECHA ================= */
+  .date-strip { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; }
+  .date-cell { flex-shrink:0; width:52px; height:64px; border-radius:var(--radius-m); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:2px; background:var(--dm-surface); border:1.5px solid var(--dm-border); }
+  .date-cell .dow { font-size:11px; font-weight:600; color:var(--dm-text-2); text-transform:uppercase; }
+  .date-cell .num { font-size:18px; font-weight:700; }
+  .date-cell.is-selected { background:var(--dm-primary); border-color:var(--dm-primary); box-shadow:var(--dm-shadow-1); }
+  .date-cell.is-selected .dow, .date-cell.is-selected .num { color:var(--dm-inverse); }
+  .date-cell.is-closed .num { text-decoration:line-through; color:var(--dm-inactive); }
+  .date-cell.is-closed .dow { color:var(--dm-inactive); }
+  .date-cell.is-past { opacity:.45; }
+  .date-cell.is-reserveonly .num { color:var(--dm-text); }
+  .date-cell .rule-tag { font-size:9px; font-weight:700; color:var(--dm-warning); background:color-mix(in srgb, var(--dm-warning) 16%, transparent);
+    border-radius:999px; padding:1px 5px; margin-top:1px; }
+  .date-more { flex-shrink:0; width:52px; height:64px; border-radius:var(--radius-m); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:4px; color:var(--dm-primary); }
+  .date-more svg { width:20px; height:20px; }
+  .date-more span { font-size:10px; font-weight:600; }
+
+  /* ================= C-13 ESTADO VACÍO ================= */
+  .empty-state { display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 20px; gap:14px; }
+  .empty-icon { width:56px; height:56px; border-radius:999px; background:var(--dm-primary-soft); display:flex; align-items:center; justify-content:center; }
+  .empty-icon svg { width:26px; height:26px; color:var(--dm-primary); }
+  .empty-title { font-size:18px; line-height:24px; font-weight:600; }
+  .empty-desc { font-size:14px; line-height:20px; color:var(--dm-text-2); max-width:26ch; }
+
+  .ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:4px; }
+  .ref-table th, .ref-table td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--pg-border); }
+  .ref-table thead th { font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--pg-text-2); }
+  .ref-table tbody tr:last-child td { border-bottom:none; }
+  .ref-table td.ctx { color:var(--pg-text-2); }
+  .ref-table td.acc { font-family:'JetBrains Mono',monospace; font-size:11px; }
+
+  /* ---- Touch target verification table ---- */
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .verify-card .sub { font-size:13px; color:var(--pg-text-2); margin-bottom:18px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
+    padding:3px 8px; border-radius:6px; }
+  .badge-pass { background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 2</h1>
+      <p class="deck">Etapa 2 de 6. C-11 Encabezado de pantalla, C-04 Chip, C-09 Selector de fecha y C-13 Estado vacío.</p>
+      <div class="meta">
+        <span>El Encanto Campestre</span>
+        <span class="mono">v1 · 20/08/2026</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>Por qué este lote.</b> Con Botón, Campo de texto, Tarjeta de plato y Barra de destinos
+      resueltos en el Lote 1, estos cuatro completan lo que le falta a <b>P-01 Carta</b> —la
+      primera pantalla de la Etapa 3— para armarse sin piezas sueltas: encabezado, chips de
+      categoría, el selector de fecha que distingue esta carta de un menú estático, y el estado
+      vacío para cuando no hay platos o no hay conexión. Reutilizo los íconos y el botón del
+      Lote 1 en vez de inventar nuevos — menos código que el equipo tiene que escribir y
+      explicar (T-4).
+    </div>
+  </div>
+
+  <!-- ============ C-11 ENCABEZADO DE PANTALLA ============ -->
+  <section id="c-11">
+    <div class="section-head"><span class="section-num">C-11</span><h2>Encabezado de pantalla</h2></div>
+    <p class="section-intro">
+      Tres variantes — <b>estándar</b>, <b>con retroceso</b>, <b>de administración</b> — cada
+      una con y sin acción a la derecha. La variante de administración usa
+      <span class="mono">admin/encabezado</span> de fondo: el dueño tiene que distinguir este
+      contexto de un vistazo, en medio del servicio (principio 5).
+    </p>
+    <div class="scope-note">
+      Sobre <span class="mono">admin/encabezado</span> el texto cambia de ficha según el tema
+      — <span class="mono">texto/inverso</span> en claro, <span class="mono">texto/primario</span>
+      en oscuro— tal como quedó documentado en la Etapa 1: en oscuro ese fondo ya es casi negro
+      y texto/inverso (también casi negro) sería ilegible.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row"><span class="header-title">Carta</span></div>
+          </div>
+          <span class="spec">estándar · sin acción · P-01 · alto 56dp</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="header-title">Carta</span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+            </div>
+          </div>
+          <span class="spec">estándar · con acción (buscar) · 48×48 dp</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <span class="header-title">Detalle del plato</span>
+            </div>
+          </div>
+          <span class="spec">con retroceso · sin acción · P-02, el físico de Android hace lo mismo</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <span class="header-title">Detalle del plato</span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+            </div>
+          </div>
+          <span class="spec">con retroceso · con acción (compartir)</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row admin">
+              <div class="header-admin-top">
+                <span class="header-eyebrow">Administración</span>
+              </div>
+              <span class="header-title">Solicitudes</span>
+            </div>
+          </div>
+          <span class="spec">administración · sin acción · P-22 · alto 64dp</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row admin">
+              <div class="header-admin-top">
+                <span class="header-eyebrow">Administración</span>
+                <span class="icon-btn" style="width:36px;height:36px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2.1"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2.1"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2.1"/></svg></span>
+              </div>
+              <span class="header-title">Disponibilidad</span>
+            </div>
+          </div>
+          <span class="spec">administración · con acción (ajustes de fecha) · P-26</span>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row"><span class="header-title">Carta</span></div>
+          </div>
+          <span class="spec">estándar · sin acción · P-01 · alto 56dp</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="header-title">Carta</span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+            </div>
+          </div>
+          <span class="spec">estándar · con acción (buscar) · 48×48 dp</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <span class="header-title">Detalle del plato</span>
+            </div>
+          </div>
+          <span class="spec">con retroceso · sin acción · P-02, el físico de Android hace lo mismo</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span>
+              <span class="header-title">Detalle del plato</span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></span>
+            </div>
+          </div>
+          <span class="spec">con retroceso · con acción (compartir)</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row admin">
+              <div class="header-admin-top">
+                <span class="header-eyebrow">Administración</span>
+              </div>
+              <span class="header-title">Solicitudes</span>
+            </div>
+          </div>
+          <span class="spec">administración · sin acción · texto/primario sobre este fondo en oscuro</span>
+
+          <div class="screen-top">
+            <div class="safe-top"></div>
+            <div class="header-row admin">
+              <div class="header-admin-top">
+                <span class="header-eyebrow">Administración</span>
+                <span class="icon-btn" style="width:36px;height:36px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="4" x2="7" y2="20"/><circle cx="7" cy="9" r="2.1"/><line x1="12" y1="4" x2="12" y2="20"/><circle cx="12" cy="16" r="2.1"/><line x1="17" y1="4" x2="17" y2="20"/><circle cx="17" cy="7" r="2.1"/></svg></span>
+              </div>
+              <span class="header-title">Disponibilidad</span>
+            </div>
+          </div>
+          <span class="spec">administración · con acción · P-26</span>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-04 CHIP ============ -->
+  <section id="c-04">
+    <div class="section-head"><span class="section-num">C-04</span><h2>Chip</h2></div>
+    <p class="section-intro">
+      Tres variantes — <b>categoría</b> (selección única, como una pestaña), <b>filtro</b>
+      (selección múltiple) y <b>etiqueta dietaria</b> (informativa). La selección nunca depende
+      solo del color: categoría cambia de relleno y peso de texto, filtro añade una marca de
+      verificación.
+    </p>
+    <div class="scope-note">
+      Radio 8dp — <span class="mono">radio/s</span>, tal como lo fija la ficha de espaciado de
+      la Etapa 1, no el radio completo que suele verse en chips de otros sistemas.
+    </div>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="variant-title"><span>Categoría</span><span class="mono">relleno sólido si está seleccionada</span></div>
+          <div class="chip-row">
+            <span class="chip chip-categoria">Entradas</span>
+            <span class="chip chip-categoria is-selected">Fuertes</span>
+            <span class="chip chip-categoria is-disabled">Postres</span>
+          </div>
+          <span class="spec">no seleccionado · seleccionado · deshabilitado (sin platos hoy)</span>
+
+          <div class="variant-title" style="margin-top:22px;"><span>Filtro</span><span class="mono">tinte + check, selección múltiple</span></div>
+          <div class="chip-row">
+            <span class="chip chip-filtro">Menos de $20.000</span>
+            <span class="chip chip-filtro is-selected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>Vegetariano</span>
+            <span class="hit-guide"><span class="chip chip-filtro is-disabled">Picante</span></span>
+          </div>
+          <span class="spec">no seleccionado · seleccionado (con check) · deshabilitado · guía = 48dp de alto de fila</span>
+
+          <div class="variant-title" style="margin-top:22px;"><span>Etiqueta dietaria</span><span class="mono">informativa · mismo tinte que en C-05</span></div>
+          <div class="chip-row">
+            <span class="chip chip-dieta">Sin gluten</span>
+            <span class="chip chip-dieta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>Vegano</span>
+            <span class="chip chip-dieta is-disabled">Sin lactosa</span>
+          </div>
+          <span class="spec">como filtro de búsqueda (P-03): no seleccionado · seleccionado · deshabilitado</span>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="variant-title"><span>Categoría</span><span class="mono">relleno sólido si está seleccionada</span></div>
+          <div class="chip-row">
+            <span class="chip chip-categoria">Entradas</span>
+            <span class="chip chip-categoria is-selected">Fuertes</span>
+            <span class="chip chip-categoria is-disabled">Postres</span>
+          </div>
+          <span class="spec">no seleccionado · seleccionado · deshabilitado (sin platos hoy)</span>
+
+          <div class="variant-title" style="margin-top:22px;"><span>Filtro</span><span class="mono">tinte + check, selección múltiple</span></div>
+          <div class="chip-row">
+            <span class="chip chip-filtro">Menos de $20.000</span>
+            <span class="chip chip-filtro is-selected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>Vegetariano</span>
+            <span class="hit-guide"><span class="chip chip-filtro is-disabled">Picante</span></span>
+          </div>
+          <span class="spec">no seleccionado · seleccionado (con check) · deshabilitado · guía = 48dp de alto de fila</span>
+
+          <div class="variant-title" style="margin-top:22px;"><span>Etiqueta dietaria</span><span class="mono">informativa · mismo tinte que en C-05</span></div>
+          <div class="chip-row">
+            <span class="chip chip-dieta">Sin gluten</span>
+            <span class="chip chip-dieta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>Vegano</span>
+            <span class="chip chip-dieta is-disabled">Sin lactosa</span>
+          </div>
+          <span class="spec">como filtro de búsqueda (P-03): no seleccionado · seleccionado · deshabilitado</span>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-09 SELECTOR DE FECHA ============ -->
+  <section id="c-09">
+    <div class="section-head"><span class="section-num">C-09</span><h2>Selector de fecha</h2></div>
+    <p class="section-intro">
+      Tira horizontal de los próximos días de atención (P-01, P-05). <b>Cerrado</b> y
+      <b>pasado</b> se ven distintos a propósito: cerrado es una regla del negocio (tachado),
+      pasado es solo el calendario (atenuado, sin tachar). <b>Solo por reserva</b> lleva la
+      etiqueta "15+" — la regla de las 15 personas entre semana no es obvia y no puede
+      explicarse solo con color.
+    </p>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="variant-title"><span>Tira de días</span><span class="mono">celda 52×64dp · radio/m 12dp</span></div>
+          <div class="date-strip">
+            <div class="date-cell is-past"><span class="dow">Vie</span><span class="num">28</span></div>
+            <div class="date-cell is-closed"><span class="dow">Lun</span><span class="num">1</span></div>
+            <div class="date-cell is-reserveonly"><span class="dow">Mié</span><span class="num">3</span><span class="rule-tag">15+</span></div>
+            <div class="date-cell is-selected"><span class="dow">Sáb</span><span class="num">6</span></div>
+            <div class="date-cell"><span class="dow">Dom</span><span class="num">7</span></div>
+            <div class="date-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg><span>Calendario</span></div>
+          </div>
+          <span class="spec">pasado · cerrado (tachado) · solo por reserva (15+) · seleccionado · abierto · acción "Ver calendario"</span>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="variant-title"><span>Tira de días</span><span class="mono">celda 52×64dp · radio/m 12dp</span></div>
+          <div class="date-strip">
+            <div class="date-cell is-past"><span class="dow">Vie</span><span class="num">28</span></div>
+            <div class="date-cell is-closed"><span class="dow">Lun</span><span class="num">1</span></div>
+            <div class="date-cell is-reserveonly"><span class="dow">Mié</span><span class="num">3</span><span class="rule-tag">15+</span></div>
+            <div class="date-cell is-selected"><span class="dow">Sáb</span><span class="num">6</span></div>
+            <div class="date-cell"><span class="dow">Dom</span><span class="num">7</span></div>
+            <div class="date-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg><span>Calendario</span></div>
+          </div>
+          <span class="spec">pasado · cerrado (tachado) · solo por reserva (15+) · seleccionado · abierto · acción "Ver calendario"</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-13 ESTADO VACÍO ============ -->
+  <section id="c-13">
+    <div class="section-head"><span class="section-num">C-13</span><h2>Estado vacío</h2></div>
+    <p class="section-intro">
+      Ícono en círculo, título, una línea de explicación y acción cuando corresponde. Nueve
+      variantes de contenido comparten esta misma estructura (§6.5) — se ilustran tres casos
+      representativos y el resto queda documentado en la tabla de referencia, en vez de repetir
+      el mismo molde nueve veces.
+    </p>
+
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+
+          <div class="variant-title"><span>Con acción</span><span class="mono">P-04 · Mis reservas</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></span>
+            <span class="empty-title">Aún no tienes reservas</span>
+            <span class="empty-desc">Separa mesa para tu próxima visita a El Encanto Campestre.</span>
+            <button class="btn btn-m btn-primario">Reservar</button>
+          </div>
+
+          <div class="variant-title"><span>Búsqueda dinámica</span><span class="mono">P-03 · texto un 30% más largo (T-11)</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+            <span class="empty-title">No encontramos «bandeja paisa vegetariana»</span>
+            <span class="empty-desc">Prueba con otra palabra o quita algún filtro.</span>
+            <button class="btn btn-m btn-texto">Limpiar filtros</button>
+          </div>
+
+          <div class="variant-title"><span>Sin acción</span><span class="mono">P-11 · Noticias</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></span>
+            <span class="empty-title">Aún no hay publicaciones</span>
+            <span class="empty-desc">Cuando el restaurante publique algo, aparecerá aquí.</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+
+          <div class="variant-title"><span>Con acción</span><span class="mono">P-04 · Mis reservas</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></span>
+            <span class="empty-title">Aún no tienes reservas</span>
+            <span class="empty-desc">Separa mesa para tu próxima visita a El Encanto Campestre.</span>
+            <button class="btn btn-m btn-primario">Reservar</button>
+          </div>
+
+          <div class="variant-title"><span>Búsqueda dinámica</span><span class="mono">P-03 · texto un 30% más largo (T-11)</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/></svg></span>
+            <span class="empty-title">No encontramos «bandeja paisa vegetariana»</span>
+            <span class="empty-desc">Prueba con otra palabra o quita algún filtro.</span>
+            <button class="btn btn-m btn-texto">Limpiar filtros</button>
+          </div>
+
+          <div class="variant-title"><span>Sin acción</span><span class="mono">P-11 · Noticias</span></div>
+          <div class="empty-state">
+            <span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a5 5 0 0 0-5 5v3.2c0 .9-.35 1.77-.97 2.42L5 16h14l-1.03-1.38A3.5 3.5 0 0 1 17 12.2V9a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></span>
+            <span class="empty-title">Aún no hay publicaciones</span>
+            <span class="empty-desc">Cuando el restaurante publique algo, aparecerá aquí.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="subhead" style="margin-top:32px; font-size:13px; font-weight:700;">Catálogo completo de contenido (§6.5)</div>
+    <table class="ref-table">
+      <thead><tr><th>Contexto</th><th>Título</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr><td class="ctx">Sin reservas próximas</td><td>"Aún no tienes reservas"</td><td class="acc">Reservar</td></tr>
+        <tr><td class="ctx">Sin historial</td><td>"Tu historial aparecerá aquí"</td><td class="acc">—</td></tr>
+        <tr><td class="ctx">Sin favoritos</td><td>"Guarda tus platos preferidos"</td><td class="acc">Ver la carta</td></tr>
+        <tr><td class="ctx">Búsqueda sin resultados</td><td>"No encontramos «‹texto›»"</td><td class="acc">Limpiar filtros</td></tr>
+        <tr><td class="ctx">Sin platos para la fecha</td><td>"El menú de ese día aún no se publica"</td><td class="acc">Ver otra fecha</td></tr>
+        <tr><td class="ctx">Fecha cerrada</td><td>"Ese día no hay servicio"</td><td class="acc">Ver el próximo día abierto</td></tr>
+        <tr><td class="ctx">Sin franjas con aforo</td><td>"No quedan cupos para ese día"</td><td class="acc">Probar otra fecha</td></tr>
+        <tr><td class="ctx">Sin noticias</td><td>"Aún no hay publicaciones"</td><td class="acc">—</td></tr>
+        <tr><td class="ctx">Bandeja de solicitudes vacía</td><td>"No hay solicitudes pendientes"</td><td class="acc">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ VERIFICACIÓN ============ -->
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <p class="sub">Solo los controles nuevos de este lote — Botón ya quedó verificado en el Lote 1.</p>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Botón de retroceso / acción en encabezado</td><td>ícono 22×22dp</td><td>48×48dp</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Acción compacta en encabezado admin</td><td>ícono 18×18dp</td><td>36×36dp visible, envuelto en fila de 64dp de alto</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Chip (las 3 variantes)</td><td>alto visible 32dp</td><td>fila con relleno hasta 48dp de alto</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Celda del selector de fecha</td><td>52×64dp</td><td>52×64dp — ya es el objetivo</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+            <tr><td>Acción "Ver calendario"</td><td>ícono 20×20dp + etiqueta</td><td>52×64dp, misma celda que los días</td><td><span class="badge badge-pass">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 2 (C-11, C-04, C-09, C-13)</span>
+    <span>Siguiente: Lote 3, cuando apruebes este</span>
+  </footer>
+</div>
