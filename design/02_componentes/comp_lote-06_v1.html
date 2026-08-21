@@ -1,0 +1,382 @@
+<title>Componentes Lote 6 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF; --pg-warning:#A87516; --pg-error:#A82A22;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px; padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color:var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border); border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1:0 1px 3px rgba(22,24,15,0.12); --dm-shadow-2:0 6px 18px rgba(22,24,15,0.20);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px; padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1:0 1px 3px rgba(0,0,0,0.45); --dm-shadow-2:0 6px 20px rgba(0,0,0,0.6);
+  }
+  .frame, .frame * { color:var(--dm-text); }
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color:var(--dm-text); font-weight:700; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif; font-weight:600; border-radius:var(--radius-m); border:1.5px solid transparent; white-space:nowrap; }
+  .btn-m { height:44px; padding:0 18px; font-size:14.5px; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-secundario { background:transparent; border-color:var(--dm-primary); color:var(--dm-primary); }
+
+  /* ================= C-28 ELEMENTO DE SOLICITUD ================= */
+  .req-item { border:1px solid var(--dm-border); border-radius:var(--radius-m); padding:12px; margin-bottom:12px; background:var(--dm-bg); }
+  .req-item:last-child { margin-bottom:0; }
+  .req-item.is-urgent { border-color:var(--dm-warning); background:color-mix(in srgb, var(--dm-warning) 8%, var(--dm-bg)); }
+  .req-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+  .req-date { font-size:14px; font-weight:700; }
+  .req-time { font-size:12px; color:var(--dm-text-2); }
+  .req-elapsed { font-size:11px; color:var(--dm-text-2); flex-shrink:0; white-space:nowrap; }
+  .req-mid { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .req-name { font-size:14px; font-weight:600; }
+  .req-people { font-size:12px; color:var(--dm-text-2); }
+  .req-bottom { display:flex; justify-content:space-between; align-items:center; }
+  .req-order { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--dm-primary); font-weight:600; }
+  .req-order svg { width:14px; height:14px; }
+  .req-total { font-size:14px; font-weight:700; }
+  .req-alert { display:flex; align-items:center; gap:6px; margin-top:8px; padding-top:8px; border-top:1px dashed var(--dm-border); font-size:11.5px; color:var(--dm-error); font-weight:600; }
+  .req-alert svg { width:14px; height:14px; flex-shrink:0; }
+
+  /* ================= C-14 ESTADO DE ERROR ================= */
+  .err-state { display:flex; flex-direction:column; align-items:center; text-align:center; padding:44px 20px; gap:12px; }
+  .err-icon { width:52px; height:52px; border-radius:999px; background:var(--dm-surface); display:flex; align-items:center; justify-content:center; }
+  .err-icon svg { width:24px; height:24px; color:var(--dm-text-2); }
+  .err-title { font-size:16px; font-weight:600; }
+  .err-desc { font-size:13px; color:var(--dm-text-2); max-width:26ch; }
+
+  /* ================= C-16 AVISO EN LÍNEA ================= */
+  .inline-alert { display:flex; align-items:flex-start; gap:10px; padding:11px 12px; border-radius:var(--radius-m); border-left:3px solid transparent; margin-bottom:12px; }
+  .inline-alert:last-child { margin-bottom:0; }
+  .inline-alert svg { width:18px; height:18px; flex-shrink:0; margin-top:1px; }
+  .inline-alert .txt { font-size:12.5px; line-height:18px; flex:1; }
+  .inline-alert .close-x { width:20px; height:20px; flex-shrink:0; opacity:.6; }
+  .inline-alert.info { background:var(--dm-surface); border-left-color:var(--dm-text-2); } .inline-alert.info svg { color:var(--dm-text-2); }
+  .inline-alert.atencion { background:color-mix(in srgb, var(--dm-warning) 12%, var(--dm-bg)); border-left-color:var(--dm-warning); } .inline-alert.atencion svg { color:var(--dm-warning); }
+  .inline-alert.error { background:color-mix(in srgb, var(--dm-error) 12%, var(--dm-bg)); border-left-color:var(--dm-error); } .inline-alert.error svg { color:var(--dm-error); }
+  .inline-alert.exito { background:color-mix(in srgb, var(--dm-success) 12%, var(--dm-bg)); border-left-color:var(--dm-success); } .inline-alert.exito svg { color:var(--dm-success); }
+
+  /* ================= C-15 ESQUELETO DE CARGA ================= */
+  .skeleton { background-color:var(--dm-border); border-radius:6px; background-image:
+    linear-gradient(90deg, var(--dm-border) 25%, color-mix(in srgb, var(--dm-border) 45%, var(--dm-bg)) 50%, var(--dm-border) 75%);
+    background-size:200% 100%; animation:sh 1.6s ease-in-out infinite; }
+  @keyframes sh { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; background-image:none; } }
+  .sk-card { border-radius:var(--radius-m); overflow:hidden; background:var(--dm-surface); margin-bottom:16px; }
+  .sk-card:last-child { margin-bottom:0; }
+  .sk-photo43 { aspect-ratio:4/3; }
+  .sk-photo169 { aspect-ratio:16/9; }
+  .sk-pad { padding:10px 12px; }
+  .sk-line { height:11px; margin-bottom:7px; border-radius:4px; }
+  .sk-w90 { width:90%; } .sk-w60 { width:60%; height:15px; } .sk-w40 { width:40%; margin-bottom:0; }
+  .sk-row { display:flex; gap:10px; align-items:center; }
+  .sk-circle { width:36px; height:36px; border-radius:999px; flex-shrink:0; }
+  .sk-grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .sk-slot { height:52px; border-radius:var(--radius-m); }
+  .sk-caption { font-size:11px; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge-tt { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; padding:3px 8px; border-radius:6px; background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 6</h1>
+      <p class="deck">Etapa 2 de 6. C-28 Elemento de solicitud, C-14 Estado de error, C-16 Aviso en línea y C-15 Esqueleto de carga.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>C-28 formaliza lo que ya vive en P-22.</b> Los otros tres son transversales — no
+      pertenecen a una pantalla, sino al vocabulario de "qué pasó" que reaparece en toda la
+      app: C-14 cuando algo se rompe de verdad (pantalla completa), C-16 cuando es un aviso
+      dentro de una pantalla que por lo demás funciona, y C-15 mientras se espera contenido
+      real. T-12 (señal débil en zona rural) es la razón por la que estos tres importan tanto
+      como cualquier pantalla "feliz".
+    </div>
+  </div>
+
+  <!-- ============ C-28 ELEMENTO DE SOLICITUD ============ -->
+  <section id="c-28">
+    <div class="section-head"><span class="section-num">C-28</span><h2>Elemento de solicitud</h2></div>
+    <p class="section-intro">Bandeja del dueño (P-22). Tres estados: pendiente simple, con pedido, y con alerta de cancelaciones previas — esta última añade una fila extra, no cambia el color de toda la tarjeta.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="req-item">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 5 min</span></div>
+            <div class="req-mid"><span class="req-name">Jorge Iván Salazar</span><span class="req-people">2 personas</span></div>
+            <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+          </div>
+          <span class="spec">pendiente, sin pedido</span>
+
+          <div class="req-item" style="margin-top:14px;">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">12:30 p. m.</span></div><span class="req-elapsed">hace 12 min</span></div>
+            <div class="req-mid"><span class="req-name">María Fernanda Ortiz</span><span class="req-people">4 personas</span></div>
+            <div class="req-bottom"><span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span><span class="req-total">$74.000</span></div>
+          </div>
+          <span class="spec">con pedido</span>
+
+          <div class="req-item is-urgent" style="margin-top:14px;">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 38 min</span></div>
+            <div class="req-mid"><span class="req-name">Carlos Andrés Muñoz</span><span class="req-people">6 personas</span></div>
+            <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+            <div class="req-alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>2 cancelaciones previas</div>
+          </div>
+          <span class="spec">con alerta de cancelaciones previas</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="req-item">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 5 min</span></div>
+            <div class="req-mid"><span class="req-name">Jorge Iván Salazar</span><span class="req-people">2 personas</span></div>
+            <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+          </div>
+          <span class="spec">pendiente, sin pedido</span>
+
+          <div class="req-item" style="margin-top:14px;">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">12:30 p. m.</span></div><span class="req-elapsed">hace 12 min</span></div>
+            <div class="req-mid"><span class="req-name">María Fernanda Ortiz</span><span class="req-people">4 personas</span></div>
+            <div class="req-bottom"><span class="req-order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Con pedido</span><span class="req-total">$74.000</span></div>
+          </div>
+          <span class="spec">con pedido</span>
+
+          <div class="req-item is-urgent" style="margin-top:14px;">
+            <div class="req-top"><div><span class="req-date">06/09/2026</span> <span class="req-time">1:00 p. m.</span></div><span class="req-elapsed">hace 38 min</span></div>
+            <div class="req-mid"><span class="req-name">Carlos Andrés Muñoz</span><span class="req-people">6 personas</span></div>
+            <div class="req-bottom"><span class="req-order" style="color:var(--dm-text-2);">Sin pedido</span></div>
+            <div class="req-alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>2 cancelaciones previas</div>
+          </div>
+          <span class="spec">con alerta de cancelaciones previas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-14 ESTADO DE ERROR ============ -->
+  <section id="c-14">
+    <div class="section-head"><span class="section-num">C-14</span><h2>Estado de error</h2></div>
+    <p class="section-intro">Pantalla completa, no un aviso dentro de otra cosa (eso es C-16). Sin permisos no lleva reintento — reintentar no cambia el rol del usuario.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="err-state">
+            <span class="err-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 12.5a10 10 0 0 1 3-2.1M19 12.5a10 10 0 0 0-3.4-2.4"/><path d="M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8a15 15 0 0 0-8.6-3.7"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></span>
+            <div class="err-title">Sin conexión</div>
+            <p class="err-desc">Revisa tu señal e intenta de nuevo. En zona rural puede tardar un poco.</p>
+            <button class="btn btn-m btn-primario">Reintentar</button>
+          </div>
+        </div>
+        <span class="spec">sin red · con reintento</span>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="err-state">
+            <span class="err-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            <div class="err-title">Algo salió mal</div>
+            <p class="err-desc">No pudimos cargar esta pantalla. Intenta de nuevo en un momento.</p>
+            <button class="btn btn-m btn-primario">Reintentar</button>
+          </div>
+        </div>
+        <span class="spec">error del servidor · con reintento</span>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="err-state">
+            <span class="err-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+            <div class="err-title">No tienes acceso a esta sección</div>
+            <p class="err-desc">Pídele al dueño que te dé el rol correcto.</p>
+          </div>
+        </div>
+        <span class="spec">sin permisos · sin reintento</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-16 AVISO EN LÍNEA ============ -->
+  <section id="c-16">
+    <div class="section-head"><span class="section-num">C-16</span><h2>Aviso en línea</h2></div>
+    <p class="section-intro">Cuatro tonos, borde izquierdo de 3dp como marca no-solo-color. Persistente no lleva "x"; descartable sí.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="inline-alert info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span class="txt">La zona Mirador se coordina aparte, por WhatsApp.</span>
+          </div>
+          <div class="inline-alert atencion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span class="txt">Entre semana solo se abre desde 15 personas.</span>
+            <svg class="close-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div class="inline-alert error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span class="txt">No pudimos enviar tu solicitud. Intenta de nuevo.</span>
+          </div>
+          <div class="inline-alert exito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>
+            <span class="txt">Ticket copiado al portapapeles.</span>
+            <svg class="close-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="spec">informativo (persistente) · atención (descartable) · error (persistente) · éxito (descartable)</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="inline-alert info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span class="txt">La zona Mirador se coordina aparte, por WhatsApp.</span>
+          </div>
+          <div class="inline-alert atencion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span class="txt">Entre semana solo se abre desde 15 personas.</span>
+            <svg class="close-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div class="inline-alert error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span class="txt">No pudimos enviar tu solicitud. Intenta de nuevo.</span>
+          </div>
+          <div class="inline-alert exito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg>
+            <span class="txt">Ticket copiado al portapapeles.</span>
+            <svg class="close-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span class="spec">informativo (persistente) · atención (descartable) · error (persistente) · éxito (descartable)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-15 ESQUELETO DE CARGA ============ -->
+  <section id="c-15">
+    <div class="section-head"><span class="section-num">C-15</span><h2>Esqueleto de carga</h2></div>
+    <p class="section-intro">Cuatro moldes, uno por cada lista que se carga en la app. Con señal débil (T-12) estos aparecen seguido — se diseñaron con el mismo cuidado que el estado con datos.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="variant-title"><span>Tarjeta de plato</span></div>
+          <div class="sk-card"><div class="skeleton sk-photo43"></div><div class="sk-pad"><div class="skeleton sk-line sk-w60"></div><div class="skeleton sk-line sk-w90"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+
+          <div class="variant-title"><span>Tarjeta de reserva</span></div>
+          <div class="sk-card"><div class="sk-pad"><div class="sk-row"><div class="skeleton sk-circle"></div><div style="flex:1;"><div class="skeleton sk-line sk-w60"></div><div class="skeleton sk-line sk-w40"></div></div></div></div></div>
+
+          <div class="variant-title"><span>Franjas horarias</span></div>
+          <div class="sk-card"><div class="sk-pad"><div class="sk-grid3"><div class="skeleton sk-slot"></div><div class="skeleton sk-slot"></div><div class="skeleton sk-slot"></div></div></div></div>
+
+          <div class="variant-title"><span>Noticia</span></div>
+          <div class="sk-card"><div class="skeleton sk-photo169"></div><div class="sk-pad"><div class="skeleton sk-line sk-w90"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="variant-title"><span>Tarjeta de plato</span></div>
+          <div class="sk-card"><div class="skeleton sk-photo43"></div><div class="sk-pad"><div class="skeleton sk-line sk-w60"></div><div class="skeleton sk-line sk-w90"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+
+          <div class="variant-title"><span>Tarjeta de reserva</span></div>
+          <div class="sk-card"><div class="sk-pad"><div class="sk-row"><div class="skeleton sk-circle"></div><div style="flex:1;"><div class="skeleton sk-line sk-w60"></div><div class="skeleton sk-line sk-w40"></div></div></div></div></div>
+
+          <div class="variant-title"><span>Franjas horarias</span></div>
+          <div class="sk-card"><div class="sk-pad"><div class="sk-grid3"><div class="skeleton sk-slot"></div><div class="skeleton sk-slot"></div><div class="skeleton sk-slot"></div></div></div></div>
+
+          <div class="variant-title"><span>Noticia</span></div>
+          <div class="sk-card"><div class="skeleton sk-photo169"></div><div class="sk-pad"><div class="skeleton sk-line sk-w90"></div><div class="skeleton sk-line sk-w40"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Botón "Reintentar" (C-14)</td><td>ancho auto × 44dp</td><td>44dp — <i>ver nota</i></td><td><span class="badge-tt" style="background:color-mix(in srgb, #A87516 16%, transparent); color:#A87516;">Revisar</span></td></tr>
+            <tr><td>Cerrar aviso en línea (C-16)</td><td>ícono 20×20dp</td><td>20dp — <i>ver nota</i></td><td><span class="badge-tt" style="background:color-mix(in srgb, #A87516 16%, transparent); color:#A87516;">Revisar</span></td></tr>
+            <tr><td>Elemento de solicitud (toda la tarjeta)</td><td>—</td><td>328dp de ancho, alto variable ≥ 64dp</td><td><span class="badge-tt">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ref-note" style="margin-top:14px; color:var(--pg-text-2); font-size:12.5px;">
+        Igual que en lotes anteriores: estos dos van a necesitar 48×48dp de área de toque real
+        en la implementación aunque el elemento visible se mantenga en su tamaño actual —
+        ajustar con relleno invisible (hit-slop), no agrandando el ícono o el botón.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 6 (C-28, C-14, C-16, C-15)</span>
+    <span>Siguiente: Lote 7 (el último)</span>
+  </footer>
+</div>

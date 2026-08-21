@@ -1,0 +1,409 @@
+<title>Componentes Lote 4 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF; --pg-warning:#A87516; --pg-error:#A82A22;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px; padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color:var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border); border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1:0 1px 3px rgba(22,24,15,0.12); --dm-shadow-2:0 6px 18px rgba(22,24,15,0.20);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px; padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1:0 1px 3px rgba(0,0,0,0.45); --dm-shadow-2:0 6px 20px rgba(0,0,0,0.6);
+  }
+  .frame, .frame * { color:var(--dm-text); }
+  .frame.flush { padding:0; }
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color:var(--dm-text); font-weight:700; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif; font-weight:600; border-radius:var(--radius-m); border:1.5px solid transparent; white-space:nowrap; }
+  .btn-m { height:48px; padding:0 16px; font-size:16px; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-secundario { background:transparent; border-color:var(--dm-primary); color:var(--dm-primary); }
+  .btn-texto { background:transparent; color:var(--dm-primary); padding:0 10px; }
+  .chip { display:inline-flex; align-items:center; gap:5px; height:32px; padding:0 13px; border-radius:var(--radius-s); font-size:12.5px; font-weight:600; background:var(--dm-surface); border:1.5px solid var(--dm-border); color:var(--dm-text-2); }
+  .chip.is-selected { background:var(--dm-primary); border-color:transparent; color:var(--dm-inverse); font-weight:700; }
+
+  /* ================= C-23 LÍNEA DE PEDIDO ================= */
+  .ol-select { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--dm-border); }
+  .ol-thumb { width:48px; height:48px; border-radius:var(--radius-s); flex-shrink:0; background:linear-gradient(135deg, color-mix(in srgb, var(--dm-primary) 32%, var(--dm-surface)), color-mix(in srgb, var(--dm-accent) 32%, var(--dm-surface))); }
+  .ol-body { flex:1; min-width:0; }
+  .ol-name { font-size:14.5px; font-weight:600; }
+  .ol-price { font-size:12.5px; color:var(--dm-text-2); }
+  .ol-note { font-size:11px; color:var(--dm-primary); font-style:italic; margin-top:2px; }
+  .stepper { display:inline-flex; align-items:center; border:1.5px solid var(--dm-border); border-radius:var(--radius-s); flex-shrink:0; }
+  .stepper button { width:32px; height:32px; display:flex; align-items:center; justify-content:center; }
+  .stepper button svg { width:14px; height:14px; }
+  .stepper .count { width:26px; text-align:center; font-size:14px; font-weight:700; }
+  .add-btn { flex-shrink:0; height:32px; padding:0 14px; border-radius:var(--radius-s); border:1.5px solid var(--dm-primary); color:var(--dm-primary); font-size:13px; font-weight:700; }
+
+  .ol-resumen { display:flex; align-items:flex-start; gap:8px; padding:9px 0; border-bottom:1px solid var(--dm-border); }
+  .ol-resumen .qty { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--dm-text-2); flex-shrink:0; width:26px; }
+  .ol-resumen .info { flex:1; }
+  .ol-resumen .name { font-size:13.5px; font-weight:600; }
+  .ol-resumen .price { font-size:13.5px; font-weight:600; flex-shrink:0; }
+  .ol-resumen .remove { width:32px; height:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--dm-text-2); }
+  .ol-resumen .remove svg { width:16px; height:16px; }
+
+  .ol-ticket { display:flex; justify-content:space-between; padding:5px 0; font-family:'JetBrains Mono',monospace; font-size:12.5px; }
+  .ol-ticket .n { color:var(--dm-text); }
+  .ol-ticket .note-ticket { color:var(--dm-text-2); font-size:11px; padding-left:14px; margin-top:-2px; margin-bottom:3px; }
+
+  /* ================= C-18 INDICADOR DE PASOS ================= */
+  .steps-bar { display:flex; gap:4px; margin-bottom:10px; }
+  .steps-bar .seg { flex:1; height:4px; border-radius:2px; background:var(--dm-border); }
+  .steps-bar .seg.done, .steps-bar .seg.current { background:var(--dm-primary); }
+  .steps-labels { display:flex; }
+  .steps-labels .lbl { flex:1; font-size:10.5px; color:var(--dm-text-2); text-align:center; }
+  .steps-labels .lbl.current { color:var(--dm-primary); font-weight:700; }
+  .steps-labels .lbl.done { color:var(--dm-text); font-weight:600; }
+
+  /* ================= C-08 FICHA DE FRANJA HORARIA ================= */
+  .slot-group-lbl { font-size:11px; font-weight:700; color:var(--dm-text-2); text-transform:uppercase; letter-spacing:.03em; margin:14px 0 8px; }
+  .slot-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
+  .slot { height:52px; border-radius:var(--radius-m); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; background:var(--dm-surface); border:1.5px solid var(--dm-border); font-size:13px; font-weight:600; }
+  .slot.is-selected { background:var(--dm-primary); border-color:transparent; color:var(--dm-inverse); box-shadow:var(--dm-shadow-1); }
+  .slot.is-full { background:transparent; border-color:var(--dm-border); color:var(--dm-inactive); }
+  .slot.is-full .sub { font-size:9.5px; }
+  .slot.is-closed { background:transparent; border:1.5px dashed var(--dm-border); color:var(--dm-inactive); opacity:.55; }
+  .slot .sub { font-size:10px; font-weight:500; color:var(--dm-text-2); }
+  .slot.is-selected .sub { color:var(--dm-inverse); opacity:.85; }
+
+  /* ================= C-12 HOJA MODAL INFERIOR ================= */
+  .sheet-demo { border-radius:20px 20px 0 0; background:var(--dm-bg); border:1px solid var(--dm-border); border-bottom:none; box-shadow:var(--dm-shadow-2); }
+  .sheet-handle { width:36px; height:4px; border-radius:999px; background:var(--dm-border); margin:10px auto 4px; }
+  .sheet-pad { padding:6px 18px 18px; }
+  .sheet-title { font-size:16px; font-weight:700; margin-bottom:12px; }
+  .filter-group-lbl { font-size:11.5px; font-weight:700; color:var(--dm-text-2); margin:12px 0 8px; }
+  .filter-group-lbl:first-child { margin-top:0; }
+  .radio-row { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--dm-border); }
+  .radio-row:last-child { border-bottom:none; }
+  .radio-dot { width:20px; height:20px; border-radius:999px; border:1.5px solid var(--dm-border); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .radio-row.is-selected .radio-dot { border-color:var(--dm-primary); }
+  .radio-row.is-selected .radio-dot::after { content:''; width:10px; height:10px; border-radius:999px; background:var(--dm-primary); }
+  .radio-row .lbl { font-size:14px; }
+  .sheet-actions-row { display:flex; gap:10px; margin-top:14px; }
+  .sheet-actions-row .btn { flex:1; }
+  .confirm-icon { width:44px; height:44px; border-radius:999px; background:color-mix(in srgb, var(--dm-warning) 16%, var(--dm-bg)); display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+  .confirm-icon svg { width:22px; height:22px; color:var(--dm-warning); }
+  .confirm-desc { font-size:13px; color:var(--dm-text-2); line-height:19px; margin-bottom:16px; }
+
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .verify-card .sub { font-size:13px; color:var(--pg-text-2); margin-bottom:18px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge-tt { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; padding:3px 8px; border-radius:6px; background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 4</h1>
+      <p class="deck">Etapa 2 de 6. C-23 Línea de pedido, C-18 Indicador de pasos, C-08 Ficha de franja horaria y C-12 Hoja modal inferior.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>Tres de estos cuatro ya se usaron</b> dentro de las pantallas de alta fidelidad
+      (P-07, P-08, P-22) antes de tener su propia lámina — acá quedan formalizados con la
+      matriz completa de variantes y estados, y el resto de la app los reutiliza tal cual.
+      C-08 (franja horaria) es el único nuevo de punta a punta, para P-06.
+    </div>
+  </div>
+
+  <!-- ============ C-23 LÍNEA DE PEDIDO ============ -->
+  <section id="c-23">
+    <div class="section-head"><span class="section-num">C-23</span><h2>Línea de pedido</h2></div>
+    <p class="section-intro">Tres variantes según dónde vive: <b>en selección</b> (P-07, interactiva), <b>en resumen</b> (P-08, editable pero sin stepper) y <b>en ticket</b> (P-09/P-22, solo lectura, tipografía monoespaciada como el resto de un comprobante).</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="variant-title"><span>En selección</span><span class="mono">P-07 · con y sin nota</span></div>
+          <div class="ol-select">
+            <div class="ol-thumb"></div>
+            <div class="ol-body"><div class="ol-name">Sancocho de gallina campesino</div><div class="ol-price">$38.000</div><div class="ol-note">Nota: sin cilantro</div></div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+          </div>
+          <div class="ol-select">
+            <div class="ol-thumb"></div>
+            <div class="ol-body"><div class="ol-name">Empanadas de pipián</div><div class="ol-price">$18.000</div></div>
+            <button class="add-btn">Agregar</button>
+          </div>
+
+          <div class="variant-title" style="margin-top:20px;"><span>En resumen</span><span class="mono">P-08 · editable, sin stepper</span></div>
+          <div class="ol-resumen">
+            <span class="qty">×2</span>
+            <div class="info"><div class="name">Empanadas de pipián</div><div class="ol-note">Nota: extra ají</div></div>
+            <span class="price">$36.000</span>
+            <span class="remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          </div>
+          <div class="ol-resumen">
+            <span class="qty">×1</span>
+            <div class="info"><div class="name">Sancocho de gallina campesino</div></div>
+            <span class="price">$38.000</span>
+            <span class="remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          </div>
+
+          <div class="variant-title" style="margin-top:20px;"><span>En ticket</span><span class="mono">P-09 / P-22 · solo lectura, mono</span></div>
+          <div class="ol-ticket"><span class="n">Empanadas de pipián ×2</span><span class="n">$36.000</span></div>
+          <div class="ol-ticket"><span class="n">Sancocho de gallina campesino ×1</span><span class="n">$38.000</span></div>
+          <div class="note-ticket">Nota: sin cilantro</div>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="variant-title"><span>En selección</span><span class="mono">P-07 · con y sin nota</span></div>
+          <div class="ol-select">
+            <div class="ol-thumb"></div>
+            <div class="ol-body"><div class="ol-name">Sancocho de gallina campesino</div><div class="ol-price">$38.000</div><div class="ol-note">Nota: sin cilantro</div></div>
+            <div class="stepper"><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></button><span class="count">1</span><button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg></button></div>
+          </div>
+          <div class="ol-select">
+            <div class="ol-thumb"></div>
+            <div class="ol-body"><div class="ol-name">Empanadas de pipián</div><div class="ol-price">$18.000</div></div>
+            <button class="add-btn">Agregar</button>
+          </div>
+
+          <div class="variant-title" style="margin-top:20px;"><span>En resumen</span><span class="mono">P-08 · editable, sin stepper</span></div>
+          <div class="ol-resumen">
+            <span class="qty">×2</span>
+            <div class="info"><div class="name">Empanadas de pipián</div><div class="ol-note">Nota: extra ají</div></div>
+            <span class="price">$36.000</span>
+            <span class="remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          </div>
+          <div class="ol-resumen">
+            <span class="qty">×1</span>
+            <div class="info"><div class="name">Sancocho de gallina campesino</div></div>
+            <span class="price">$38.000</span>
+            <span class="remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          </div>
+
+          <div class="variant-title" style="margin-top:20px;"><span>En ticket</span><span class="mono">P-09 / P-22 · solo lectura, mono</span></div>
+          <div class="ol-ticket"><span class="n">Empanadas de pipián ×2</span><span class="n">$36.000</span></div>
+          <div class="ol-ticket"><span class="n">Sancocho de gallina campesino ×1</span><span class="n">$38.000</span></div>
+          <div class="note-ticket">Nota: sin cilantro</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-18 INDICADOR DE PASOS ============ -->
+  <section id="c-18">
+    <div class="section-head"><span class="section-num">C-18</span><h2>Indicador de pasos</h2></div>
+    <p class="section-intro">Cuatro pasos del flujo de reserva. Ya vive en el encabezado de P-05 a P-08 sin etiquetas (por espacio); acá se documenta una vez con nombre completo por paso.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame" style="width:328px;">
+          <div class="steps-bar"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          <div class="steps-labels"><span class="lbl done">Fecha</span><span class="lbl done">Franja</span><span class="lbl current">Pedido</span><span class="lbl">Resumen</span></div>
+          <span class="spec" style="margin-top:14px;">paso 3 de 4 · completado / actual / pendiente</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark" style="width:328px;">
+          <div class="steps-bar"><span class="seg done"></span><span class="seg done"></span><span class="seg current"></span><span class="seg"></span></div>
+          <div class="steps-labels"><span class="lbl done">Fecha</span><span class="lbl done">Franja</span><span class="lbl current">Pedido</span><span class="lbl">Resumen</span></div>
+          <span class="spec" style="margin-top:14px;">paso 3 de 4 · completado / actual / pendiente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-08 FICHA DE FRANJA HORARIA ============ -->
+  <section id="c-08">
+    <div class="section-head"><span class="section-num">C-08</span><h2>Ficha de franja horaria</h2></div>
+    <p class="section-intro">P-06. Agrupadas por momento del servicio. <b>Sin aforo</b> es una franja normal que ya se llenó hoy; <b>fuera de horario</b> es una franja que este día ni siquiera se ofrece — por eso llevan tratamientos distintos, no serían el mismo problema para el comensal.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="slot-group-lbl">Almuerzo</div>
+          <div class="slot-grid">
+            <div class="slot">12:00 <span class="sub">p. m.</span></div>
+            <div class="slot is-selected">12:30 <span class="sub">p. m.</span></div>
+            <div class="slot is-full">1:00 <span class="sub">Sin cupo</span></div>
+            <div class="slot">1:30 <span class="sub">p. m.</span></div>
+            <div class="slot">2:00 <span class="sub">p. m.</span></div>
+            <div class="slot is-full">2:30 <span class="sub">Sin cupo</span></div>
+          </div>
+          <div class="slot-group-lbl">Tarde</div>
+          <div class="slot-grid">
+            <div class="slot">3:00 <span class="sub">p. m.</span></div>
+            <div class="slot">3:30 <span class="sub">p. m.</span></div>
+            <div class="slot is-closed">4:00 <span class="sub">Cerrado</span></div>
+          </div>
+          <span class="spec" style="margin-top:14px;">52dp de alto · radio/m 12dp · borde y superficie distinguen sin depender solo del color</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="slot-group-lbl">Almuerzo</div>
+          <div class="slot-grid">
+            <div class="slot">12:00 <span class="sub">p. m.</span></div>
+            <div class="slot is-selected">12:30 <span class="sub">p. m.</span></div>
+            <div class="slot is-full">1:00 <span class="sub">Sin cupo</span></div>
+            <div class="slot">1:30 <span class="sub">p. m.</span></div>
+            <div class="slot">2:00 <span class="sub">p. m.</span></div>
+            <div class="slot is-full">2:30 <span class="sub">Sin cupo</span></div>
+          </div>
+          <div class="slot-group-lbl">Tarde</div>
+          <div class="slot-grid">
+            <div class="slot">3:00 <span class="sub">p. m.</span></div>
+            <div class="slot">3:30 <span class="sub">p. m.</span></div>
+            <div class="slot is-closed">4:00 <span class="sub">Cerrado</span></div>
+          </div>
+          <span class="spec" style="margin-top:14px;">52dp de alto · radio/m 12dp · borde y superficie distinguen sin depender solo del color</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-12 HOJA MODAL INFERIOR ============ -->
+  <section id="c-12">
+    <div class="section-head"><span class="section-num">C-12</span><h2>Hoja modal inferior</h2></div>
+    <p class="section-intro">Tres variantes: <b>confirmación</b>, <b>filtros</b> y <b>selección</b>. Radio/l (20dp) en las esquinas superiores, elevación/2, siempre ancladas al fondo.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame flush" style="justify-content:flex-end; display:flex;">
+          <div class="sheet-demo" style="width:100%;">
+            <div class="sheet-handle"></div>
+            <div class="sheet-pad">
+              <span class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+              <div class="sheet-title">¿Cancelar la reserva?</div>
+              <p class="confirm-desc">Esta acción no se puede deshacer. Tu código ECC-4921 quedará cancelado.</p>
+              <div class="sheet-actions-row"><button class="btn btn-m btn-secundario">Volver</button><button class="btn btn-m btn-primario">Sí, cancelar</button></div>
+            </div>
+          </div>
+        </div>
+        <span class="spec">confirmación · P-10</span>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark flush" style="justify-content:flex-end; display:flex;">
+          <div class="sheet-demo" style="width:100%;">
+            <div class="sheet-handle"></div>
+            <div class="sheet-pad">
+              <div class="sheet-title">Filtrar</div>
+              <div class="filter-group-lbl">Categoría</div>
+              <div class="chip-row" style="display:flex;gap:8px;flex-wrap:wrap;"><span class="chip is-selected">Fuertes</span><span class="chip">Entradas</span><span class="chip">Postres</span></div>
+              <div class="filter-group-lbl">Etiqueta dietaria</div>
+              <div class="chip-row" style="display:flex;gap:8px;flex-wrap:wrap;"><span class="chip">Sin gluten</span><span class="chip is-selected">Vegetariano</span></div>
+              <div class="sheet-actions-row"><button class="btn btn-m btn-texto">Limpiar</button><button class="btn btn-m btn-primario">Aplicar filtros</button></div>
+            </div>
+          </div>
+        </div>
+        <span class="spec">filtros · P-03</span>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame flush" style="justify-content:flex-end; display:flex;">
+          <div class="sheet-demo" style="width:100%;">
+            <div class="sheet-handle"></div>
+            <div class="sheet-pad">
+              <div class="sheet-title">Ordenar por</div>
+              <div class="radio-row is-selected"><span class="radio-dot"></span><span class="lbl">Más recientes</span></div>
+              <div class="radio-row"><span class="radio-dot"></span><span class="lbl">Precio: menor a mayor</span></div>
+              <div class="radio-row"><span class="radio-dot"></span><span class="lbl">Precio: mayor a menor</span></div>
+            </div>
+          </div>
+        </div>
+        <span class="spec">selección · P-03, resultado de búsqueda</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERIFICACIÓN ============ -->
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Stepper (línea de pedido)</td><td>ícono 14×14dp</td><td>32×32dp — <i>ver nota</i></td><td><span class="badge-tt" style="background:color-mix(in srgb, #A87516 16%, transparent); color:#A87516;">Revisar</span></td></tr>
+            <tr><td>Quitar (línea en resumen)</td><td>ícono 16×16dp</td><td>32×32dp — <i>ver nota</i></td><td><span class="badge-tt" style="background:color-mix(in srgb, #A87516 16%, transparent); color:#A87516;">Revisar</span></td></tr>
+            <tr><td>Ficha de franja horaria</td><td>—</td><td>franja del grid ≥ 96×52dp (3 columnas en 328dp)</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Fila de radio (hoja de selección)</td><td>círculo 20×20dp</td><td>fila completa, alto 38dp — <i>ver nota</i></td><td><span class="badge-tt" style="background:color-mix(in srgb, #A87516 16%, transparent); color:#A87516;">Revisar</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ref-note" style="margin-top:14px; color:var(--pg-text-2); font-size:12.5px;">
+        Tres controles compactos por diseño (stepper y quitar dentro de una fila angosta de
+        328dp; la fila de radio prioriza legibilidad de lista sobre altura de fila). Ya se
+        marcaron así en el Lote 1 con el mismo criterio: van a necesitar 48×48dp reales de
+        área de toque en la implementación, aunque el elemento visible se mantenga compacto —
+        no ajustar el tamaño visual para "resolverlo", ajustar el hit-slop.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 4 (C-23, C-18, C-08, C-12)</span>
+    <span>Siguiente: Lote 5</span>
+  </footer>
+</div>
