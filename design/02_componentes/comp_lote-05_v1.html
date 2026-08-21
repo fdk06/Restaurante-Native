@@ -1,0 +1,354 @@
+<title>Componentes Lote 5 El Encanto Campestre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pg-bg:#FFFFFF; --pg-surface:#F6F5F1; --pg-border:#E2E2DA; --pg-text:#16180F; --pg-text-2:#5F6355;
+    --pg-primary:#4A5D3A; --pg-accent:#A2632E; --pg-inverse:#FFFFFF; --pg-warning:#A87516; --pg-error:#A82A22;
+    --radius-s:8px; --radius-m:12px; --radius-l:20px; --radius-full:999px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+  }
+  :root[data-theme="dark"] { --pg-bg:#12140F; --pg-surface:#1C1F19; --pg-border:#2C302A; --pg-text:#F0F1EA; --pg-text-2:#A5A99B; --pg-primary:#9CB584; --pg-accent:#D69A5E; --pg-inverse:#12140F; --pg-warning:#DFA945; --pg-error:#EF8880; }
+
+  * { box-sizing:border-box; }
+  html, body { background:var(--pg-bg); color:var(--pg-text); }
+  body { margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1160px; margin:0 auto; padding:40px 24px 96px; }
+  code, .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  p { margin:0; }
+
+  .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px; padding-bottom:28px; margin-bottom:20px; border-bottom:1px solid var(--pg-border); }
+  .eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--pg-accent); margin:0 0 10px; }
+  .masthead h1 { font-size:34px; font-weight:700; letter-spacing:-.01em; }
+  .masthead .deck { color:var(--pg-text-2); font-size:15px; margin-top:8px; max-width:52ch; }
+  .masthead .meta { font-size:12px; color:var(--pg-text-2); margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; }
+  .masthead .meta .mono { color:var(--pg-primary); }
+  .method-note { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:14px; padding:16px 20px; font-size:13.5px; color:var(--pg-text-2); margin-bottom:56px; display:flex; gap:10px; }
+  .method-note b { color:var(--pg-text); }
+
+  section { margin-top:72px; }
+  .section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  .section-num { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--pg-text-2); }
+  section > .section-head > h2 { font-size:22px; font-weight:700; }
+  .section-intro { color:var(--pg-text-2); font-size:14.5px; max-width:78ch; margin:14px 0 28px; }
+  .section-intro b { color:var(--pg-text); }
+  .scope-note { font-size:12.5px; color:var(--pg-text-2); background:var(--pg-surface); border:1px dashed var(--pg-border); border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:78ch; }
+  .variant-title { font-size:12px; font-weight:700; color:var(--dm-text-2); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .variant-title .mono { font-weight:500; }
+
+  .frame-row { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .frame-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .frame-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--pg-text-2); }
+  .frame {
+    --dm-bg:#FFFFFF; --dm-surface:#F6F5F1; --dm-border:#E2E2DA; --dm-text:#16180F; --dm-text-2:#5F6355;
+    --dm-primary:#4A5D3A; --dm-primary-soft:#EEF2E8; --dm-accent:#A2632E; --dm-inverse:#FFFFFF;
+    --dm-success:#2F6B45; --dm-warning:#A87516; --dm-error:#A82A22; --dm-inactive:#B4B4AA;
+    --dm-shadow-1:0 1px 3px rgba(22,24,15,0.12); --dm-shadow-2:0 6px 18px rgba(22,24,15,0.20);
+    width:360px; background:var(--dm-bg); border:1px solid var(--dm-border); border-radius:16px; padding:20px 16px; overflow:hidden;
+  }
+  .frame.dark {
+    --dm-bg:#12140F; --dm-surface:#1C1F19; --dm-border:#2C302A; --dm-text:#F0F1EA; --dm-text-2:#A5A99B;
+    --dm-primary:#9CB584; --dm-primary-soft:#232C1C; --dm-accent:#D69A5E; --dm-inverse:#12140F;
+    --dm-success:#6FB98C; --dm-warning:#DFA945; --dm-error:#EF8880; --dm-inactive:#55584F;
+    --dm-shadow-1:0 1px 3px rgba(0,0,0,0.45); --dm-shadow-2:0 6px 20px rgba(0,0,0,0.6);
+  }
+  .frame, .frame * { color:var(--dm-text); }
+  .spec { font-family:'JetBrains Mono',monospace; font-size:10.5px; line-height:1.5; color:var(--dm-text-2); text-align:center; margin-top:8px; }
+  .spec b { color:var(--dm-text); font-weight:700; }
+
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif; font-weight:600; border-radius:var(--radius-m); border:1.5px solid transparent; white-space:nowrap; }
+  .btn-m { height:48px; padding:0 16px; font-size:16px; }
+  .btn-primario { background:var(--dm-primary); color:var(--dm-inverse); }
+  .btn-secundario { background:transparent; border-color:var(--dm-primary); color:var(--dm-primary); }
+  .btn-destructivo { background:transparent; border-color:var(--dm-error); color:var(--dm-error); }
+
+  /* ================= C-24 RESUMEN DE TICKET ================= */
+  .ticket-card { border-radius:var(--radius-m); border:1px solid var(--dm-border); background:var(--dm-bg); overflow:hidden; }
+  .ticket-head { padding:12px 14px; border-bottom:1px dashed var(--dm-border); display:flex; justify-content:space-between; align-items:center; }
+  .ticket-head .code { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px; }
+  .ticket-body { padding:12px 14px; }
+  .ticket-row { display:flex; justify-content:space-between; padding:5px 0; font-family:'JetBrains Mono',monospace; font-size:12.5px; }
+  .ticket-row.meta .k { color:var(--dm-text-2); }
+  .ticket-row.meta .v { font-weight:700; }
+  .ticket-divider { border-top:1px dashed var(--dm-border); margin:8px 0; }
+  .ticket-total { display:flex; justify-content:space-between; font-weight:700; font-size:14px; padding-top:6px; }
+  .ticket-empty { padding:20px 14px; text-align:center; color:var(--dm-text-2); font-size:13px; }
+  .copy-btn { width:100%; height:44px; border-radius:0; border-top:1px solid var(--dm-border); background:var(--dm-surface); color:var(--dm-text);
+    font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .copy-btn svg { width:15px; height:15px; }
+
+  /* ================= C-29 INSTRUCCIONES DE PAGO ================= */
+  .pay-block { border-radius:var(--radius-m); background:var(--dm-surface); padding:14px; }
+  .pay-block .hd { font-size:13px; font-weight:700; margin-bottom:10px; }
+  .pay-step { display:flex; gap:10px; margin-bottom:10px; }
+  .pay-step:last-child { margin-bottom:0; }
+  .pay-step .n { width:20px; height:20px; border-radius:999px; background:var(--dm-primary); color:var(--dm-inverse); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+  .pay-step .t { font-size:12.5px; line-height:17px; color:var(--dm-text); }
+  .pay-methods { display:flex; gap:6px; margin-top:6px; }
+  .pay-methods span { font-size:10.5px; font-weight:700; padding:3px 8px; border-radius:6px; background:var(--dm-bg); border:1px solid var(--dm-border); }
+
+  /* ================= C-06 TARJETA DE RESERVA ================= */
+  .res-card { display:flex; gap:12px; padding:12px; border-radius:var(--radius-m); border:1px solid var(--dm-border); background:var(--dm-bg); margin-bottom:10px; box-shadow:var(--dm-shadow-1); }
+  .res-card:last-child { margin-bottom:0; }
+  .res-date { text-align:center; flex-shrink:0; width:40px; }
+  .res-date .d { font-size:18px; font-weight:700; line-height:20px; }
+  .res-date .m { font-size:10px; color:var(--dm-text-2); text-transform:uppercase; }
+  .res-info { flex:1; min-width:0; }
+  .res-info .t1 { font-size:14px; font-weight:600; }
+  .res-info .t2 { font-size:12px; color:var(--dm-text-2); font-family:'JetBrains Mono',monospace; margin-top:1px; }
+  .status { display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 10px; border-radius:999px; font-size:11.5px; font-weight:600; flex-shrink:0; align-self:flex-start; }
+  .status .dot { width:6px; height:6px; border-radius:999px; }
+  .status.st-atencion { background:color-mix(in srgb, var(--dm-warning) 16%, var(--dm-bg)); color:var(--dm-warning); } .status.st-atencion .dot { background:var(--dm-warning); }
+  .status.st-exito { background:color-mix(in srgb, var(--dm-success) 16%, var(--dm-bg)); color:var(--dm-success); } .status.st-exito .dot { background:var(--dm-success); }
+  .status.st-error { background:color-mix(in srgb, var(--dm-error) 16%, var(--dm-bg)); color:var(--dm-error); } .status.st-error .dot { background:var(--dm-error); }
+  .status.st-primario { background:var(--dm-primary-soft); color:var(--dm-primary); } .status.st-primario .dot { background:var(--dm-primary); }
+  .status.st-inactivo { background:var(--dm-surface); color:var(--dm-text-2); border:1px solid var(--dm-border); } .status.st-inactivo .dot { background:var(--dm-inactive); }
+
+  /* ================= C-22 DIÁLOGO DE CONFIRMACIÓN ================= */
+  .dialog-card { width:100%; border-radius:var(--radius-l); background:var(--dm-bg); border:1px solid var(--dm-border); box-shadow:var(--dm-shadow-2); padding:22px 20px; text-align:center; }
+  .dialog-icon { width:48px; height:48px; border-radius:999px; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; }
+  .dialog-icon.std { background:var(--dm-primary-soft); } .dialog-icon.std svg { color:var(--dm-primary); }
+  .dialog-icon.destr { background:color-mix(in srgb, var(--dm-error) 14%, var(--dm-bg)); } .dialog-icon.destr svg { color:var(--dm-error); }
+  .dialog-icon svg { width:24px; height:24px; }
+  .dialog-title { font-size:17px; font-weight:700; margin-bottom:8px; }
+  .dialog-desc { font-size:13.5px; color:var(--dm-text-2); line-height:19px; margin-bottom:18px; }
+  .dialog-actions { display:flex; gap:10px; }
+  .dialog-actions .btn { flex:1; }
+  .scrim { background:rgba(0,0,0,.45); border-radius:var(--radius-m); padding:24px 16px; display:flex; }
+
+  .verify-card { background:var(--pg-surface); border:1px solid var(--pg-border); border-radius:16px; padding:24px; }
+  .verify-card h3 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .table-scroll { overflow-x:auto; }
+  table.tt { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+  table.tt th, table.tt td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--pg-border); }
+  table.tt thead th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--pg-text-2); }
+  table.tt tbody tr:last-child td { border-bottom:none; }
+  .badge-tt { display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700; padding:3px 8px; border-radius:6px; background:color-mix(in srgb, #2F6B45 16%, transparent); color:#2F6B45; }
+
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--pg-border); font-size:12.5px; color:var(--pg-text-2); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Proyecto académico · App móvil</p>
+      <h1>Componentes — Lote 5</h1>
+      <p class="deck">Etapa 2 de 6. C-24 Resumen de ticket, C-29 Instrucciones de pago, C-06 Tarjeta de reserva y C-22 Diálogo de confirmación.</p>
+      <div class="meta"><span>El Encanto Campestre</span><span class="mono">v1 · 20/08/2026</span></div>
+    </div>
+  </header>
+
+  <div class="method-note">
+    <span>ℹ</span>
+    <div>
+      <b>C-24 y C-29 ya aparecían dentro de P-09</b> como parte del contenido de esa pantalla;
+      acá quedan aislados como piezas reutilizables — C-24 además gana la variante "del dueño"
+      (copiable, la que usa P-22) que P-09 no necesitaba. C-06 es la ficha que arma toda
+      P-04 y aporta la mitad de P-10; C-22 formaliza el patrón de diálogo destructivo que ya
+      insinuamos en el Lote 4 con "¿Cancelar la reserva?".
+    </div>
+  </div>
+
+  <!-- ============ C-24 RESUMEN DE TICKET ============ -->
+  <section id="c-24">
+    <div class="section-head"><span class="section-num">C-24</span><h2>Resumen de ticket</h2></div>
+    <p class="section-intro">Variante <b>del comensal</b> (P-09, sin acción de copiar) y <b>del dueño</b> (P-22, con botón "Copiar ticket"). Estados con pedido y sin pedido.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="variant-title"><span>Del comensal · con pedido</span><span class="mono">P-09</span></div>
+          <div class="ticket-card">
+            <div class="ticket-head"><span>Código</span><span class="code">ECC-4921</span></div>
+            <div class="ticket-body">
+              <div class="ticket-row meta"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="ticket-row meta"><span class="k">Franja</span><span class="v">12:30 p. m.</span></div>
+              <div class="ticket-row meta"><span class="k">Comensales</span><span class="v">4 personas</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-row"><span>Empanadas de pipián ×2</span><span>$36.000</span></div>
+              <div class="ticket-row"><span>Sancocho de gallina campesino ×1</span><span>$38.000</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-total"><span>Total</span><span>$74.000</span></div>
+            </div>
+          </div>
+          <span class="spec">sin acción de copiar — es informativo, no operativo</span>
+
+          <div class="variant-title" style="margin-top:20px;"><span>Del dueño · sin pedido</span><span class="mono">P-22 · copiable</span></div>
+          <div class="ticket-card">
+            <div class="ticket-head"><span>Código</span><span class="code">ECC-4988</span></div>
+            <div class="ticket-body">
+              <div class="ticket-row meta"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="ticket-row meta"><span class="k">Franja</span><span class="v">1:00 p. m.</span></div>
+              <div class="ticket-row meta"><span class="k">Comensales</span><span class="v">6 personas</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-empty">Sin pedido adjunto</div>
+            </div>
+            <button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copiar ticket</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="variant-title"><span>Del comensal · con pedido</span><span class="mono">P-09</span></div>
+          <div class="ticket-card">
+            <div class="ticket-head"><span>Código</span><span class="code">ECC-4921</span></div>
+            <div class="ticket-body">
+              <div class="ticket-row meta"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="ticket-row meta"><span class="k">Franja</span><span class="v">12:30 p. m.</span></div>
+              <div class="ticket-row meta"><span class="k">Comensales</span><span class="v">4 personas</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-row"><span>Empanadas de pipián ×2</span><span>$36.000</span></div>
+              <div class="ticket-row"><span>Sancocho de gallina campesino ×1</span><span>$38.000</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-total"><span>Total</span><span>$74.000</span></div>
+            </div>
+          </div>
+          <span class="spec">sin acción de copiar — es informativo, no operativo</span>
+
+          <div class="variant-title" style="margin-top:20px;"><span>Del dueño · sin pedido</span><span class="mono">P-22 · copiable</span></div>
+          <div class="ticket-card">
+            <div class="ticket-head"><span>Código</span><span class="code">ECC-4988</span></div>
+            <div class="ticket-body">
+              <div class="ticket-row meta"><span class="k">Fecha</span><span class="v">06/09/2026</span></div>
+              <div class="ticket-row meta"><span class="k">Franja</span><span class="v">1:00 p. m.</span></div>
+              <div class="ticket-row meta"><span class="k">Comensales</span><span class="v">6 personas</span></div>
+              <div class="ticket-divider"></div>
+              <div class="ticket-empty">Sin pedido adjunto</div>
+            </div>
+            <button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copiar ticket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-29 BLOQUE DE INSTRUCCIONES DE PAGO ============ -->
+  <section id="c-29">
+    <div class="section-head"><span class="section-num">C-29</span><h2>Bloque de instrucciones de pago</h2></div>
+    <p class="section-intro">Sin variantes ni estados — el mismo bloque de tres pasos en toda la app, con el monto y el número del dueño siempre inyectados por datos reales.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="pay-block">
+            <div class="hd">Cómo pagar</div>
+            <div class="pay-step"><span class="n">1</span><span class="t">Paga $74.000 por el medio que prefieras.<div class="pay-methods"><span>Efectivo</span><span>PSE</span><span>Nequi</span></div></span></div>
+            <div class="pay-step"><span class="n">2</span><span class="t">Nequi y PSE: 315 402 8871, a nombre de El Encanto Campestre.</span></div>
+            <div class="pay-step"><span class="n">3</span><span class="t">Envía el comprobante — incluye tu código automáticamente.</span></div>
+          </div>
+          <span class="spec">radio/m 12dp · fondo superficie/elevada · círculos de paso 20dp</span>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="pay-block">
+            <div class="hd">Cómo pagar</div>
+            <div class="pay-step"><span class="n">1</span><span class="t">Paga $74.000 por el medio que prefieras.<div class="pay-methods"><span>Efectivo</span><span>PSE</span><span>Nequi</span></div></span></div>
+            <div class="pay-step"><span class="n">2</span><span class="t">Nequi y PSE: 315 402 8871, a nombre de El Encanto Campestre.</span></div>
+            <div class="pay-step"><span class="n">3</span><span class="t">Envía el comprobante — incluye tu código automáticamente.</span></div>
+          </div>
+          <span class="spec">radio/m 12dp · fondo superficie/elevada · círculos de paso 20dp</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-06 TARJETA DE RESERVA ============ -->
+  <section id="c-06">
+    <div class="section-head"><span class="section-num">C-06</span><h2>Tarjeta de reserva</h2></div>
+    <p class="section-intro">Próxima y pasada comparten estructura; lo que cambia es cuáles de los siete estados pueden aparecer y si hay acciones al pie (resueltas en la pantalla, no en la tarjeta).</p>
+    <div class="scope-note">Los siete estados de reserva, uno por fila, ya que la tarjeta en sí no cambia de forma entre ellos — solo la insignia (C-07) y, en algunos, un dato adicional como el motivo de rechazo.</div>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro</span>
+        <div class="frame">
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-atencion"><span class="dot"></span>Solicitada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-exito"><span class="dot"></span>Confirmada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">03</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">6 personas · 1:00 p. m.</div><div class="t2">ECC-4877</div></div><span class="status st-error"><span class="dot"></span>Rechazada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-primario"><span class="dot"></span>En curso</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">30</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">2 personas · 11:00 a. m.</div><div class="t2">ECC-4802</div></div><span class="status st-inactivo"><span class="dot"></span>Cancelada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">23</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">3 personas · 6:00 p. m.</div><div class="t2">ECC-4715</div></div><span class="status st-error"><span class="dot"></span>No asistió</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">16</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">5 personas · 1:30 p. m.</div><div class="t2">ECC-4601</div></div><span class="status st-inactivo"><span class="dot"></span>Expirada</span></div>
+        </div>
+      </div>
+      <div class="frame-col">
+        <span class="frame-label">Oscuro</span>
+        <div class="frame dark">
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-atencion"><span class="dot"></span>Solicitada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-exito"><span class="dot"></span>Confirmada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">03</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">6 personas · 1:00 p. m.</div><div class="t2">ECC-4877</div></div><span class="status st-error"><span class="dot"></span>Rechazada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">06</div><div class="m">Sep</div></div><div class="res-info"><div class="t1">4 personas · 12:30 p. m.</div><div class="t2">ECC-4921</div></div><span class="status st-primario"><span class="dot"></span>En curso</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">30</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">2 personas · 11:00 a. m.</div><div class="t2">ECC-4802</div></div><span class="status st-inactivo"><span class="dot"></span>Cancelada</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">23</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">3 personas · 6:00 p. m.</div><div class="t2">ECC-4715</div></div><span class="status st-error"><span class="dot"></span>No asistió</span></div>
+          <div class="res-card"><div class="res-date"><div class="d">16</div><div class="m">Ago</div></div><div class="res-info"><div class="t1">5 personas · 1:30 p. m.</div><div class="t2">ECC-4601</div></div><span class="status st-inactivo"><span class="dot"></span>Expirada</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ C-22 DIÁLOGO DE CONFIRMACIÓN ============ -->
+  <section id="c-22">
+    <div class="section-head"><span class="section-num">C-22</span><h2>Diálogo de confirmación</h2></div>
+    <p class="section-intro">Estándar y destructivo. A diferencia de la hoja modal de confirmación (C-12, anclada al fondo), este diálogo es centrado y para decisiones que cortan el flujo por completo — como rechazar una solicitud.</p>
+    <div class="frame-row">
+      <div class="frame-col">
+        <span class="frame-label">Claro · estándar</span>
+        <div class="frame" style="align-items:center; display:flex;">
+          <div class="scrim" style="width:100%; align-items:center; justify-content:center;">
+            <div class="dialog-card">
+              <span class="dialog-icon std"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg></span>
+              <div class="dialog-title">¿Aprobar esta solicitud?</div>
+              <p class="dialog-desc">María Fernanda Ortiz recibirá una notificación de confirmación.</p>
+              <div class="dialog-actions"><button class="btn btn-m btn-secundario">Cancelar</button><button class="btn btn-m btn-primario">Aprobar</button></div>
+            </div>
+          </div>
+        </div>
+        <span class="spec">P-22 · confirmar aprobación</span>
+      </div>
+
+      <div class="frame-col">
+        <span class="frame-label">Oscuro · destructivo</span>
+        <div class="frame dark" style="align-items:center; display:flex;">
+          <div class="scrim" style="width:100%; align-items:center; justify-content:center;">
+            <div class="dialog-card">
+              <span class="dialog-icon destr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+              <div class="dialog-title">¿Rechazar esta solicitud?</div>
+              <p class="dialog-desc">Vas a poder escribir el motivo en el siguiente paso. El comensal lo verá.</p>
+              <div class="dialog-actions"><button class="btn btn-m btn-secundario">Volver</button><button class="btn btn-m btn-destructivo">Rechazar</button></div>
+            </div>
+          </div>
+        </div>
+        <span class="spec">P-22 · confirmar rechazo, previo al campo de motivo</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="verificacion">
+    <div class="section-head"><span class="section-num">05</span><h2>Verificación de área táctil</h2></div>
+    <div class="verify-card">
+      <h3>Los 48×48 dp mínimos, control por control</h3>
+      <div class="table-scroll">
+        <table class="tt">
+          <thead><tr><th>Control</th><th>Elemento visible</th><th>Área táctil real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Botón "Copiar ticket"</td><td>ancho completo × 44dp</td><td>328×44dp</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Tarjeta de reserva (toda la fila)</td><td>—</td><td>328×~64dp, toda la tarjeta es el objetivo</td><td><span class="badge-tt">Cumple</span></td></tr>
+            <tr><td>Botones del diálogo de confirmación</td><td>alto 48dp</td><td>48dp — mismo botón M de C-01</td><td><span class="badge-tt">Cumple</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Etapa 2 de 6 · Componentes — Lote 5 (C-24, C-29, C-06, C-22)</span>
+    <span>Siguiente: Lote 6</span>
+  </footer>
+</div>
