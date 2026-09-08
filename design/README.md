@@ -1,20 +1,24 @@
-# Carpeta de diseño
+# Carpeta de Diseño
 
-Espacio de trabajo para los entregables visuales del proyecto. La especificación completa está en `00_brief/Brief_Diseno_Wireframes.md`; este archivo solo explica dónde va cada cosa.
+Espacio de trabajo para los entregables visuales y la interfaz del proyecto. La especificación completa y los requisitos de cada pantalla están en `00_brief/Brief_Diseno_Wireframes.md`; aquí resumimos la organización de los archivos.
 
-## Estructura
+---
 
-| Carpeta | Qué se guarda aquí |
+## Estructura de carpetas
+
+| Carpeta | Qué guardamos aquí |
 |---|---|
-| `00_brief/` | El brief de diseño. Documento de entrada para la sesión de Claude Design |
-| `01_tokens/` | Paleta verificada, escala tipográfica, `tokens.css` y `tokens.json` |
-| `02_componentes/` | Una lámina por componente, con todas sus variantes y estados |
-| `03_wireframes/` | Una lámina por pantalla: baja fidelidad primero, alta fidelidad después |
-| `04_prototipo/` | Prototipo navegable en HTML autocontenido |
-| `05_exportes/` | Versiones listas para el informe y la sustentación (PNG a 2× o SVG) |
-| `_revisiones/` | Iteraciones descartadas, con una línea de motivo en el nombre o en una nota adjunta |
+| `00_brief/` | El brief de diseño con las pautas visuales y requisitos de interfaz |
+| `01_tokens/` | Paleta de color verificada, escala de tipografía y archivos `tokens.css` y `tokens.json` |
+| `02_componentes/` | Archivo HTML por componente, mostrando sus estados (activo, presionado, deshabilitado) |
+| `03_wireframes/` | Pantallas de la app: baja fidelidad inicial y alta fidelidad definitiva con sus capturas PNG |
+| `04_prototipo/` | Prototipo navegable en HTML para validar el flujo completo de la app |
+| `05_exportes/` | Imágenes finales listas para el informe escrito y la presentación de sustentación |
+| `_revisiones/` | Bocetos o pantallas anteriores que descartamos durante las revisiones |
 
-## Convención de nombres
+---
+
+## Convención para nombrar archivos
 
 | Tipo | Patrón | Ejemplo |
 |---|---|---|
@@ -22,23 +26,27 @@ Espacio de trabajo para los entregables visuales del proyecto. La especificació
 | Wireframe | `<ID>_<nombre>_v<n>_<tema>.<ext>` | `P-03_detalle-plato_v1_claro.png` |
 | Alta fidelidad | `<ID>_<nombre>_hf_v<n>_<tema>.<ext>` | `P-02_carta_hf_v1_oscuro.png` |
 
-`<tema>` toma los valores `claro` u `oscuro`. Se numera desde `v1` y no se sobrescribe: cada iteración incrementa el número y la anterior se mueve a `_revisiones/`.
+`<tema>` toma los valores `claro` u `oscuro`. Empezamos siempre desde `v1` y no sobreescribimos archivos: si hacemos cambios mayores aumentamos la versión y la anterior la pasamos a `_revisiones/`.
 
-## Orden de trabajo
+---
 
-1. Fichas de diseño → `01_tokens/`
-2. Componentes → `02_componentes/`
-3. Wireframes de baja fidelidad → `03_wireframes/`
-4. Alta fidelidad de las cinco pantallas principales → `03_wireframes/`
-5. Prototipo navegable → `04_prototipo/`
-6. Auditoría de accesibilidad y exportes → `05_exportes/`
+## Orden de trabajo que seguimos
 
-Cada etapa depende de la anterior. Los prompts para cada una están en la §7 del brief.
+1. Fichas y tokens de diseño (`01_tokens/`)
+2. Biblioteca de componentes base (`02_componentes/`)
+3. Wireframes en baja fidelidad (`03_wireframes/`)
+4. Pantallas en alta fidelidad (`03_wireframes/`)
+5. Prototipo navegable en HTML (`04_prototipo/`)
+6. Revisión de accesibilidad y exporte de imágenes (`05_exportes/`)
 
-## Antes de dar por cerrada una pantalla
+Cada etapa se apoya en la anterior. Los requerimientos específicos de cada pantalla están detallados en la sección 7 del brief.
 
-Contrastarla contra los criterios de aceptación de la §8 del brief. Los tres que con más frecuencia se pasan por alto:
+---
 
-- Los estados vacío, de carga y de error están diseñados, no solo el estado principal.
-- Ninguna información se transmite únicamente por color.
-- Todo control deshabilitado explica por qué lo está.
+## Lista de chequeo antes de cerrar una pantalla
+
+Antes de dar por terminada una pantalla, verificamos:
+
+* Que los estados vacío, de carga (esqueleto) y de error estén contemplados, no solo el estado con datos listos.
+* Que ninguna información dependa únicamente del color para entenderse.
+* Que cualquier botón o control deshabilitado explique claramente al usuario por qué no se puede presionar.
