@@ -120,19 +120,19 @@ Se aceptan las recomendaciones y se resuelven al final del proyecto, sin interfe
 
 ---
 
-## F · Diseño ⬜
+## F · Diseño ✅
 
-Bloque completo sin responder. Son decisiones de media hora que condicionan el trabajo de wireframes.
+Bloque completado y archivado en la carpeta `design/`.
 
-| # | Tema | Opciones | Recomendación | ✍ |
-|---|---|---|---|---|
-| F-1 | Herramienta de wireframes | Figma · Claude Design · papel | Claude Design, ya hay brief preparado | _____ |
-| F-2 | Fidelidad | Solo baja · baja para todas y alta para las principales | Baja para todas, alta para cinco | _____ |
-| F-3 | Fichas de diseño | — | Definir color, espaciado, radio y tipografía como valores nombrados antes de los componentes | _____ |
-| F-4 | Tema oscuro | Sí · no | Sí, desde el inicio | _____ |
-| F-5 | Estilo de la carta | Lista con foto a la izquierda · tarjetas con foto amplia | Tarjetas con foto amplia | _____ |
-| F-6 | Iconografía | — | Un solo conjunto, por ejemplo Lucide | _____ |
-| F-7 | Navegación | — | Cinco destinos inferiores según G-8: Carta · Reservas · **Noticias** (botón central) · Próximamente · Ajustes | _____ |
+| # | Tema | Opciones | Decisión tomada | Estado |
+|---|---|---|---|:---:|
+| F-1 | Herramienta de wireframes | Figma / Maquetación HTML / Papel | HTML autocontenido con diseño por fichas y exportes PNG | Completado |
+| F-2 | Fidelidad | Solo baja · baja para todas y alta para las principales | Componentes completos (29/29) y alta fidelidad en 5 pantallas clave (`P-01`, `P-02`, `P-07`, `P-09`, `P-22`) | ✅ |
+| F-3 | Fichas de diseño | — | Color, espaciado, radio y tipografía definidos en `tokens.json` y `tokens.css` | ✅ |
+| F-4 | Tema oscuro | Sí · no | Sí, claro y oscuro con verificación WCAG AA | ✅ |
+| F-5 | Estilo de la carta | Lista con foto a la izquierda · tarjetas con foto amplia | Tarjetas con foto amplia 4:3 y precio destacado | ✅ |
+| F-6 | Iconografía | — | Conjunto Lucide Icons (24 dp, trazo 1.5–2 px) | ✅ |
+| F-7 | Navegación | — | Cinco destinos: Carta · Reservas · **Noticias** (botón central elevado) · Próximamente · Ajustes | ✅ |
 
 ---
 
@@ -173,7 +173,7 @@ Nada de esto bloquea empezar a programar, pero sí conviene resolverlo antes del
 | H-5 ⬜ | ¿La adición de platos tras la confirmación se hace en la app o por WhatsApp? | Define si el pedido es editable después de aprobado |
 | H-6 ⬜ | ¿Las noticias generan notificación push? | Afecta el módulo de notificaciones del Sprint 5 |
 | H-7 ⬜ | ¿El calendario anual se marca día por día o por reglas (todos los domingos, festivos)? | Marcar 365 días a mano es inviable; por reglas es más trabajo de interfaz |
-| H-8 ⬜ | Bloque F completo | Condiciona el arranque de los wireframes |
+| H-8 ✅ | Bloque F completo | ✅ Resuelto y cerrado en la carpeta `design/` |
 | H-9 ⬜ | C-20, G-9, G-10, G-14 | Ver notas en sus filas |
 
 ---

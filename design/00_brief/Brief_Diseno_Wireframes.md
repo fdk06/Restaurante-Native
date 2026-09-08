@@ -1,7 +1,7 @@
 # Brief de diseño — wireframes, componentes y sistema visual
 ### App móvil — El Encanto Campestre
 **Versión:** 0.2 · **Actualizado:** 20 de agosto de 2026
-**Documento de entrada para:** Claude Design · **Fuente:** `Sprint0_Analisis_y_Diseno.md` v0.2
+**Documento base para:** Sistema de Diseño e Interfaces · **Fuente:** `Sprint0_Analisis_y_Diseno.md` v0.2
 
 ---
 
@@ -20,10 +20,10 @@
 
 Cada etapa depende de la anterior. Saltarse una obliga a rehacer trabajo.
 
-### 0.2 Mecánica
+### 0.2 Metodología de trabajo
 
-1. Pegar **§1** una sola vez al inicio de la sesión.
-2. Avanzar con los prompts de **§7**, uno por mensaje. No pedir varias pantallas en el mismo mensaje.
+1. Revisar la sección 1 para tener presente el contexto del restaurante.
+2. Avanzar con las especificaciones de la sección 7 en orden, etapa por etapa.
 3. Contrastar cada resultado contra **§8** antes de continuar.
 4. Guardar con la convención de **§0.3**. Las versiones descartadas van a `_revisiones/` con una línea de motivo.
 
@@ -509,21 +509,21 @@ Variantes del componente C-13: ícono o ilustración, título, una línea de exp
 
 ---
 
-## 7. Prompts listos para pegar
+## 7. Especificaciones técnicas por etapa
 
-Enviar uno por mensaje, en orden, después del contexto base de §1.
+Guía de requerimientos visuales organizada en el orden de maquetación del proyecto.
 
-### Prompt 1 — Fichas de diseño
+### Etapa 7.1 - Fichas de diseño
 
 ```
-ETAPA 1 · FICHAS DE DISEÑO
+ETAPA 1: FICHAS DE DISEÑO
 
 Construye el sistema de fichas de diseño (design tokens) en tema claro y oscuro, a partir
 de estos valores de partida:
 
-[Pegar §4.1, §4.2 y §4.3]
+[Ver §4.1, §4.2 y §4.3]
 
-Entrega:
+Entregables:
 1. Lámina con la paleta completa: nombre de cada ficha, valor en ambos temas y relación de
    contraste contra la superficie sobre la que se usa.
 2. La escala tipográfica aplicada sobre texto real en español, con nombres de platos
@@ -533,60 +533,60 @@ Entrega:
 
 Verifica y reporta el contraste de texto/primario y texto/secundario sobre
 superficie/fondo y superficie/elevada, y de texto/inverso sobre marca/primario, en ambos
-temas. Si algún par no llega a 4.5:1, ajústalo y dime qué cambiaste.
+temas. Si algún par no llega a 4.5:1, se debe ajustar.
 
 Entrega como HTML autocontenido.
 ```
 
-### Prompt 2 — Componentes
+### Etapa 7.2 - Componentes
 
 ```
-ETAPA 2 · COMPONENTES
+ETAPA 2: COMPONENTES
 
 Usando las fichas de la etapa anterior, construye la biblioteca de componentes:
 
-[Pegar §5]
+[Ver §5]
 
-Trabajemos por lotes de cuatro. Empieza por C-01, C-02, C-05 y C-10 (la barra de cinco
-destinos con botón central es el componente de mayor riesgo, prefiero verlo temprano).
+Trabajamos por lotes de cuatro. Empezamos por C-01, C-02, C-05 y C-10 (la barra de cinco
+destinos con botón central es el componente prioritario).
 
 Para cada componente entrega una lámina con todas sus variantes y estados, en tema claro
 y oscuro, sobre lienzo de 360 dp de ancho. Junto a cada variante, su nombre de ficha y
 las medidas relevantes: altura, relleno interno, radio.
 
-Verifica que todo control interactivo alcance 48×48 dp de área táctil, aunque su elemento
+Verifica que todo control interactivo alcance 48x48 dp de área táctil, aunque su elemento
 visible sea más pequeño.
 
 Entrega cada lote como HTML autocontenido.
 ```
 
-### Prompt 3 — Wireframes de baja fidelidad
+### Etapa 7.3 - Wireframes de baja fidelidad
 
 ```
-ETAPA 3 · WIREFRAME
+ETAPA 3: WIREFRAME
 
 Diseña el wireframe de baja fidelidad de esta pantalla. Escala de grises, marcadores de
 posición en lugar de fotografías, contenido textual real en español.
 
-[Pegar la ficha completa de la pantalla, de §6]
+[Ver la ficha completa de la pantalla, en §6]
 
-Entrega:
+Entregables:
 1. El estado principal.
 2. Cada estado listado en la ficha, como lámina separada y rotulada.
 3. Anotaciones numeradas con las decisiones de disposición y su motivo.
 
-Lienzo 360×800 dp. Respeta las restricciones T-1 a T-12 del brief.
+Lienzo 360x800 dp. Respeta las restricciones T-1 a T-12 del brief.
 Entrega como HTML autocontenido con las láminas una debajo de otra.
 ```
 
-> Orden sugerido: **P-01, P-02, P-07, P-09, P-22** primero (son las que más pueden salir mal), luego P-05, P-06, P-08, P-04, P-10, P-11, P-26, P-27, y después el resto.
+> Orden sugerido: **P-01, P-02, P-07, P-09, P-22** primero (pantallas clave), luego P-05, P-06, P-08, P-04, P-10, P-11, P-26, P-27, y después el resto.
 
-### Prompt 4 — Alta fidelidad
+### Etapa 7.4 - Alta fidelidad
 
 ```
-ETAPA 4 · ALTA FIDELIDAD
+ETAPA 4: ALTA FIDELIDAD
 
-Convierte el wireframe aprobado de <ID · nombre> en alta fidelidad, aplicando las fichas
+Convierte el wireframe aprobado en alta fidelidad, aplicando las fichas
 y los componentes de las etapas 1 y 2.
 
 Contenido verosímil de un restaurante campestre del Cauca: nombres de platos reales,
@@ -594,38 +594,37 @@ precios en pesos colombianos con separador de miles, sin decimales y sin impuest
 descripciones de una o dos líneas en español natural.
 
 Entrega tema claro y oscuro, más los estados vacío, de carga y de error.
-Lienzo 360×800 dp. HTML autocontenido.
+Lienzo 360x800 dp. HTML autocontenido.
 ```
 
-### Prompt 5 — Prototipo navegable
+### Etapa 7.5 - Prototipo navegable
 
 ```
-ETAPA 5 · PROTOTIPO
+ETAPA 5: PROTOTIPO
 
 Une los mockups de alta fidelidad en un prototipo navegable de una sola página, con las
 transiciones de este mapa:
 
-[Pegar §13.3 del documento de Sprint 0]
+[Ver §13.3 del documento de Sprint 0]
 
-Debe permitir recorrer completo: Carta → Detalle de plato → Reservar paso 1 → 2 → 3 → 4
-→ Solicitud enviada → Mis reservas → Detalle de reserva. Y por separado: Noticias →
-Detalle, y Ajustes → Administración → Solicitudes → aprobar.
+Debe permitir recorrer completo: Carta -> Detalle de plato -> Reservar paso 1 -> 2 -> 3 -> 4
+-> Solicitud enviada -> Mis reservas -> Detalle de reserva. Y por separado: Noticias ->
+Detalle, y Ajustes -> Administración -> Solicitudes -> aprobar.
 
 Incluye conmutador de tema claro/oscuro y conmutador de rol comensal/dueño que revele el
 acceso a Administración.
 
-Entrega como un único HTML autocontenido que pueda abrir en el teléfono.
+Entrega como un único HTML autocontenido que pueda abrirse en el teléfono.
 ```
 
-### Prompt 6 — Auditoría
+### Etapa 7.6 - Auditoría y verificación
 
 ```
-ETAPA 6 · REVISIÓN
+ETAPA 6: REVISIÓN Y ACCESIBILIDAD
 
-Revisa todas las pantallas producidas contra esta lista y repórtame cada incumplimiento
-con la pantalla, el elemento y la corrección propuesta:
+Revisa todas las pantallas producidas contra esta lista y documenta cada corrección:
 
-[Pegar §8]
+[Ver §8]
 ```
 
 ---
