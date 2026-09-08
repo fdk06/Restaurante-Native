@@ -858,7 +858,7 @@ flowchart LR
     P30 -.acción sensible.-> P32["P-32 TOTP"]
 ```
 
-> La especificación pantalla por pantalla —objetivo, datos, estructura, estados y prompts de trabajo— está en `Brief_Diseno_Wireframes.md`. Los resultados se archivan en `design/`.
+> La especificación pantalla por pantalla (objetivo, datos, estructura y estados) está en `Brief_Diseno_Wireframes.md`. Los resultados se archivan en `design/`.
 
 ---
 
