@@ -1,0 +1,61 @@
+{
+  "tabs": {
+    "menu": "Carta",
+    "reservations": "Reservas",
+    "news": "Noticias",
+    "upcoming": "Próximamente",
+    "settings": "Ajustes"
+  },
+  "menu": {
+    "title": "Carta Campestre",
+    "subtitle": "Platos preparados con sazón tradicional caucana",
+    "nextOpenDay": "Próximo día de atención",
+    "schedule": "Domingos y festivos de 10:00 a 17:00",
+    "badgeAvailable": "Disponible hoy",
+    "badgeUnavailable": "No disponible para esta fecha",
+    "emptyState": "No encontramos platos para la fecha seleccionada"
+  },
+  "reservations": {
+    "title": "Mis Reservas",
+    "subtitle": "Consulta el estado de tus solicitudes o programa tu visita",
+    "btnNewReservation": "Solicitar nueva reserva",
+    "tabUpcoming": "Próximas",
+    "tabHistory": "Historial",
+    "emptyUpcoming": "No tienes reservas programadas",
+    "emptyHistory": "Aún no tienes reservas en el historial"
+  },
+  "news": {
+    "title": "Muro del Encanto",
+    "subtitle": "Noticias, eventos y novedades de la vereda Las Huacas",
+    "pinned": "Fijada",
+    "emptyState": "No hay publicaciones recientes"
+  },
+  "upcoming": {
+    "title": "Próximamente en El Encanto",
+    "subtitle": "Nuevas experiencias campestres que estamos preparando",
+    "motocrossTitle": "Pista de Motocross y Enduro",
+    "motocrossDesc": "Circuito campestre para entrenamiento y eventos de velocidad.",
+    "fishingTitle": "Zona de Pesca Deportiva",
+    "fishingDesc": "Lagos preparados para descanso familiar y pesca deportiva.",
+    "inquiryNote": "Para más información y convenios para grupos, escríbenos directamente por WhatsApp."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "appearance": "Apariencia",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo oscuro",
+    "themeSystem": "Predeterminado del sistema",
+    "language": "Idioma",
+    "langSpanish": "Español",
+    "contact": "Contacto y ubicación",
+    "location": "Vereda Las Huacas, Timbío, Cauca",
+    "version": "Versión 1.0.0 (Sprint 1)"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error inesperado",
+    "retry": "Reintentar",
+    "back": "Atrás",
+    "close": "Cerrar"
+  }
+}
