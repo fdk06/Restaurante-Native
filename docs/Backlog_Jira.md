@@ -70,7 +70,7 @@ Cumplir la condicion del cliente de que ningun texto de interfaz este escrito en
 - [x] Existe una verificacion o convencion documentada para detectar literales antes de integrar
 - [x] Los formatos de moneda (COP sin decimales) y fecha (dd/mm/aaaa) estan centralizados en utilidades
 
-### Inicializar la API NestJS en contenedor
+### [x] Inicializar la API NestJS en contenedor
 
 `Sprint 1` · `5 pts` · `Highest` · `backend,infra` · `RNF-12, ADR-008`
 
@@ -78,10 +78,10 @@ Que el backend corra igual en la maquina de cualquier integrante y en la VPS.
 
 **Criterios de aceptación**
 
-- El proyecto NestJS arranca con Dockerfile y docker-compose
-- Swagger expone la especificacion en /api/docs
-- Existe un filtro global de excepciones con respuesta uniforme
-- El prefijo de rutas es /api/v1
+- [x] El proyecto NestJS arranca con Dockerfile y docker-compose
+- [x] Swagger expone la especificacion en /api/docs
+- [x] Existe un filtro global de excepciones con respuesta uniforme
+- [x] El prefijo de rutas es /api/v1
 
 ### Definir el esquema de Prisma y aplicar la primera migracion
 
@@ -131,7 +131,7 @@ Registro, inicio de sesión, sesión persistente, verificación de correo y recu
 
 _3 historias · 18 puntos_
 
-### Implementar registro, inicio de sesion, refresco y cierre de sesion
+### [x] Implementar registro, inicio de sesion, refresco y cierre de sesion
 
 `Sprint 1` · `8 pts` · `Highest` · `backend,movil` · `RF-AUT01, RF-AUT03, RF-AUT04`
 
@@ -139,11 +139,11 @@ Que una persona pueda crear su cuenta y entrar a la aplicacion.
 
 **Criterios de aceptación**
 
-- El registro pide nombre, correo, telefono y contrasena, y valida en linea
-- Las contrasenas se almacenan con Argon2id
-- El inicio de sesion emite un token de acceso corto y un token de refresco rotatorio
-- El cierre de sesion invalida el token de refresco de ese dispositivo
-- El error de credenciales no revela cual de los dos campos fallo
+- [x] El registro pide nombre, correo, telefono y contrasena, y valida en linea
+- [x] Las contrasenas se almacenan con Argon2id
+- [x] El inicio de sesion emite un token de acceso corto y un token de refresco rotatorio
+- [x] El cierre de sesion invalida el token de refresco de ese dispositivo
+- [x] El error de credenciales no revela cual de los dos campos fallo
 
 ### Guardar el token de refresco de forma segura y renovar la sesion sin friccion
 
