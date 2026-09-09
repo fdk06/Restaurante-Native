@@ -16,6 +16,7 @@ async function enableRLS() {
 
   const tables = [
     'usuarios',
+    'tokens_refresco',
     'restaurantes',
     'zonas',
     'mesas',
