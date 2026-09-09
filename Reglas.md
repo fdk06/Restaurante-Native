@@ -6,9 +6,9 @@ Este documento reúne las pautas obligatorias que acordamos en el equipo para tr
 
 ## 1. Estabilidad de la rama `main`
 
-* **Todo lo que esté en `main` debe funcionar al 100%:** Las funcionalidades presentadas en la rama `main` deben estar completas y sin errores de backend, frontend ni base de datos.
-* **Cero código roto:** No se sube código a medias, funciones a medio terminar o pantallas que tiren error en consola. Si algo todavía no funciona o está en pruebas, se trabaja en rama propia y solo se une a `main` cuando esté probado y verificado.
-* **Pruebas antes de integrar:** Antes de hacer merge a `main`, el integrante responsable debe verificar que el proyecto compile, que el contenedor o la base de datos levanten sin fallos y que la app móvil corra sin caerse.
+- **Todo lo que esté en `main` debe funcionar al 100%:** Las funcionalidades presentadas en la rama `main` deben estar completas y sin errores de backend, frontend ni base de datos.
+- **Cero código roto:** No se sube código a medias, funciones a medio terminar o pantallas que tiren error en consola. Si algo todavía no funciona o está en pruebas, se trabaja en rama propia y solo se une a `main` cuando esté probado y verificado.
+- **Pruebas antes de integrar:** Antes de hacer merge a `main`, el integrante responsable debe verificar que el proyecto compile, que el contenedor o la base de datos levanten sin fallos y que la app móvil corra sin caerse.
 
 ---
 
@@ -16,27 +16,28 @@ Este documento reúne las pautas obligatorias que acordamos en el equipo para tr
 
 Para que el historial de Git sea transparente y sepamos exactamente quién hizo cada cosa y por qué, definimos:
 
-* **Responsabilidad única:** Cada commit debe resolver una sola cosa específica. No mezclar ajustes de diseño con cambios de base de datos o lógica de autenticación en un mismo commit.
-* **Formato del mensaje de commit:** El mensaje debe iniciar obligatoriamente con el nombre de quien está trabajando, seguido de lo que hizo en minúsculas y separado por barra:
-  * `yeison/{lo que está haciendo}`
-  * `alex/{lo que está haciendo}`
-  * `fabian/{lo que está haciendo}`
+- **Responsabilidad única:** Cada commit debe resolver una sola cosa específica. No mezclar ajustes de diseño con cambios de base de datos o lógica de autenticación en un mismo commit.
+- **Formato del mensaje de commit:** El mensaje debe iniciar obligatoriamente con el nombre de quien está trabajando, seguido de lo que hizo en minúsculas y separado por barra:
+  - `yeison/{lo que está haciendo}`
+  - `alex/{lo que está haciendo}`
+  - `fabian/{lo que está haciendo}`
 
 ### Ejemplos válidos:
-* `yeison/inicializa-proyecto-react-native-con-cinco-tabs`
-* `alex/configura-docker-compose-y-swagger-en-api`
-* `fabian/crea-esquema-prisma-con-18-entidades-y-primera-migracion`
-* `yeison/conecta-almacenamiento-de-tokens-en-keystore`
-* `alex/crea-endpoints-de-registro-y-login-con-argon2id`
-* `fabian/agrega-datos-de-prueba-en-seed-con-platos-y-mesas`
+
+- `yeison/inicializa-proyecto-react-native-con-cinco-tabs`
+- `alex/configura-docker-compose-y-swagger-en-api`
+- `fabian/crea-esquema-prisma-con-18-entidades-y-primera-migracion`
+- `yeison/conecta-almacenamiento-de-tokens-en-keystore`
+- `alex/crea-endpoints-de-registro-y-login-con-argon2id`
+- `fabian/agrega-datos-de-prueba-en-seed-con-platos-y-mesas`
 
 ---
 
 ## 3. Estilo de Redacción: Primera Persona y Lenguaje Humano
 
-* **Escribir en primera persona:** Tanto en la documentación de soporte como en notas y comentarios, escribimos de forma natural y cercana (en primera persona singular o plural: *"hice"*, *"creé"*, *"definimos"*, *"probamos"*).
-* **Evitar lenguaje acartonado o generado por IA:** Nada de textos inflados con palabras como "apalancar", "sinergia", "holístico", "sin fricción", ni párrafos mecánicos con guiones largos excesivos (`—`) o listas infinitas de emojis.
-* **Tono directo y coloquial:** Explicamos las cosas como las hablaríamos en el salón de clase o en una reunión técnica entre nosotros: con palabras claras, directas y al grano.
+- **Escribir en primera persona:** Tanto en la documentación de soporte como en notas y comentarios, escribimos de forma natural y cercana (en primera persona singular o plural: _"hice"_, _"creé"_, _"definimos"_, _"probamos"_).
+- **Evitar lenguaje acartonado o generado por IA:** Nada de textos inflados con palabras como "apalancar", "sinergia", "holístico", "sin fricción", ni párrafos mecánicos con guiones largos excesivos (`—`) o listas infinitas de emojis.
+- **Tono directo y coloquial:** Explicamos las cosas como las hablaríamos en el salón de clase o en una reunión técnica entre nosotros: con palabras claras, directas y al grano.
 
 ---
 
@@ -44,10 +45,11 @@ Para que el historial de Git sea transparente y sepamos exactamente quién hizo 
 
 Todos los archivos de código (React Native, NestJS, Prisma, utilidades) deben tener comentarios bien explicativos, redactados de forma simple y en primera persona, sin tecnicismos innecesarios.
 
-* **Comentar funciones simples y complejas:** No asumir que el código se explica solo. Si creamos una función para formatear precios, explicamos qué recibe y qué devuelve. Si hacemos una consulta con transacción o validación recursiva, explicamos el motivo y los pasos.
-* **Explicar el por qué:** Más que decir *"suma A más B"*, explicar *"sumo los precios para mostrar el subtotal antes de enviar la reserva"*.
+- **Comentar funciones simples y complejas:** No asumir que el código se explica solo. Si creamos una función para formatear precios, explicamos qué recibe y qué devuelve. Si hacemos una consulta con transacción o validación recursiva, explicamos el motivo y los pasos.
+- **Explicar el por qué:** Más que decir _"suma A más B"_, explicar _"sumo los precios para mostrar el subtotal antes de enviar la reserva"_.
 
 ### Ejemplo de cómo comentamos en Backend:
+
 ```javascript
 // con esta función valido que el usuario me haya mandado todos los campos obligatorios
 function validarCamposRegistro(datos) {
@@ -66,6 +68,7 @@ async function hashearPassword(passwordPlana) {
 ```
 
 ### Ejemplo de cómo comentamos en Móvil (React Native):
+
 ```javascript
 // aquí guardo el token de refresco en el llavero seguro del celular para no perder la sesión
 async function guardarSesionSegura(refreshToken) {
