@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ../../
+      dockerfile: apps/api/Dockerfile
+    container_name: encanto_api_dev
+    ports:
+      - '3000:3000'
+    volumes:
+      # Montamos el código fuente de la API y de shared para hot-reload
+      - ../../apps/api:/usr/src/app/apps/api
+      - ../../packages/shared:/usr/src/app/packages/shared
+      # Ignoramos node_modules local para usar el del contenedor (opcional)
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development

@@ -1,0 +1,506 @@
+// ==============================================================================
+// ESQUEMA DE BASE DE DATOS - RESTAURANTE EL ENCANTO CAMPESTRE
+// Autor: Fabián Hoyos (Infraestructura, Datos y Seguridad)
+// Proyecto: Restaurante Campestre en Timbío, Cauca
+//
+// En este archivo defino las 18 entidades completas del modelo relacional
+// según lo acordado en Sprint 0 §9.1. Cada modelo tiene nombres claros en camelCase
+// para el cliente de TypeScript y se mapea mediante @@map a su tabla en PostgreSQL.
+// ==============================================================================
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ------------------------------------------------------------------------------
+// ENUMERACIONES DEL DOMINIO
+// ------------------------------------------------------------------------------
+
+// defino los roles permitidos en el sistema: comensales, meseros/cocina y dueños
+enum Role {
+  COMENSAL
+  STAFF
+  ADMIN
+}
+
+// defino los estados por los que transita una reserva en su ciclo de vida
+enum ReservationStatus {
+  SOLICITADA
+  CONFIRMADA
+  RECHAZADA
+  EXPIRADA
+  CANCELADA
+  EN_CURSO
+  COMPLETADA
+  NO_ASISTIO
+}
+
+// defino las diferentes clases de notificaciones que podemos enviar al usuario
+enum NotificationType {
+  SOLICITUD_NUEVA
+  APROBACION
+  RECHAZO
+  RECORDATORIO
+  CANCELACION
+  NOTICIA
+}
+
+// defino los estados de entrega para cada mensaje o notificación push
+enum NotificationStatus {
+  PENDIENTE
+  ENVIADA
+  FALLIDA
+}
+
+// plataformas móviles soportadas para el registro de tokens de notificación
+enum DevicePlatform {
+  ANDROID
+  IOS
+}
+
+// ------------------------------------------------------------------------------
+// 1. USUARIOS Y CONTROL DE ACCESO
+// ------------------------------------------------------------------------------
+
+// aquí guardo los datos de comensales, personal del restaurante y administradores
+model User {
+  id                String   @id @default(uuid())
+  nombre            String
+  correo            String   @unique
+  telefono          String
+  passwordHash      String   @map("password_hash")
+  rol               Role     @default(COMENSAL)
+  correoVerificado  Boolean  @default(false) @map("correo_verificado")
+  totpSecretCifrado String?  @map("totp_secret_cifrado")
+  totpHabilitado    Boolean  @default(false) @map("totp_habilitado")
+  cancelaciones     Int      @default(0)
+  activo            Boolean  @default(true)
+  createdAt         DateTime @default(now()) @map("creado_en")
+  updatedAt         DateTime @updatedAt @map("actualizado_en")
+
+  // relaciones con las demás entidades
+  reservations         Reservation[]            @relation("UsuarioReservas")
+  approvedReservations Reservation[]            @relation("AdminAprobaciones")
+  refreshTokens        RefreshToken[]
+  notifications        Notification[]
+  notificationPrefs    NotificationPreference[]
+  auditLogs            AuditLog[]
+  newsPosts            NewsPost[]
+  favoriteDishes       Dish[]                   @relation("UserFavorites")
+
+  @@map("usuarios")
+}
+
+// ------------------------------------------------------------------------------
+// 1.1 TOKENS DE REFRESCO POR DISPOSITIVO
+// ------------------------------------------------------------------------------
+
+// guardo un token de refresco por cada dispositivo en el que el usuario inicia sesion,
+// asi puedo revocar uno solo (ej. "cerrar sesion en este celular") sin afectar los demas
+model RefreshToken {
+  id          String    @id @default(uuid())
+  usuarioId   String    @map("usuario_id")
+  tokenHash   String    @map("token_hash")
+  dispositivo String    @map("dispositivo")
+  expiraEn    DateTime  @map("expira_en")
+  revocadoEn  DateTime? @map("revocado_en")
+
+  usuario User @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  // busco rapido los tokens vigentes de un usuario al validar o rotar el refresco
+  @@index([usuarioId])
+  @@map("tokens_refresco")
+}
+
+// ------------------------------------------------------------------------------
+// 2. RESTAURANTE Y CONFIGURACIÓN GENERAL
+// ------------------------------------------------------------------------------
+
+// guardo la información institucional y parámetros de operación de El Encanto Campestre
+model Restaurant {
+  id                       String   @id @default(uuid())
+  nombre                   String
+  direccion                String
+  latitud                  Decimal  @db.Decimal(10, 7)
+  longitud                 Decimal  @db.Decimal(10, 7)
+  telefono                 String
+  whatsapp                 String
+  aforoTotal               Int      @map("aforo_total")
+  duracionReservaMin       Int      @default(90) @map("duracion_reserva_min")
+  granularidadMin          Int      @default(30) @map("granularidad_min")
+  toleranciaMin            Int      @default(30) @map("tolerancia_min")
+  ventanaCancelacionMin    Int      @default(60) @map("ventana_cancelacion_min")
+  anticipacionMaxDias      Int      @default(60) @map("anticipacion_max_dias")
+  anticipacionMinMin       Int      @default(120) @map("anticipacion_min_min")
+  minPersonasEntreSemana   Int      @default(15) @map("min_personas_entre_semana")
+  horasExpiracionSolicitud Int      @default(24) @map("horas_expiracion_solicitud")
+  createdAt                DateTime @default(now()) @map("creado_en")
+  updatedAt                DateTime @updatedAt @map("actualizado_en")
+
+  // áreas, carta, calendario y publicaciones asociadas a la sede
+  zones        Zone[]
+  categories   Category[]
+  calendarDays CalendarDay[]
+  timeSlots    TimeSlot[]
+  newsPosts    NewsPost[]
+
+  @@map("restaurantes")
+}
+
+// ------------------------------------------------------------------------------
+// 3. ZONAS DEL RESTAURANTE
+// ------------------------------------------------------------------------------
+
+// represento las diferentes áreas del predio: Salón Principal, Terraza Campestre y Mirador VIP
+model Zone {
+  id              String   @id @default(uuid())
+  restaurantId    String   @map("restaurante_id")
+  nombre          String
+  descripcion     String?
+  reservableEnApp Boolean  @default(true) @map("reservable_en_app")
+  activa          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("creado_en")
+  updatedAt       DateTime @updatedAt @map("actualizado_en")
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  tables     Table[]
+
+  @@map("zonas")
+}
+
+// ------------------------------------------------------------------------------
+// 4. MESAS Y CAPACIDADES
+// ------------------------------------------------------------------------------
+
+// guardo cada mesa física con su capacidad y si se puede juntar con otras para grupos grandes
+model Table {
+  id         String   @id @default(uuid())
+  zoneId     String   @map("zona_id")
+  codigo     String // ej. M-01, T-03, MIRADOR
+  capacidad  Int
+  combinable Boolean  @default(true)
+  activa     Boolean  @default(true)
+  createdAt  DateTime @default(now()) @map("creado_en")
+  updatedAt  DateTime @updatedAt @map("actualizado_en")
+
+  zone Zone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@map("mesas")
+}
+
+// ------------------------------------------------------------------------------
+// 5. CATEGORÍAS DE LA CARTA
+// ------------------------------------------------------------------------------
+
+// organizo los platos en entradas, platos fuertes, asados, postres y bebidas típicas
+model Category {
+  id           String   @id @default(uuid())
+  restaurantId String   @map("restaurante_id")
+  nombre       String
+  orden        Int      @default(0)
+  activa       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("creado_en")
+  updatedAt    DateTime @updatedAt @map("actualizado_en")
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  dishes     Dish[]
+
+  @@map("categorias")
+}
+
+// ------------------------------------------------------------------------------
+// 6. PLATOS Y ESPECIALIDADES GASTRONÓMICAS
+// ------------------------------------------------------------------------------
+
+// registro cada plato típico caucano con su precio en pesos colombianos y estado
+model Dish {
+  id               String   @id @default(uuid())
+  categoryId       String   @map("categoria_id")
+  nombre           String
+  slug             String   @unique
+  descripcionBreve String?  @map("descripcion_breve")
+  descripcion      String
+  precio           Decimal  @db.Decimal(12, 2)
+  alergenos        String?
+  disponible       Boolean  @default(true)
+  destacado        Boolean  @default(false)
+  orden            Int      @default(0)
+  createdAt        DateTime @default(now()) @map("creado_en")
+  updatedAt        DateTime @updatedAt @map("actualizado_en")
+
+  category         Category          @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  photos           DishPhoto[]
+  dietaryTags      DishDietaryTag[]
+  schedules        DishSchedule[]
+  reservationLines ReservationLine[]
+  favoritedBy      User[]            @relation("UserFavorites")
+
+  // índice frecuente de §9.3 para ordenar la carta por categoría y posición
+  @@index([categoryId, orden])
+  @@map("platos")
+}
+
+// ------------------------------------------------------------------------------
+// 7. FOTOS DE PLATOS (GALERÍA)
+// ------------------------------------------------------------------------------
+
+// almaceno hasta 10 fotos por plato con optimización para previsualización en WhatsApp
+model DishPhoto {
+  id        String   @id @default(uuid())
+  dishId    String   @map("plato_id")
+  path      String
+  pathOg    String?  @map("path_og")
+  orden     Int      @default(0)
+  principal Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("creada_en")
+
+  dish Dish @relation(fields: [dishId], references: [id], onDelete: Cascade)
+
+  @@map("fotos_platos")
+}
+
+// ------------------------------------------------------------------------------
+// 8. ETIQUETAS DIETÉTICAS Y CARACTERÍSTICAS
+// ------------------------------------------------------------------------------
+
+// catálogo de etiquetas nutricionales o de tipo de preparación (sin gluten, típico caucano, etc.)
+model DietaryTag {
+  id     String  @id @default(uuid())
+  nombre String  @unique
+  icono  String?
+
+  dishes DishDietaryTag[]
+
+  @@map("etiquetas")
+}
+
+// ------------------------------------------------------------------------------
+// 9. RELACIÓN PLATO - ETIQUETA DIETÉTICA
+// ------------------------------------------------------------------------------
+
+// tabla intermedia explícita para asociar múltiples etiquetas a cada plato
+model DishDietaryTag {
+  id     String @id @default(uuid())
+  dishId String @map("plato_id")
+  tagId  String @map("etiqueta_id")
+
+  dish Dish       @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  tag  DietaryTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([dishId, tagId])
+  @@map("platos_etiquetas")
+}
+
+// ------------------------------------------------------------------------------
+// 10. DISPONIBILIDAD DE PLATO POR FECHA ESPECÍFICA
+// ------------------------------------------------------------------------------
+
+// permite habilitar o agotar un plato en una fecha determinada (ej. trucha solo el domingo)
+model DishSchedule {
+  id         String   @id @default(uuid())
+  dishId     String   @map("plato_id")
+  fecha      DateTime @db.Date
+  disponible Boolean
+  cupo       Int?
+
+  dish Dish @relation(fields: [dishId], references: [id], onDelete: Cascade)
+
+  // índice único por plato y fecha según §9.3
+  @@unique([dishId, fecha])
+  @@index([fecha])
+  @@map("disponibilidad_platos")
+}
+
+// ------------------------------------------------------------------------------
+// 11. DÍAS DE ATENCIÓN EN CALENDARIO (EXCEPCIONES)
+// ------------------------------------------------------------------------------
+
+// registra días festivos o eventos especiales que sobreescriben el horario regular
+model CalendarDay {
+  id             String   @id @default(uuid())
+  restaurantId   String   @map("restaurante_id")
+  fecha          DateTime @db.Date
+  abierto        Boolean
+  horaApertura   String?  @map("hora_apertura")
+  horaCierre     String?  @map("hora_cierre")
+  soloPorReserva Boolean  @default(false) @map("solo_por_reserva")
+  motivo         String?
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([restaurantId, fecha])
+  @@index([fecha])
+  @@map("dias_atencion")
+}
+
+// ------------------------------------------------------------------------------
+// 12. FRANJAS HORARIAS Y REGLAS DE ATENCIÓN SEMANALES
+// ------------------------------------------------------------------------------
+
+// defino los horarios habituales de apertura y cierre según el día de la semana (0=Domingo, 6=Sábado)
+model TimeSlot {
+  id           String  @id @default(uuid())
+  restaurantId String  @map("restaurante_id")
+  diaSemana    Int     @map("dia_semana")
+  horaApertura String  @map("hora_apertura")
+  horaCierre   String  @map("hora_cierre")
+  abierto      Boolean @default(true)
+  aforoMaximo  Int?    @map("aforo_maximo")
+  activo       Boolean @default(true)
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@map("reglas_atencion")
+}
+
+// ------------------------------------------------------------------------------
+// 13. RESERVAS DE MESAS Y GRUPOS
+// ------------------------------------------------------------------------------
+
+// gestiono cada solicitud de reserva solicitada por un comensal y aprobada por el dueño
+model Reservation {
+  id            String            @id @default(uuid())
+  usuarioId     String            @map("usuario_id")
+  codigo        String            @unique
+  fecha         DateTime          @db.Date
+  horaInicio    String            @map("hora_inicio")
+  horaFin       String            @map("hora_fin")
+  numComensales Int               @map("num_comensales")
+  estado        ReservationStatus @default(SOLICITADA)
+  total         Decimal           @default(0) @db.Decimal(12, 2)
+  nota          String?
+  motivoRechazo String?           @map("motivo_rechazo")
+  aprobadaPorId String?           @map("aprobada_por_id")
+  aprobadaEn    DateTime?         @map("aprobada_en")
+  createdAt     DateTime          @default(now()) @map("creada_en")
+  updatedAt     DateTime          @updatedAt @map("actualizada_en")
+
+  usuario       User              @relation("UsuarioReservas", fields: [usuarioId], references: [id], onDelete: Restrict)
+  aprobadaPor   User?             @relation("AdminAprobaciones", fields: [aprobadaPorId], references: [id], onDelete: SetNull)
+  lines         ReservationLine[]
+  notifications Notification[]
+
+  // índices frecuentes de §9.3 para consulta rápida por fecha/estado y reservas por usuario
+  @@index([fecha, estado])
+  @@index([usuarioId, createdAt(sort: Desc)])
+  @@map("reservas")
+}
+
+// ------------------------------------------------------------------------------
+// 14. LÍNEAS DE PEDIDO ADJUNTO A LA RESERVA
+// ------------------------------------------------------------------------------
+
+// guardo los platos solicitados por anticipado con el precio fijado al momento de reservar
+model ReservationLine {
+  id             String  @id @default(uuid())
+  reservaId      String  @map("reserva_id")
+  platoId        String  @map("plato_id")
+  cantidad       Int
+  precioUnitario Decimal @map("precio_unitario") @db.Decimal(12, 2)
+  nota           String?
+
+  reserva Reservation @relation(fields: [reservaId], references: [id], onDelete: Cascade)
+  plato   Dish        @relation(fields: [platoId], references: [id], onDelete: Restrict)
+
+  @@map("lineas_pedido")
+}
+
+// ------------------------------------------------------------------------------
+// 15. NOTIFICACIONES AL COMENSAL Y AL PERSONAL
+// ------------------------------------------------------------------------------
+
+// registro cada aviso programado o enviado sobre confirmación, recordatorios o novedades
+model Notification {
+  id             String             @id @default(uuid())
+  usuarioId      String             @map("usuario_id")
+  reservaId      String?            @map("reserva_id")
+  tipo           NotificationType
+  titulo         String
+  cuerpo         String
+  programadaPara DateTime?          @map("programada_para")
+  enviadaEn      DateTime?          @map("enviada_en")
+  estado         NotificationStatus @default(PENDIENTE)
+  createdAt      DateTime           @default(now()) @map("creada_en")
+
+  usuario User         @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  reserva Reservation? @relation(fields: [reservaId], references: [id], onDelete: SetNull)
+
+  @@map("notificaciones")
+}
+
+// ------------------------------------------------------------------------------
+// 16. PREFERENCIAS DE NOTIFICACIÓN Y DISPOSITIVOS MÓVILES
+// ------------------------------------------------------------------------------
+
+// vinculo el token FCM del celular con los canales de notificación preferidos del usuario
+model NotificationPreference {
+  id                     String          @id @default(uuid())
+  usuarioId              String          @map("usuario_id")
+  tokenPush              String?         @map("token_push")
+  plataforma             DevicePlatform?
+  notificacionesPush     Boolean         @default(true) @map("notificaciones_push")
+  notificacionesEmail    Boolean         @default(true) @map("notificaciones_email")
+  notificacionesWhatsapp Boolean         @default(true) @map("notificaciones_whatsapp")
+  ultimoUso              DateTime?       @map("ultimo_uso")
+  createdAt              DateTime        @default(now()) @map("creado_en")
+  updatedAt              DateTime        @updatedAt @map("actualizado_en")
+
+  usuario User @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@map("preferencias_notificacion")
+}
+
+// ------------------------------------------------------------------------------
+// 17. BITÁCORA Y REGISTRO DE AUDITORÍA
+// ------------------------------------------------------------------------------
+
+// guardo trazabilidad inmutable de cambios de estado, aprobaciones y modificaciones administrativas
+model AuditLog {
+  id           String   @id @default(uuid())
+  usuarioId    String?  @map("usuario_id")
+  accion       String
+  entidad      String
+  entidadId    String?  @map("entidad_id")
+  datosPrevios Json?    @map("datos_previos")
+  datosNuevos  Json?    @map("datos_nuevos")
+  ip           String?
+  userAgent    String?  @map("user_agent")
+  createdAt    DateTime @default(now()) @map("creado_en")
+
+  usuario User? @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+
+  @@map("bitacoras")
+}
+
+// ------------------------------------------------------------------------------
+// 18. NOTICIAS Y NOVEDADES DEL RESTAURANTE
+// ------------------------------------------------------------------------------
+
+// muro de publicaciones de El Encanto Campestre para comunicar eventos, pista de motos y pesca
+model NewsPost {
+  id           String   @id @default(uuid())
+  restaurantId String   @map("restaurante_id")
+  autorId      String   @map("autor_id")
+  titulo       String
+  cuerpo       String
+  imagenPath   String?  @map("imagen_path")
+  enlaces      Json?
+  fijada       Boolean  @default(false)
+  publicada    Boolean  @default(true)
+  publicadaEn  DateTime @default(now()) @map("publicada_en")
+  createdAt    DateTime @default(now()) @map("creada_en")
+  updatedAt    DateTime @updatedAt @map("actualizada_en")
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  autor      User       @relation(fields: [autorId], references: [id], onDelete: Restrict)
+
+  // índice de §9.3 para ordenar noticias priorizando fijadas y orden cronológico descendente
+  @@index([fijada(sort: Desc), publicadaEn(sort: Desc)])
+  @@map("noticias")
+}
