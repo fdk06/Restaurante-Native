@@ -43,7 +43,7 @@ Dejar el repositorio listo para que los tres proyectos convivan y el equipo trab
 - [x] El README explica como levantar cada proyecto desde cero
 - [x] Existe .env.example documentado, y .env esta ignorado por git
 
-### Inicializar la app React Native con navegacion de cinco destinos
+### [x] Inicializar la app React Native con navegacion de cinco destinos
 
 `Sprint 1` · `8 pts` · `Highest` · `movil` · `Sprint0 §13.1`
 
@@ -51,13 +51,13 @@ Tener la aplicacion corriendo en Android con el esqueleto de navegacion definiti
 
 **Criterios de aceptación**
 
-- El proyecto se inicializa con @react-native-community/cli sobre React Native 0.87
-- La Nueva Arquitectura y Hermes estan activos
-- La barra inferior tiene cinco destinos: Carta, Reservas, Noticias (boton central), Proximamente y Ajustes
-- El tema claro y oscuro se resuelve con fichas de diseno, sin colores literales en los componentes
-- La orientacion esta fijada en vertical
+- [x] El proyecto se inicializa con @react-native-community/cli sobre React Native 0.87
+- [x] La Nueva Arquitectura y Hermes estan activos
+- [x] La barra inferior tiene cinco destinos: Carta, Reservas, Noticias (boton central), Proximamente y Ajustes
+- [x] El tema claro y oscuro se resuelve con fichas de diseno, sin colores literales en los componentes
+- [x] La orientacion esta fijada en vertical
 
-### Configurar i18n y externalizar los textos desde el primer commit
+### [x] Configurar i18n y externalizar los textos desde el primer commit
 
 `Sprint 1` · `3 pts` · `High` · `movil` · `RNF-03, ADR-009`
 
@@ -65,10 +65,10 @@ Cumplir la condicion del cliente de que ningun texto de interfaz este escrito en
 
 **Criterios de aceptación**
 
-- i18next esta configurado con espanol como idioma inicial
-- Todos los textos de las pantallas existentes provienen de archivos de recursos
-- Existe una verificacion o convencion documentada para detectar literales antes de integrar
-- Los formatos de moneda (COP sin decimales) y fecha (dd/mm/aaaa) estan centralizados en utilidades
+- [x] i18next esta configurado con espanol como idioma inicial
+- [x] Todos los textos de las pantallas existentes provienen de archivos de recursos
+- [x] Existe una verificacion o convencion documentada para detectar literales antes de integrar
+- [x] Los formatos de moneda (COP sin decimales) y fecha (dd/mm/aaaa) estan centralizados en utilidades
 
 ### Inicializar la API NestJS en contenedor
 

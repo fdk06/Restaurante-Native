@@ -1,0 +1,61 @@
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
+import './src/i18n'; // cargamos la configuracion de internacionalizacion
+import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
+import { BottomTabNavigator } from './src/navigation/BottomTabNavigator';
+
+// componente interno que conecta el tema de React Navigation con nuestro ThemeContext
+const AppContent: React.FC = () => {
+  const { isDark, colors } = useTheme();
+
+  // adaptamos el tema de navegacion para que coincida con nuestros tokens
+  const navTheme = isDark
+    ? {
+        ...DarkTheme,
+        colors: {
+          ...DarkTheme.colors,
+          background: colors.superficie.fondo,
+          card: colors.superficie.fondo,
+          text: colors.texto.primario,
+          border: colors.superficie.borde,
+          primary: colors.marca.primario,
+        },
+      }
+    : {
+        ...DefaultTheme,
+        colors: {
+          ...DefaultTheme.colors,
+          background: colors.superficie.fondo,
+          card: colors.superficie.fondo,
+          text: colors.texto.primario,
+          border: colors.superficie.borde,
+          primary: colors.marca.primario,
+        },
+      };
+
+  return (
+    <NavigationContainer theme={navTheme}>
+      <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />
+      <BottomTabNavigator />
+    </NavigationContainer>
+  );
+};
+
+// componente raiz con los proveedores de area segura y tema dinamico
+const App: React.FC = () => {
+  return (
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </SafeAreaProvider>
+  );
+};
+
+export default App;

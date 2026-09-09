@@ -70,8 +70,8 @@ gantt
 |  Estado   | Tarea                                                                                    | Requisitos       |  Pts   | Responsable |
 | :-------: | ---------------------------------------------------------------------------------------- | ---------------- | :----: | ----------- |
 |    [x]    | Monorepo, convenciones de commits, packages/shared (Zod) y CI mínima                     | RNF-14           |   3    | Yeison      |
-|    [ ]    | React Native 0.87 bare con Nueva Arquitectura, TypeScript y navegación de 5 tabs         | §13.1            |   8    | Yeison      |
-|    [ ]    | i18n con `i18next` y archivos de recursos desde el primer commit                         | RNF-03, ADR-009  |   3    | Yeison      |
+|    [x]    | React Native 0.87 bare con Nueva Arquitectura, TypeScript y navegación de 5 tabs         | §13.1            |   8    | Yeison      |
+|    [x]    | i18n con `i18next` y archivos de recursos desde el primer commit                         | RNF-03, ADR-009  |   3    | Yeison      |
 |    [ ]    | NestJS en contenedor Docker, Swagger en `/api/docs` y manejo centralizado de excepciones | RNF-12, ADR-008  |   5    | Alex        |
 |    [ ]    | Esquema de Prisma completo (18 entidades) y primera migración en Supabase                | §9               |   8    | Fabián      |
 |    [ ]    | Datos de siembra (seed): restaurante, zonas, mesas, categorías, platos y calendario      | —                |   3    | Fabián      |
