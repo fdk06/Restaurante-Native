@@ -73,11 +73,11 @@ gantt
 |    [x]    | React Native 0.87 bare con Nueva Arquitectura, TypeScript y navegación de 5 tabs         | §13.1            |   8    | Yeison      |
 |    [x]    | i18n con `i18next` y archivos de recursos desde el primer commit                         | RNF-03, ADR-009  |   3    | Yeison      |
 |    [ ]    | NestJS en contenedor Docker, Swagger en `/api/docs` y manejo centralizado de excepciones | RNF-12, ADR-008  |   5    | Alex        |
-|    [ ]    | Esquema de Prisma completo (18 entidades) y primera migración en Supabase                | §9               |   8    | Fabián      |
-|    [ ]    | Datos de siembra (seed): restaurante, zonas, mesas, categorías, platos y calendario      | —                |   3    | Fabián      |
+|    [x]    | Esquema de Prisma completo (18 entidades) y primera migración en Supabase                | §9               |   8    | Fabián      |
+|    [x]    | Datos de siembra (seed): restaurante, zonas, mesas, categorías, platos y calendario      | —                |   3    | Fabián      |
 |    [ ]    | Registro, inicio de sesión, refresco y cierre de sesión con Argon2id                     | RF-AUT01, 03, 04 |   8    | Alex        |
 |    [ ]    | Token de refresco en Keystore (`react-native-keychain`) e interceptor de renovación      | RNF-06           |   5    | Yeison      |
-|    [ ]    | `RolesGuard` y protección de rutas por rol en backend                                    | RNF-08           |   3    | Fabián      |
+|    [x]    | `RolesGuard` y protección de rutas por rol en backend                                    | RNF-08           |   3    | Fabián      |
 |    [ ]    | Despliegue del contenedor en la VPS con HTTPS                                            | ADR-008          |   5    | Alex        |
 | **Total** |                                                                                          |                  | **51** |             |
 

@@ -83,7 +83,7 @@ Que el backend corra igual en la maquina de cualquier integrante y en la VPS.
 - Existe un filtro global de excepciones con respuesta uniforme
 - El prefijo de rutas es /api/v1
 
-### Definir el esquema de Prisma y aplicar la primera migracion
+### [x] Definir el esquema de Prisma y aplicar la primera migracion
 
 `Sprint 1` · `8 pts` · `Highest` · `backend,datos` · `Sprint0 §9`
 
@@ -91,13 +91,13 @@ Llevar el modelo de datos del documento de diseno a una base real.
 
 **Criterios de aceptación**
 
-- El esquema incluye todas las entidades de Sprint0 §9.1
-- Las enumeraciones de estado, rol y tipo de notificacion estan declaradas
-- La migracion se aplica sobre Supabase y queda versionada en el repositorio
-- Estan creados los indices frecuentes de §9.3
-- RLS queda habilitado con negacion por defecto en todas las tablas
+- [x] El esquema incluye todas las entidades de Sprint0 §9.1
+- [x] Las enumeraciones de estado, rol y tipo de notificacion estan declaradas
+- [x] La migracion se aplica sobre Supabase y queda versionada en el repositorio
+- [x] Estan creados los indices frecuentes de §9.3
+- [x] RLS queda habilitado con negacion por defecto en todas las tablas
 
-### Cargar datos de siembra realistas
+### [x] Cargar datos de siembra realistas
 
 `Sprint 1` · `3 pts` · `Medium` · `backend,datos`
 
@@ -105,10 +105,10 @@ Poder probar la aplicacion con contenido verosimil desde el primer dia.
 
 **Criterios de aceptación**
 
-- Existen restaurante, zonas y mesas con capacidades reales
-- Hay al menos 15 platos con nombre, descripcion y precio verosimiles
-- El calendario tiene marcados los proximos fines de semana y festivos
-- Existen las tres cuentas de prueba: comensal, staff y dueno
+- [x] Existen restaurante, zonas y mesas con capacidades reales
+- [x] Hay al menos 15 platos con nombre, descripcion y precio verosimiles
+- [x] El calendario tiene marcados los proximos fines de semana y festivos
+- [x] Existen las tres cuentas de prueba: comensal, staff y dueno
 
 ### Desplegar el contenedor del backend en la VPS
 
@@ -704,7 +704,7 @@ Guardias por rol, segundo factor TOTP sobre acciones sensibles y bitacora de acc
 
 _2 historias · 11 puntos_
 
-### Proteger los endpoints con guardia de roles
+### [x] Proteger los endpoints con guardia de roles
 
 `Sprint 1` · `3 pts` · `High` · `backend` · `RNF-08, ADR-006`
 
@@ -712,10 +712,10 @@ Que la autorizacion viva en el servidor y no dependa de la interfaz.
 
 **Criterios de aceptación**
 
-- Existe RolesGuard aplicable por endpoint
-- Los roles COMENSAL, STAFF y ADMIN estan diferenciados
-- Un usuario sin rol suficiente recibe 403, aunque la pantalla estuviera visible
-- Hay una prueba que verifica el rechazo por rol insuficiente
+- [x] Existe RolesGuard aplicable por endpoint
+- [x] Los roles COMENSAL, STAFF y ADMIN estan diferenciados
+- [x] Un usuario sin rol suficiente recibe 403, aunque la pantalla estuviera visible
+- [x] Hay una prueba que verifica el rechazo por rol insuficiente
 
 ### Implementar TOTP y proteger las acciones sensibles
 
