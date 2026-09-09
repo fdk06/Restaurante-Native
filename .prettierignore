@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.gradle/
+*.keystore
+*.lock
+package-lock.json
+design/
+docs/diagramas/
