@@ -1,5 +1,7 @@
 # Backlog para Jira — El Encanto Campestre
+
 ### Épicas, historias y criterios de aceptación
+
 **Versión:** 0.1 · **Generado:** 20 de agosto de 2026
 
 Archivo importable: `Backlog_Jira.csv`. Instrucciones de importación al final.
@@ -8,15 +10,15 @@ Archivo importable: `Backlog_Jira.csv`. Instrucciones de importación al final.
 
 ## Resumen
 
-| Sprint | Historias | Puntos |
-|---|---|---|
-| Sprint 1 | 10 | 51 |
-| Sprint 2 | 9 | 58 |
-| Sprint 3 | 10 | 62 |
-| Sprint 4 | 10 | 53 |
-| Sprint 5 | 12 | 63 |
-| Sprint 6 | 9 | 38 |
-| **Total** | **60** | **325** |
+| Sprint    | Historias | Puntos  |
+| --------- | --------- | ------- |
+| Sprint 1  | 10        | 51      |
+| Sprint 2  | 9         | 58      |
+| Sprint 3  | 10        | 62      |
+| Sprint 4  | 10        | 53      |
+| Sprint 5  | 12        | 63      |
+| Sprint 6  | 9         | 38      |
+| **Total** | **60**    | **325** |
 
 Capacidad estimada: ~52 h por sprint entre tres personas. Los sprints 3 y 5 exceden lo esperable; cada uno tiene su lista de recorte en `Plan_de_Sprints.md`.
 
@@ -26,9 +28,9 @@ Capacidad estimada: ~52 h por sprint entre tres personas. Los sprints 3 y 5 exce
 
 Monorepo, proyectos base, esquema de datos, contenedor y despliegue. Es la base sobre la que se apoyan las demás épicas: hasta que no cierre, ninguna funcionalidad puede integrarse de extremo a extremo.
 
-*7 historias · 35 puntos*
+_7 historias · 35 puntos_
 
-### Configurar monorepo, convenciones y estructura de proyectos
+### [x] Configurar monorepo, convenciones y estructura de proyectos
 
 `Sprint 1` · `3 pts` · `High` · `infra`
 
@@ -36,12 +38,12 @@ Dejar el repositorio listo para que los tres proyectos convivan y el equipo trab
 
 **Criterios de aceptación**
 
-- El monorepo contiene apps/mobile, apps/api, apps/web y packages/shared
-- Estan configurados linting y formateo automatico en los tres proyectos
-- El README explica como levantar cada proyecto desde cero
-- Existe .env.example documentado, y .env esta ignorado por git
+- [x] El monorepo contiene apps/mobile, apps/api, apps/web y packages/shared
+- [x] Estan configurados linting y formateo automatico en los tres proyectos
+- [x] El README explica como levantar cada proyecto desde cero
+- [x] Existe .env.example documentado, y .env esta ignorado por git
 
-### Inicializar la app React Native con navegacion de cinco destinos
+### [x] Inicializar la app React Native con navegacion de cinco destinos
 
 `Sprint 1` · `8 pts` · `Highest` · `movil` · `Sprint0 §13.1`
 
@@ -49,13 +51,13 @@ Tener la aplicacion corriendo en Android con el esqueleto de navegacion definiti
 
 **Criterios de aceptación**
 
-- El proyecto se inicializa con @react-native-community/cli sobre React Native 0.87
-- La Nueva Arquitectura y Hermes estan activos
-- La barra inferior tiene cinco destinos: Carta, Reservas, Noticias (boton central), Proximamente y Ajustes
-- El tema claro y oscuro se resuelve con fichas de diseno, sin colores literales en los componentes
-- La orientacion esta fijada en vertical
+- [x] El proyecto se inicializa con @react-native-community/cli sobre React Native 0.87
+- [x] La Nueva Arquitectura y Hermes estan activos
+- [x] La barra inferior tiene cinco destinos: Carta, Reservas, Noticias (boton central), Proximamente y Ajustes
+- [x] El tema claro y oscuro se resuelve con fichas de diseno, sin colores literales en los componentes
+- [x] La orientacion esta fijada en vertical
 
-### Configurar i18n y externalizar los textos desde el primer commit
+### [x] Configurar i18n y externalizar los textos desde el primer commit
 
 `Sprint 1` · `3 pts` · `High` · `movil` · `RNF-03, ADR-009`
 
@@ -63,10 +65,10 @@ Cumplir la condicion del cliente de que ningun texto de interfaz este escrito en
 
 **Criterios de aceptación**
 
-- i18next esta configurado con espanol como idioma inicial
-- Todos los textos de las pantallas existentes provienen de archivos de recursos
-- Existe una verificacion o convencion documentada para detectar literales antes de integrar
-- Los formatos de moneda (COP sin decimales) y fecha (dd/mm/aaaa) estan centralizados en utilidades
+- [x] i18next esta configurado con espanol como idioma inicial
+- [x] Todos los textos de las pantallas existentes provienen de archivos de recursos
+- [x] Existe una verificacion o convencion documentada para detectar literales antes de integrar
+- [x] Los formatos de moneda (COP sin decimales) y fecha (dd/mm/aaaa) estan centralizados en utilidades
 
 ### Inicializar la API NestJS en contenedor
 
@@ -127,7 +129,7 @@ Tener un entorno de produccion desde temprano, no al final del semestre.
 
 Registro, inicio de sesión, sesión persistente, verificación de correo y recuperación de contraseña. El comensal puede explorar sin cuenta; la autenticación se exige solo al reservar.
 
-*3 historias · 18 puntos*
+_3 historias · 18 puntos_
 
 ### Implementar registro, inicio de sesion, refresco y cierre de sesion
 
@@ -175,7 +177,7 @@ Cerrar los flujos de cuenta que quedaron pendientes del Sprint 1.
 
 Consulta de la carta por parte del comensal. La carta depende de la fecha: muestra los platos habilitados para el día que se consulte, no una lista fija.
 
-*6 historias · 34 puntos*
+_6 historias · 34 puntos_
 
 ### Mostrar la carta agrupada por categorias
 
@@ -260,7 +262,7 @@ Que la aplicacion sirva en zona rural con senal debil.
 
 Todo lo que el dueño mantiene para que la carta y el calendario reflejen la operación real: categorías, platos, fotos, disponibilidad por fecha y días de atención.
 
-*4 historias · 32 puntos*
+_4 historias · 32 puntos_
 
 ### Administrar categorias y platos
 
@@ -321,7 +323,7 @@ Representar una operacion discontinua: fines de semana, festivos y aperturas por
 
 Cálculo de franjas, validación de aforo y flujo de solicitud con pedido opcional. Es el núcleo técnico del proyecto y el de mayor riesgo de concurrencia.
 
-*8 historias · 49 puntos*
+_8 historias · 49 puntos_
 
 ### Calcular las franjas horarias disponibles
 
@@ -437,7 +439,7 @@ Cubrir el caso real de que el cliente quiera pedir algo mas.
 
 Lo que hace el dueño y el personal: revisar solicitudes, aprobar o rechazar tras verificar el pago, copiar el ticket para la cocina y operar la agenda durante el servicio.
 
-*2 historias · 13 puntos*
+_2 historias · 13 puntos_
 
 ### Construir la bandeja de solicitudes con aprobacion y rechazo
 
@@ -472,7 +474,7 @@ Dar al personal una vista operable durante el servicio.
 
 Muro de publicaciones con imagen, texto y enlaces, más la pantalla Proximamente. Para este cliente la comunicacion pesa tanto como la reserva.
 
-*4 historias · 21 puntos*
+_4 historias · 21 puntos_
 
 ### Construir el muro de noticias y su detalle
 
@@ -532,7 +534,7 @@ Que el comensal sepa donde queda el restaurante y como llegar.
 
 Capa web con metadatos Open Graph para que un plato compartido por WhatsApp se vea con su fotografia, y App Links para que el enlace abra la aplicacion.
 
-*6 historias · 32 puntos*
+_6 historias · 32 puntos_
 
 ### Publicar la capa web con la pagina de plato renderizada en servidor
 
@@ -616,7 +618,7 @@ Que el enlace lleve al detalle exacto y no a la pantalla de inicio.
 
 Avisos al comensal y al dueno, por push y por correo, incluso con la aplicacion cerrada. Incluye recordatorios y procesos programados de expiracion e inasistencia.
 
-*6 historias · 29 puntos*
+_6 historias · 29 puntos_
 
 ### Integrar FCM y registrar el dispositivo
 
@@ -700,7 +702,7 @@ Dar control sobre que avisos se reciben.
 
 Guardias por rol, segundo factor TOTP sobre acciones sensibles y bitacora de acciones administrativas.
 
-*2 historias · 11 puntos*
+_2 historias · 11 puntos_
 
 ### Proteger los endpoints con guardia de roles
 
@@ -734,7 +736,7 @@ Reducir el riesgo de una sesion de dueno comprometida.
 
 Integracion continua, pruebas, estabilizacion, documentacion y preparacion de la sustentacion academica.
 
-*12 historias · 51 puntos*
+_12 historias · 51 puntos_
 
 ### Cubrir con pruebas la resolucion de disponibilidad por fecha
 
@@ -886,11 +888,11 @@ Preparar los parciales, donde cada integrante debe explicar el codigo.
 
 ## Cómo importar en Jira
 
-1. Ir a **Configuración del proyecto → Importar** (o *System → External System Import → CSV* si tienes permisos de administrador).
+1. Ir a **Configuración del proyecto → Importar** (o _System → External System Import → CSV_ si tienes permisos de administrador).
 2. Subir `Backlog_Jira.csv`. La codificación es UTF-8 con BOM y el separador es la coma.
 3. Mapear las columnas: `Issue Type`, `Summary`, `Epic Name`, `Epic Link`, `Description`, `Story Points`, `Sprint`, `Priority`, `Labels`.
 4. Importar **primero solo las filas de tipo Epic** si tu instancia no resuelve `Epic Link` por nombre en la misma pasada; luego el resto.
 5. Los valores de `Sprint` (`Sprint 1` … `Sprint 6`) deben coincidir con los nombres de los sprints del tablero. Si aún no existen, créalos antes de importar o deja la columna sin mapear y asígnalos después arrastrando desde el backlog.
-6. `Story Points` requiere que el campo esté habilitado en el tipo de incidencia. En proyectos gestionados por equipo puede llamarse *Estimación*.
+6. `Story Points` requiere que el campo esté habilitado en el tipo de incidencia. En proyectos gestionados por equipo puede llamarse _Estimación_.
 
-**Nota.** Si el proyecto es de tipo *gestionado por equipo* (team-managed), la jerarquía de épicas usa el campo **Parent** en lugar de `Epic Link`. En ese caso, renombra la columna `Epic Link` a `Parent` tras crear las épicas y sustituye el nombre por la clave de cada épica (por ejemplo `ENC-1`).
+**Nota.** Si el proyecto es de tipo _gestionado por equipo_ (team-managed), la jerarquía de épicas usa el campo **Parent** en lugar de `Epic Link`. En ese caso, renombra la columna `Epic Link` a `Parent` tras crear las épicas y sustituye el nombre por la clave de cada épica (por ejemplo `ENC-1`).

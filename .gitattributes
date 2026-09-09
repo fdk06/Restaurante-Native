@@ -1,0 +1,17 @@
+# Forzar saltos de linea LF para evitar problemas entre Windows y Linux (Docker / Gradle)
+* text=auto eol=lf
+
+# Scripts especificos de Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Archivos binarios que no deben modificarse
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.keystore binary
+*.jar binary
