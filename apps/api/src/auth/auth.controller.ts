@@ -12,6 +12,18 @@ export class AuthController {
 
   @Post('register')
   @ApiOperation({ summary: 'Registrar un nuevo usuario' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        nombre: { type: 'string', example: 'Alex' },
+        correo: { type: 'string', example: 'alex@encanto.com' },
+        telefono: { type: 'string', example: '3001234567' },
+        password: { type: 'string', example: 'SuperSecreta123' },
+      },
+      required: ['nombre', 'correo', 'telefono', 'password'],
+    },
+  })
   @ApiResponse({ status: 201, description: 'Usuario registrado correctamente' })
   @ApiResponse({ status: 400, description: 'Datos de registro inválidos' })
   @UsePipes(new ZodValidationPipe(RegisterSchema))
@@ -23,6 +35,16 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Iniciar sesión' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        correo: { type: 'string', example: 'alex@encanto.com' },
+        password: { type: 'string', example: 'SuperSecreta123' },
+      },
+      required: ['correo', 'password'],
+    },
+  })
   @ApiResponse({ status: 200, description: 'Sesión iniciada, retorna tokens' })
   @ApiResponse({ status: 401, description: 'Credenciales inválidas' })
   @UsePipes(new ZodValidationPipe(LoginSchema))
