@@ -2,27 +2,28 @@ FROM node:22-alpine
 
 WORKDIR /usr/src/app
 
-# Instalar dependencias necesarias para node-gyp y argon2 en alpine
-RUN apk add --no-cache python3 make g++
+# Herramientas para compilar módulos nativos (argon2) y OpenSSL para el motor de Prisma
+RUN apk add --no-cache python3 make g++ openssl
 
-# Copiar configuraciones del workspace
+# Copiamos manifiestos del monorepo
 COPY package*.json ./
-COPY tsconfig.json ./
-COPY nest-cli.json ./
 
-# Copiar los package.json de los workspaces para poder hacer el npm install
+# Copiamos los package.json de la API y paquete compartido
 COPY apps/api/package.json ./apps/api/
 COPY packages/shared/package.json ./packages/shared/
 
-# Instalar dependencias
+# Instalamos dependencias
 RUN npm install
 
-# Copiar el código fuente (esto normalmente se hace con volúmenes en desarrollo)
+# Copiamos el código fuente, configuraciones de TS y esquemas
 COPY packages/shared ./packages/shared
 COPY apps/api ./apps/api
 
-# Exponer el puerto
+# Generamos el cliente de Prisma para que esté listo al arrancar
+RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
+
+# Exponemos el puerto de NestJS
 EXPOSE 3000
 
-# Comando para desarrollo con hot-reload
+# Iniciamos en desarrollo con recarga automática
 CMD ["npm", "run", "start:dev", "-w", "api"]
