@@ -11,11 +11,13 @@ node_modules/
 .env.production.local
 *.pem
 *.key
+Estado-actual.md
 
 # Compilación y artefactos
 dist/
 build/
 coverage/
+*.tsbuildinfo
 .turbo/
 .next/
 out/
