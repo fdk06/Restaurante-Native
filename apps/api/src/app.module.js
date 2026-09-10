@@ -33,38 +33,35 @@ var __runInitializers = (this && this.__runInitializers) || function (thisArg, i
     return useValue ? value : void 0;
 };
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller.js';
-import { AuthService } from './auth.service.js';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-let AuthModule = (() => {
+import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
+import { AuthModule } from './auth/auth.module.js';
+import { PrismaModule } from './prisma/prisma.module.js';
+let AppModule = (() => {
     let _classDecorators = [Module({
             imports: [
-                JwtModule.registerAsync({
-                    imports: [ConfigModule],
-                    inject: [ConfigService],
-                    useFactory: async (configService) => ({
-                        secret: configService.get('JWT_ACCESS_SECRET'),
-                        signOptions: { expiresIn: (configService.get('JWT_ACCESS_EXPIRATION') || '15m') },
-                    }),
-                }),
+                // Configuro las variables de entorno para que estén disponibles globalmente
+                ConfigModule.forRoot({ isGlobal: true }),
+                AuthModule,
+                PrismaModule,
             ],
-            controllers: [AuthController],
-            providers: [AuthService],
+            controllers: [AppController],
+            providers: [AppService],
         })];
     let _classDescriptor;
     let _classExtraInitializers = [];
     let _classThis;
-    var AuthModule = class {
+    var AppModule = class {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
-            AuthModule = _classThis = _classDescriptor.value;
+            AppModule = _classThis = _classDescriptor.value;
             if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
             __runInitializers(_classThis, _classExtraInitializers);
         }
     };
-    return AuthModule = _classThis;
+    return AppModule = _classThis;
 })();
-export { AuthModule };
+export { AppModule };

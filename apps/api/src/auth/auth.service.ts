@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import * as argon2 from 'argon2';
 import type { RegisterDto, LoginDto } from '@encanto/shared';
 
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service.js';
 
 @Injectable()
 export class AuthService {

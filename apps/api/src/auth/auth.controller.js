@@ -50,8 +50,28 @@ let AuthController = (() => {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
-            _register_decorators = [Post('register'), ApiOperation({ summary: 'Registrar un nuevo usuario' }), ApiResponse({ status: 201, description: 'Usuario registrado correctamente' }), ApiResponse({ status: 400, description: 'Datos de registro inválidos' }), UsePipes(new ZodValidationPipe(RegisterSchema))];
-            _login_decorators = [Post('login'), HttpCode(HttpStatus.OK), ApiOperation({ summary: 'Iniciar sesión' }), ApiResponse({ status: 200, description: 'Sesión iniciada, retorna tokens' }), ApiResponse({ status: 401, description: 'Credenciales inválidas' }), UsePipes(new ZodValidationPipe(LoginSchema))];
+            _register_decorators = [Post('register'), ApiOperation({ summary: 'Registrar un nuevo usuario' }), ApiBody({
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            nombre: { type: 'string', example: 'Alex' },
+                            correo: { type: 'string', example: 'alex@encanto.com' },
+                            telefono: { type: 'string', example: '3001234567' },
+                            password: { type: 'string', example: 'SuperSecreta123' },
+                        },
+                        required: ['nombre', 'correo', 'telefono', 'password'],
+                    },
+                }), ApiResponse({ status: 201, description: 'Usuario registrado correctamente' }), ApiResponse({ status: 400, description: 'Datos de registro inválidos' }), UsePipes(new ZodValidationPipe(RegisterSchema))];
+            _login_decorators = [Post('login'), HttpCode(HttpStatus.OK), ApiOperation({ summary: 'Iniciar sesión' }), ApiBody({
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            correo: { type: 'string', example: 'alex@encanto.com' },
+                            password: { type: 'string', example: 'SuperSecreta123' },
+                        },
+                        required: ['correo', 'password'],
+                    },
+                }), ApiResponse({ status: 200, description: 'Sesión iniciada, retorna tokens' }), ApiResponse({ status: 401, description: 'Credenciales inválidas' }), UsePipes(new ZodValidationPipe(LoginSchema))];
             _refresh_decorators = [Post('refresh'), HttpCode(HttpStatus.OK), ApiOperation({ summary: 'Refrescar tokens' }), ApiBody({ schema: { type: 'object', properties: { refreshToken: { type: 'string' } } } }), ApiResponse({ status: 200, description: 'Nuevos tokens generados' }), ApiResponse({ status: 401, description: 'Refresh token inválido o expirado' })];
             _logout_decorators = [Post('logout'), HttpCode(HttpStatus.OK), ApiBearerAuth(), ApiOperation({ summary: 'Cerrar sesión' }), ApiResponse({ status: 200, description: 'Sesión cerrada correctamente' })];
             __esDecorate(this, null, _register_decorators, { kind: "method", name: "register", static: false, private: false, access: { has: obj => "register" in obj, get: obj => obj.register }, metadata: _metadata }, null, _instanceExtraInitializers);

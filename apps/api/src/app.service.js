@@ -32,39 +32,25 @@ var __runInitializers = (this && this.__runInitializers) || function (thisArg, i
     }
     return useValue ? value : void 0;
 };
-import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller.js';
-import { AuthService } from './auth.service.js';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-let AuthModule = (() => {
-    let _classDecorators = [Module({
-            imports: [
-                JwtModule.registerAsync({
-                    imports: [ConfigModule],
-                    inject: [ConfigService],
-                    useFactory: async (configService) => ({
-                        secret: configService.get('JWT_ACCESS_SECRET'),
-                        signOptions: { expiresIn: (configService.get('JWT_ACCESS_EXPIRATION') || '15m') },
-                    }),
-                }),
-            ],
-            controllers: [AuthController],
-            providers: [AuthService],
-        })];
+import { Injectable } from '@nestjs/common';
+let AppService = (() => {
+    let _classDecorators = [Injectable()];
     let _classDescriptor;
     let _classExtraInitializers = [];
     let _classThis;
-    var AuthModule = class {
+    var AppService = class {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
-            AuthModule = _classThis = _classDescriptor.value;
+            AppService = _classThis = _classDescriptor.value;
             if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
             __runInitializers(_classThis, _classExtraInitializers);
         }
+        getHello() {
+            return 'Hello World!';
+        }
     };
-    return AuthModule = _classThis;
+    return AppService = _classThis;
 })();
-export { AuthModule };
+export { AppService };
