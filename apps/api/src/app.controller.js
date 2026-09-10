@@ -1,3 +1,10 @@
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
 var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
     function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
     var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
@@ -25,46 +32,33 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
-var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
-    var useValue = arguments.length > 2;
-    for (var i = 0; i < initializers.length; i++) {
-        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
-    }
-    return useValue ? value : void 0;
-};
-import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller.js';
-import { AuthService } from './auth.service.js';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-let AuthModule = (() => {
-    let _classDecorators = [Module({
-            imports: [
-                JwtModule.registerAsync({
-                    imports: [ConfigModule],
-                    inject: [ConfigService],
-                    useFactory: async (configService) => ({
-                        secret: configService.get('JWT_ACCESS_SECRET'),
-                        signOptions: { expiresIn: (configService.get('JWT_ACCESS_EXPIRATION') || '15m') },
-                    }),
-                }),
-            ],
-            controllers: [AuthController],
-            providers: [AuthService],
-        })];
+import { Controller, Get } from '@nestjs/common';
+let AppController = (() => {
+    let _classDecorators = [Controller()];
     let _classDescriptor;
     let _classExtraInitializers = [];
     let _classThis;
-    var AuthModule = class {
+    let _instanceExtraInitializers = [];
+    let _getHello_decorators;
+    var AppController = class {
         static { _classThis = this; }
         static {
             const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            _getHello_decorators = [Get()];
+            __esDecorate(this, null, _getHello_decorators, { kind: "method", name: "getHello", static: false, private: false, access: { has: obj => "getHello" in obj, get: obj => obj.getHello }, metadata: _metadata }, null, _instanceExtraInitializers);
             __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
-            AuthModule = _classThis = _classDescriptor.value;
+            AppController = _classThis = _classDescriptor.value;
             if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
             __runInitializers(_classThis, _classExtraInitializers);
         }
+        appService = __runInitializers(this, _instanceExtraInitializers);
+        constructor(appService) {
+            this.appService = appService;
+        }
+        getHello() {
+            return this.appService.getHello();
+        }
     };
-    return AuthModule = _classThis;
+    return AppController = _classThis;
 })();
-export { AuthModule };
+export { AppController };

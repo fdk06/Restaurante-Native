@@ -56,7 +56,6 @@ let AuthService = (() => {
             this.configService = configService;
             this.prisma = prisma;
         }
-        /** Registro de usuario – guarda en la tabla usuarios via Prisma */
         async register(registerDto) {
             // Verificar si el correo ya existe
             const existing = await this.prisma.user.findUnique({
@@ -87,7 +86,6 @@ let AuthService = (() => {
             });
             return newUser;
         }
-        /** Login – busca usuario en BD, verifica contraseña y genera tokens */
         async login(loginDto) {
             // Buscar usuario por correo en la tabla usuarios
             const user = await this.prisma.user.findUnique({
@@ -118,25 +116,31 @@ let AuthService = (() => {
             });
             return tokens;
         }
-        /** Refresh – valida el refresh token contra la tabla y renueva */
         async refresh(refreshToken) {
             try {
                 const secret = this.configService.get('JWT_REFRESH_SECRET');
                 const payload = this.jwtService.verify(refreshToken, { secret });
-                // Buscar registro activo (no revocado, no expirado)
-                const stored = await this.prisma.refreshToken.findFirst({
+                // Buscar registros activos (no revocados, no expirados) para el usuario
+                const storedTokens = await this.prisma.refreshToken.findMany({
                     where: {
                         usuarioId: payload.sub,
                         revocadoEn: null,
                         expiraEn: { gt: new Date() },
                     },
                 });
-                if (!stored) {
+                if (!storedTokens.length) {
                     throw new UnauthorizedException('Refresh token no encontrado');
                 }
-                // Verificar que el hash coincida
-                const hashValid = await argon2.verify(stored.tokenHash, refreshToken);
-                if (!hashValid) {
+                // Verificar cuál hash coincide
+                let stored = null;
+                for (const t of storedTokens) {
+                    const hashValid = await argon2.verify(t.tokenHash, refreshToken);
+                    if (hashValid) {
+                        stored = t;
+                        break;
+                    }
+                }
+                if (!stored) {
                     throw new UnauthorizedException('Refresh token inválido');
                 }
                 // Generar nuevos tokens y actualizar la fila (rotación)
@@ -152,11 +156,12 @@ let AuthService = (() => {
                 return newTokens;
             }
             catch (error) {
+                console.error('Error en refresh:', error);
                 throw new UnauthorizedException('Refresh token inválido o expirado');
             }
         }
-        /** Logout – revoca todos los refresh tokens activos del usuario */
         async logout(userId) {
+            // Revoca todos los refresh tokens activos del usuario
             await this.prisma.refreshToken.updateMany({
                 where: { usuarioId: userId, revocadoEn: null },
                 data: { revocadoEn: new Date() },
@@ -164,12 +169,17 @@ let AuthService = (() => {
             return { message: 'Sesión cerrada correctamente' };
         }
         async generateTokens(payload) {
+            // Emito un Access Token JWT
             const accessToken = this.jwtService.sign(payload);
+            // Emito un Refresh Token rotatorio
             const refreshToken = this.jwtService.sign(payload, {
                 secret: this.configService.get('JWT_REFRESH_SECRET'),
-                expiresIn: this.configService.get('JWT_REFRESH_EXPIRATION') || '7d',
+                expiresIn: (this.configService.get('JWT_REFRESH_EXPIRATION') || '7d'),
             });
-            return { accessToken, refreshToken };
+            return {
+                accessToken,
+                refreshToken,
+            };
         }
     };
     return AuthService = _classThis;
