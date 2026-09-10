@@ -8,9 +8,11 @@
 // ante peticiones de usuarios con roles insuficientes o ausentes.
 // ==============================================================================
 
+import 'reflect-metadata';
 import { ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Role } from '@prisma/client';
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 import { RolesGuard } from './roles.guard';
 
 describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
@@ -26,10 +28,10 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
   // función auxiliar para simular el ExecutionContext de NestJS con el usuario especificado
   const crearContextoSimulado = (usuario: any): ExecutionContext => {
     return {
-      getHandler: jest.fn(),
-      getClass: jest.fn(),
-      switchToHttp: jest.fn().mockReturnValue({
-        getRequest: jest.fn().mockReturnValue({
+      getHandler: vi.fn(),
+      getClass: vi.fn(),
+      switchToHttp: vi.fn().mockReturnValue({
+        getRequest: vi.fn().mockReturnValue({
           user: usuario,
         }),
       }),
@@ -38,7 +40,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe permitir el acceso si la ruta no define ningún decorador @Roles (ruta libre de rol)', () => {
     // simulo que el reflector no encuentra metadatos de roles en la ruta
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue(null);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue(null);
 
     const context = crearContextoSimulado({ id: 'user-1', rol: Role.COMENSAL });
     const resultado = guard.canActivate(context);
@@ -49,7 +51,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe permitir el acceso a un ADMIN en una ruta protegida exclusivamente para ADMIN', () => {
     // configuro que la ruta requiere rol ADMIN
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
 
     const context = crearContextoSimulado({ id: 'admin-1', rol: Role.ADMIN });
     const resultado = guard.canActivate(context);
@@ -59,7 +61,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe permitir el acceso a un STAFF en una ruta compartida para STAFF y ADMIN', () => {
     // configuro que la ruta permite personal de atención o administradores
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.STAFF, Role.ADMIN]);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.STAFF, Role.ADMIN]);
 
     const context = crearContextoSimulado({ id: 'staff-1', rol: Role.STAFF });
     const resultado = guard.canActivate(context);
@@ -69,7 +71,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe arrojar ForbiddenException (HTTP 403) si un COMENSAL intenta acceder a ruta de STAFF o ADMIN', () => {
     // la ruta exige rol STAFF o ADMIN
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.STAFF, Role.ADMIN]);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.STAFF, Role.ADMIN]);
 
     const context = crearContextoSimulado({ id: 'comensal-1', rol: Role.COMENSAL });
 
@@ -80,7 +82,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe arrojar ForbiddenException (HTTP 403) si no existe un usuario autenticado en la petición', () => {
     // la ruta exige rol ADMIN pero la petición no trae sesión
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
 
     const context = crearContextoSimulado(undefined);
 
@@ -90,7 +92,7 @@ describe('RolesGuard (Fabián Hoyos - Control de Acceso y Seguridad)', () => {
 
   it('debe arrojar ForbiddenException (HTTP 403) si el objeto usuario no incluye la propiedad rol', () => {
     // la petición tiene un usuario sin rol asignado
-    jest.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
+    vi.spyOn(reflector, 'getAllAndOverride').mockReturnValue([Role.ADMIN]);
 
     const context = crearContextoSimulado({ id: 'user-sin-rol' });
 
