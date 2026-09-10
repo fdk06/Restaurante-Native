@@ -51,6 +51,18 @@
     "location": "Vereda Las Huacas, Timbío, Cauca",
     "version": "Versión 1.0.0 (Sprint 1)"
   },
+  "auth": {
+    "title": "Cuenta y Seguridad",
+    "secureStorage": "Tokens protegidos por hardware (Keychain)",
+    "connectedAs": "Conectado como",
+    "role": "Rol",
+    "logout": "Cerrar sesión",
+    "loginComensal": "Iniciar sesión (Comensal)",
+    "loginAdmin": "Iniciar sesión (Admin)",
+    "guestTitle": "Sesión no iniciada",
+    "guestDesc": "Accede para gestionar reservas y ver tus solicitudes",
+    "loggingIn": "Iniciando sesión..."
+  },
   "common": {
     "loading": "Cargando...",
     "error": "Ocurrió un error inesperado",
