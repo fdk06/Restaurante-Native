@@ -33,7 +33,15 @@ Para que el historial de Git sea transparente y sepamos exactamente quién hizo 
 
 ---
 
-## 3. Estilo de Redacción: Primera Persona y Lenguaje Humano
+## 3. Exclusividad de Contribuyentes y Autoría Humana
+
+- **Solo los integrantes del equipo figuran en GitHub:** Los únicos autores y colaboradores permitidos en los commits, ramas, pull requests y métricas de GitHub son **Yeison Muñoz**, **Alex Santacruz** y **Fabián Hoyos**.
+- **Cero créditos o registros de IA:** Queda terminantemente prohibido que agentes de programación, inteligencias artificiales (Claude, Copilot o cualquier bot) aparezcan como autores, colaboradores o con etiquetas de co-autoría (`Co-authored-by`). La autoría y responsabilidad del código es 100% de nosotros como estudiantes del proyecto académico.
+- **Configuración de Git limpia:** Cada integrante debe asegurarse de tener configurado su `user.name` y `user.email` institucional o personal correcto en Git antes de hacer commits.
+
+---
+
+## 4. Estilo de Redacción: Primera Persona y Lenguaje Humano
 
 - **Escribir en primera persona:** Tanto en la documentación de soporte como en notas y comentarios, escribimos de forma natural y cercana (en primera persona singular o plural: _"hice"_, _"creé"_, _"definimos"_, _"probamos"_).
 - **Evitar lenguaje acartonado o generado por IA:** Nada de textos inflados con palabras como "apalancar", "sinergia", "holístico", "sin fricción", ni párrafos mecánicos con guiones largos excesivos (`—`) o listas infinitas de emojis.
@@ -41,7 +49,7 @@ Para que el historial de Git sea transparente y sepamos exactamente quién hizo 
 
 ---
 
-## 4. Comentarios en el Código: Simples, Humanizados y Muy Explicativos
+## 5. Comentarios en el Código: Simples, Humanizados y Muy Explicativos
 
 Todos los archivos de código (React Native, NestJS, Prisma, utilidades) deben tener comentarios bien explicativos, redactados de forma simple y en primera persona, sin tecnicismos innecesarios.
 
@@ -83,7 +91,7 @@ async function guardarSesionSegura(refreshToken) {
 
 ---
 
-## 5. Resumen Rápido para el Día a Día
+## 6. Resumen Rápido para el Día a Día
 
 1. **¿Funciona completo en local?** Sí $\rightarrow$ Listo para commit.
 2. **¿Formato de commit correcto?** Nombre + lo que hice (`yeison/...`, `alex/...`, `fabian/...`).
