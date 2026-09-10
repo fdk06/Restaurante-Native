@@ -1,0 +1,10 @@
+node_modules
+.git
+.agents
+dist
+build
+coverage
+apps/mobile
+.next
+.turbo
+*.log
