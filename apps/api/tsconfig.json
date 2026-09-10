@@ -31,7 +31,8 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "ignoreDeprecations": "5.0"
   },
   "include": ["src/**/*", "prisma/**/*"]
 }
